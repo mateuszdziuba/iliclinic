@@ -1,17 +1,97 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import locations from '../data/locations.json';
 
+const allLocations = Object.entries(locations);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Wybierz lokalizację" description="Iliclinic - Gabinety medycyny estetycznej w Pruszkowie i Ostrołęce. Wybierz najbliższy gabinet.">
+  <!-- Hero Section -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Background gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-surface-warm via-surface-cream to-surface-warm"></div>
+    
+    <!-- Decorative shapes -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary-medical/5 mask-organic"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-gold/5 mask-organic"></div>
+    
+    <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+      <!-- Logo Mark -->
+      <div class="mb-8 inline-flex items-center justify-center w-20 h-20 bg-primary-medical rounded-sm">
+        <span class="text-text-light font-heading font-bold text-4xl">i</span>
+      </div>
+
+      <h1 class="font-heading text-5xl md:text-7xl text-text-deep mb-6">
+        Iliclinic
+      </h1>
+      
+      <p class="text-xl md:text-2xl text-text-muted font-body mb-4">
+        Gabinet Medycyny Estetycznej
+      </p>
+      
+      <p class="text-lg text-text-muted/80 max-w-2xl mx-auto mb-12">
+        Profesjonalna pielęgnacja i zabiegi estetyczne w dwóch lokalizacjach. 
+        Zaufaj ekspertom i rozbudź naturalne piękno.
+      </p>
+
+      <!-- Location Selector -->
+      <div class="mb-8">
+        <p class="text-sm text-text-muted uppercase tracking-widest mb-6">
+          Wybierz lokalizację
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          {allLocations.map(([key, location]) => (
+            <a 
+              href={`/${key}`}
+              class="group relative bg-white/80 backdrop-blur-sm border border-primary-medical/10 p-8 hover-lift"
+            >
+              <!-- Hover accent -->
+              <div class="absolute inset-0 bg-gradient-to-br from-primary-medical/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              
+              <div class="relative">
+                <h2 class="font-heading text-3xl text-text-deep mb-3 group-hover:text-primary-medical transition-colors">
+                  {location.name}
+                </h2>
+                
+                <p class="text-text-muted text-sm mb-4">
+                  {location.address.street}<br />
+                  {location.address.postalCode} {location.address.city}
+                </p>
+                
+                <div class="flex items-center gap-2 text-primary-medical font-medium text-sm">
+                  Zobacz gabinet
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="flex flex-wrap justify-center gap-8 text-text-muted/60 text-sm">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
+          Certyfikowani specjaliści
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+          Naturalne efekty
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Ponad 10 lat doświadczenia
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

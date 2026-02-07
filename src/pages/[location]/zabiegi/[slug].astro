@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import locations from '../../../data/locations.json';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const treatments = await getCollection('zabiegi');
+  const paths = [];
+
+  for (const treatment of treatments) {
+    for (const loc of treatment.data.locations) {
+      paths.push({
+        params: { location: loc, slug: treatment.slug },
+        props: { treatment, location: loc },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { treatment, location } = Astro.props;
+const locationData = locations[location as keyof typeof locations];
+
+const price = location === 'pruszkow' 
+  ? treatment.data.price_pruszkow 
+  : treatment.data.price_ostroleka;
+
+const { Content } = await treatment.render();
+---
+
+<BaseLayout 
+  title={treatment.data.title}
+  description={treatment.data.description}
+  location={location as 'pruszkow' | 'ostroleka'}
+>
+  <article class="py-16 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumbs -->
+      <nav class="mb-8 text-sm">
+        <ol class="flex items-center gap-2 text-text-muted">
+          <li><a href={`/${location}`} class="hover:text-primary-medical">{locationData.name}</a></li>
+          <li>/</li>
+          <li><a href={`/${location}/zabiegi`} class="hover:text-primary-medical">Zabiegi</a></li>
+          <li>/</li>
+          <li class="text-text-deep">{treatment.data.title}</li>
+        </ol>
+      </nav>
+
+      <!-- Header -->
+      <header class="mb-12">
+        {treatment.data.category && (
+          <p class="text-primary-medical font-medium mb-4 tracking-wide uppercase text-sm">
+            {treatment.data.category}
+          </p>
+        )}
+        
+        <h1 class="font-heading text-4xl lg:text-5xl text-text-deep mb-6">
+          {treatment.data.title}
+        </h1>
+        
+        <p class="text-xl text-text-muted">
+          {treatment.data.description}
+        </p>
+        
+        <!-- Meta info -->
+        <div class="mt-8 flex flex-wrap gap-6 text-sm">
+          {price && (
+            <div class="flex items-center gap-2">
+              <span class="text-text-muted">Cena od:</span>
+              <span class="font-medium text-text-deep">{price} zł</span>
+            </div>
+          )}
+          {treatment.data.duration && (
+            <div class="flex items-center gap-2">
+              <span class="text-text-muted">Czas zabiegu:</span>
+              <span class="font-medium text-text-deep">{treatment.data.duration}</span>
+            </div>
+          )}
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose prose-lg max-w-none 
+        prose-headings:font-heading prose-headings:text-text-deep
+        prose-p:text-text-muted prose-p:leading-relaxed
+        prose-a:text-primary-medical prose-a:no-underline hover:prose-a:underline
+        prose-strong:text-text-deep
+        prose-ul:text-text-muted prose-li:marker:text-primary-medical
+      ">
+        <Content />
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 p-8 bg-surface-cream text-center">
+        <h2 class="font-heading text-2xl text-text-deep mb-4">
+          Zainteresowany/a zabiegiem?
+        </h2>
+        <p class="text-text-muted mb-6">
+          Umów się na bezpłatną konsultację w naszym gabinecie w {locationData.name}.
+        </p>
+        <a 
+          href={`/${location}/kontakt`}
+          class="inline-block bg-primary-medical text-text-light px-8 py-4 rounded-sm font-medium hover:bg-primary-medical-dark transition-colors"
+        >
+          Umów wizytę
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

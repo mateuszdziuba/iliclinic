@@ -1,0 +1,81 @@
+---
+import locations from '../data/locations.json';
+
+interface Props {
+  location?: 'pruszkow' | 'ostroleka';
+  currentPath: string;
+}
+
+const { location, currentPath } = Astro.props;
+
+const basePath = location ? `/${location}` : '';
+
+const navLinks = [
+  { label: 'Zabiegi', href: `${basePath}/zabiegi` },
+  { label: 'O nas', href: `${basePath}/o-nas` },
+  { label: 'Kontakt', href: `${basePath}/kontakt` },
+];
+
+const otherLocation = location === 'pruszkow' ? 'ostroleka' : 'pruszkow';
+const otherLocationData = locations[otherLocation as keyof typeof locations];
+---
+
+<header class="bg-surface-warm/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary-medical/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a href={location ? `/${location}` : '/'} class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-primary-medical rounded-sm flex items-center justify-center">
+          <span class="text-text-light font-heading font-bold text-xl">i</span>
+        </div>
+        <span class="font-heading text-2xl text-text-deep group-hover:text-primary-medical transition-colors">
+          Iliclinic
+        </span>
+        {location && (
+          <span class="text-sm text-text-muted font-body">
+            {locations[location as keyof typeof locations]?.name}
+          </span>
+        )}
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        {navLinks.map(link => (
+          <a 
+            href={link.href}
+            class:list={[
+              "font-body text-sm tracking-wide transition-colors relative",
+              currentPath.startsWith(link.href) 
+                ? "text-primary-medical font-medium" 
+                : "text-text-deep hover:text-primary-medical"
+            ]}
+          >
+            {link.label}
+            {currentPath.startsWith(link.href) && (
+              <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-medical"></span>
+            )}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Location Switch & CTA -->
+      <div class="flex items-center gap-4">
+        {location && otherLocationData && (
+          <a 
+            href={`/${otherLocation}`}
+            class="hidden sm:block text-sm text-text-muted hover:text-primary-medical transition-colors"
+          >
+            Zobacz gabinet w {otherLocationData.name}
+          </a>
+        )}
+        
+        <a 
+          href={`${basePath}/kontakt`}
+          class="bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+        >
+          Umów wizytę
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

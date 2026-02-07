@@ -1,0 +1,44 @@
+{
+  "pruszkow": {
+    "name": "Pruszków",
+    "slug": "pruszkow",
+    "address": {
+      "street": "ul. Przykładowa 10",
+      "city": "Pruszków",
+      "postalCode": "05-800"
+    },
+    "phone": "+48 22 123 45 67",
+    "email": "pruszkow@iliclinic.pl",
+    "googleMapsUrl": "https://maps.google.com/?cid=PRUSZKÓW_CID",
+    "openingHours": {
+      "weekdays": "9:00 - 19:00",
+      "saturday": "9:00 - 14:00",
+      "sunday": "Zamknięte"
+    },
+    "social": {
+      "facebook": "https://facebook.com/iliclinic.pruszkow",
+      "instagram": "https://instagram.com/iliclinic.pruszkow"
+    }
+  },
+  "ostroleka": {
+    "name": "Ostrołęka",
+    "slug": "ostroleka",
+    "address": {
+      "street": "ul. Przykładowa 5",
+      "city": "Ostrołęka",
+      "postalCode": "07-400"
+    },
+    "phone": "+48 29 123 45 67",
+    "email": "ostroleka@iliclinic.pl",
+    "googleMapsUrl": "https://maps.google.com/?cid=OSTROLEKA_CID",
+    "openingHours": {
+      "weekdays": "9:00 - 18:00",
+      "saturday": "9:00 - 13:00",
+      "sunday": "Zamknięte"
+    },
+    "social": {
+      "facebook": "https://facebook.com/iliclinic.ostroleka",
+      "instagram": "https://instagram.com/iliclinic.ostroleka"
+    }
+  }
+}

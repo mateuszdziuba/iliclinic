@@ -1,0 +1,200 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import locations from '../../data/locations.json';
+
+export function getStaticPaths() {
+  return [
+    { params: { location: 'pruszkow' } },
+    { params: { location: 'ostroleka' } },
+  ];
+}
+
+const { location } = Astro.params;
+const locationData = locations[location as keyof typeof locations];
+
+if (!locationData) {
+  return Astro.redirect('/');
+}
+---
+
+<BaseLayout 
+  title={`Gabinet w ${locationData.name}`} 
+  description={`Iliclinic ${locationData.name} - Profesjonalna medycyna estetyczna. Zabiegi upiększające w ${locationData.address.city}.`}
+  location={location as 'pruszkow' | 'ostroleka'}
+>
+  <!-- Hero Section -->
+  <section class="relative py-24 lg:py-32 overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-surface-warm via-surface-cream to-surface-warm"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-primary-medical/3 mask-organic"></div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-primary-medical font-medium mb-4 tracking-wide">
+            Gabinet w {locationData.name}
+          </p>
+          
+          <h1 class="font-heading text-4xl lg:text-6xl text-text-deep mb-6 leading-tight">
+            Odkryj piękno,<br />
+            <span class="text-primary-medical">które trwa</span>
+          </h1>
+          
+          <p class="text-lg text-text-muted mb-8 max-w-lg">
+            Profesjonalne zabiegi medycyny estetycznej w centrum {locationData.address.city}. 
+            Zaufaj naszym specjalistom i ciesz się naturalnymi efektami.
+          </p>
+          
+          <div class="flex flex-wrap gap-4">
+            <a 
+              href={`/${location}/zabiegi`}
+              class="bg-primary-medical text-text-light px-8 py-4 rounded-sm font-medium hover:bg-primary-medical-dark transition-colors"
+            >
+              Zobacz zabiegi
+            </a>
+            <a 
+              href={`/${location}/kontakt`}
+              class="border-2 border-primary-medical text-primary-medical px-8 py-4 rounded-sm font-medium hover:bg-primary-medical hover:text-text-light transition-colors"
+            >
+              Umów wizytę
+            </a>
+          </div>
+        </div>
+        
+        <!-- Image placeholder with organic shape -->
+        <div class="relative">
+          <div class="aspect-[4/5] bg-gradient-to-br from-primary-medical/20 to-accent-gold/20 mask-organic"></div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-accent-gold/30 rounded-sm"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="font-heading text-3xl lg:text-4xl text-text-deep mb-4">
+          Dlaczego Iliclinic?
+        </h2>
+        <p class="text-text-muted max-w-2xl mx-auto">
+          Łączymy wieloletnie doświadczenie z najnowszymi technologiami, 
+          zapewniając bezpieczeństwo i spektakularne efekty.
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-8 group">
+          <div class="w-16 h-16 mx-auto mb-6 bg-surface-cream rounded-sm flex items-center justify-center group-hover:bg-primary-medical/10 transition-colors">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">
+            Bezpieczeństwo
+          </h3>
+          <p class="text-text-muted text-sm">
+            Wszystkie zabiegi wykonywane są przez certyfikowanych specjalistów 
+            z użyciem sprawdzonych preparatów.
+          </p>
+        </div>
+        
+        <div class="text-center p-8 group">
+          <div class="w-16 h-16 mx-auto mb-6 bg-surface-cream rounded-sm flex items-center justify-center group-hover:bg-primary-medical/10 transition-colors">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">
+            Naturalne efekty
+          </h3>
+          <p class="text-text-muted text-sm">
+            Stawiamy na subtelne korekty, które podkreślają Twoje naturalne piękno 
+            i zachowują indywidualny charakter.
+          </p>
+        </div>
+        
+        <div class="text-center p-8 group">
+          <div class="w-16 h-16 mx-auto mb-6 bg-surface-cream rounded-sm flex items-center justify-center group-hover:bg-primary-medical/10 transition-colors">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">
+            Indywidualne podejście
+          </h3>
+          <p class="text-text-muted text-sm">
+            Każdy zabieg poprzedzony jest konsultacją, podczas której dobieramy 
+            optimalne rozwiązanie dla Twoich potrzeb.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Info Section -->
+  <section class="py-20 bg-surface-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-heading text-3xl lg:text-4xl text-text-deep mb-6">
+            Odwiedź nas w {locationData.name}
+          </h2>
+          
+          <div class="space-y-6">
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-primary-medical/10 rounded-sm flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium text-text-deep">Adres</p>
+                <p class="text-text-muted">
+                  {locationData.address.street}<br />
+                  {locationData.address.postalCode} {locationData.address.city}
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-primary-medical/10 rounded-sm flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium text-text-deep">Telefon</p>
+                <a href={`tel:${locationData.phone.replace(/\s/g, '')}`} class="text-primary-medical hover:text-primary-medical-dark">
+                  {locationData.phone}
+                </a>
+              </div>
+            </div>
+            
+            <div class="flex gap-4">
+              <div class="w-12 h-12 bg-primary-medical/10 rounded-sm flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-medium text-text-deep">Godziny otwarcia</p>
+                <p class="text-text-muted">
+                  Pon-Pt: {locationData.openingHours.weekdays}<br />
+                  Sobota: {locationData.openingHours.saturday}<br />
+                  Niedziela: {locationData.openingHours.sunday}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Map placeholder -->
+        <div class="aspect-square bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 rounded-sm flex items-center justify-center">
+          <p class="text-text-muted text-sm">Mapa Google</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
