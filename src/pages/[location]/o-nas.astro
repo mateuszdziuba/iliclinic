@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import locations from '../../data/locations.json';
+import { Image } from 'astro:assets';
+
+export function getStaticPaths() {
+  return [
+    { params: { location: 'pruszkow' } },
+    { params: { location: 'ostroleka' } },
+  ];
+}
+
+const { location } = Astro.params;
+const locationData = locations[location as keyof typeof locations];
+---
+
+<BaseLayout 
+  title={`O nas - ${locationData.name}`}
+  description={`Poznaj gabinet Ili Clinic w ${locationData.name}. Zespół doświadczonych specjalistów medycyny estetycznej.`}
+  location={location as 'pruszkow' | 'ostroleka'}
+>
+  <!-- Hero -->
+  <section class="py-16 lg:py-24 bg-surface-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-primary-medical font-medium mb-4 tracking-wide uppercase text-sm">
+            O nas
+          </p>
+          <h1 class="font-heading text-4xl lg:text-5xl text-text-deep mb-6">
+            Klinika Zdrowej Skóry<br />
+            <span class="text-primary-medical">Ili Clinic</span>
+          </h1>
+          <p class="text-lg text-text-muted mb-6">
+            Ili Clinic to miejsce, gdzie pasja do kosmetologii spotyka się z wiedzą medyczną. 
+            Łączymy zaawansowane technologie z indywidualnym podejściem do każdego pacjenta, 
+            oferując kompleksową pielęgnację i zabiegi medycyny estetycznej.
+          </p>
+          <p class="text-text-muted">
+            Nasz gabinet w {locationData.name} to nowoczesna przestrzeń wyposażona 
+            w najwyższej klasy sprzęt - od profesjonalnych laserów po zaawansowane 
+            urządzenia Hi-Tech. Stawiamy na bezpieczeństwo i spektakularne, ale naturalne efekty.
+          </p>
+        </div>
+        
+        <!-- Clinic Image -->
+        <div class="relative">
+          <img 
+            src="/images/hero-clinic.png" 
+            alt="Wnętrze gabinetu Ili Clinic"
+            class="w-full h-auto rounded-sm shadow-lg"
+            width="600"
+            height="600"
+          />
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-accent-gold/30 rounded-sm -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patricia Sobieska Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Portrait -->
+        <div class="order-2 lg:order-1">
+          <img 
+            src="/images/founder-portrait.png" 
+            alt="Założycielka Ili Clinic - Kosmetolog, Trycholog, Pielęgniarka"
+            class="w-full max-w-md mx-auto h-auto mask-organic"
+            width="500"
+            height="500"
+          />
+        </div>
+        
+        <div class="order-1 lg:order-2">
+          <p class="text-primary-medical font-medium mb-4 tracking-wide uppercase text-sm">
+            Założycielka
+          </p>
+          <h2 class="font-heading text-3xl lg:text-4xl text-text-deep mb-6">
+            Nasza założycielka
+          </h2>
+          <p class="text-accent-gold font-medium mb-4">
+            Kosmetolog • Trycholog • Pielęgniarka
+          </p>
+          
+          <blockquote class="border-l-4 border-primary-medical pl-6 my-8 italic text-text-muted text-lg">
+            „Kluczem do efektów jest wiedza, którą uzyskuję podczas konsultacji 
+            z moim pacjentem i wzajemna współpraca."
+          </blockquote>
+          
+          <div class="space-y-4 text-text-muted">
+            <p>
+              Założycielka Ili Clinic jest wykształconym <strong class="text-text-deep">kosmetologiem oraz pielęgniarką</strong>, 
+              co pozwala jej na holistyczne podejście do zdrowia skóry. Pierwsze kroki 
+              w zawodzie stawiała już w trakcie studiów, zdobywając doświadczenie 
+              w renomowanych gabinetach i klinikach w Warszawie i okolicach.
+            </p>
+            <p>
+              Nieustannie podnosi swoje kwalifikacje, uczestnicząc w licznych szkoleniach, 
+              wykładach i kursach branżowych. Specjalizuje się w <strong class="text-text-deep">terapiach 
+              specjalistycznych oraz zabiegach stymulujących</strong>.
+            </p>
+            <p>
+              Uwielbia pracować z wysokiej klasy preparatami kosmetycznymi w połączeniu 
+              z nowoczesną laseroterapią oraz zabiegami iniekcyjnymi.
+            </p>
+          </div>
+
+          <div class="mt-8 flex gap-4">
+            <a 
+              href="https://www.instagram.com/patricia.kosmetolog/"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 text-primary-medical hover:text-primary-medical-dark transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              @patricia.kosmetolog
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Treatment Room -->
+  <section class="py-20 bg-surface-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-heading text-3xl lg:text-4xl text-text-deep mb-6">
+            Nowoczesne technologie
+          </h2>
+          <p class="text-lg text-text-muted mb-6">
+            Nasz gabinet wyposażony jest w najnowocześniejszy sprzęt do zabiegów 
+            laseroterapii i medycyny estetycznej.
+          </p>
+          
+          <ul class="space-y-4">
+            <li class="flex gap-3">
+              <svg class="w-6 h-6 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-text-muted"><strong class="text-text-deep">AlexDual Xlase</strong> - profesjonalny laser do depilacji i liftingu</span>
+            </li>
+            <li class="flex gap-3">
+              <svg class="w-6 h-6 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-text-muted"><strong class="text-text-deep">Dermapen 4.0</strong> - złoty standard mikronakłuwania</span>
+            </li>
+            <li class="flex gap-3">
+              <svg class="w-6 h-6 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-text-muted"><strong class="text-text-deep">Gold Needle RF</strong> - fala radiowa mikroigłowa</span>
+            </li>
+            <li class="flex gap-3">
+              <svg class="w-6 h-6 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-text-muted"><strong class="text-text-deep">AquaSure H2</strong> - oczyszczanie wodorowe</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <img 
+            src="/images/treatment-room.png" 
+            alt="Gabinet zabiegowy Ili Clinic"
+            class="w-full h-auto rounded-sm shadow-lg"
+            width="600"
+            height="600"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="font-heading text-3xl text-text-deep text-center mb-12">
+        Nasze wartości
+      </h2>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="text-center p-8 bg-surface-cream">
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary-medical/10 rounded-sm flex items-center justify-center">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">Bezpieczeństwo</h3>
+          <p class="text-text-muted text-sm">
+            Wszystkie zabiegi wykonujemy zgodnie z najwyższymi standardami 
+            bezpieczeństwa, używając certyfikowanych preparatów.
+          </p>
+        </div>
+        
+        <div class="text-center p-8 bg-surface-cream">
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary-medical/10 rounded-sm flex items-center justify-center">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">Naturalność</h3>
+          <p class="text-text-muted text-sm">
+            Stawiamy na subtelne korekty, które podkreślają indywidualny charakter 
+            i zachowują naturalne piękno.
+          </p>
+        </div>
+        
+        <div class="text-center p-8 bg-surface-cream">
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary-medical/10 rounded-sm flex items-center justify-center">
+            <svg class="w-8 h-8 text-primary-medical" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl text-text-deep mb-3">Indywidualne podejście</h3>
+          <p class="text-text-muted text-sm">
+            Każdy zabieg poprzedzony jest konsultacją, podczas której dobieramy 
+            optymalne rozwiązanie dla Twoich potrzeb.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-primary-medical">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="font-heading text-3xl text-white mb-6">
+        Gotowy na konsultację?
+      </h2>
+      <p class="text-white/90 mb-8">
+        Umów się na bezpłatną konsultację i dowiedz się, jak możemy Ci pomóc.
+      </p>
+      <a 
+        href={`/${location}/kontakt`}
+        class="inline-block bg-white text-primary-medical px-8 py-4 rounded-sm font-medium hover:bg-surface-cream transition-colors"
+      >
+        Skontaktuj się z nami
+      </a>
+    </div>
+  </section>
+</BaseLayout>

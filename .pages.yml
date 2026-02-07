@@ -1,0 +1,265 @@
+# Pages CMS Configuration for Iliclinic
+# Docs: https://pagescms.org/docs/configuration
+
+media:
+  input: public/images
+  output: /images
+
+content:
+  # Partner brands/logos
+  - name: marki
+    label: Marki partnerskie
+    type: collection
+    path: src/content/marki
+    format: yaml-frontmatter
+    fields:
+      - name: name
+        label: Nazwa marki
+        type: string
+        required: true
+      - name: logo
+        label: Logo
+        type: image
+        required: true
+      - name: url
+        label: Link do strony
+        type: string
+      - name: order
+        label: Kolejność
+        type: number
+        default: 0
+
+  # Treatments collection (zabiegi)
+  - name: zabiegi
+    label: Zabiegi
+    type: collection
+    path: src/content/zabiegi
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+        required: true
+      - name: description
+        label: Krótki opis
+        type: text
+        required: true
+      - name: locations
+        label: Lokalizacje
+        type: select
+        options:
+          - label: Pruszków
+            value: pruszkow
+          - label: Ostrołęka
+            value: ostroleka
+        list: true
+        required: true
+      - name: category
+        label: Kategoria
+        type: select
+        options:
+          - label: Medycyna Estetyczna
+            value: Medycyna Estetyczna
+          - label: Hi-Tech / Laser
+            value: Hi-Tech / Laser
+          - label: Pielęgnacja Twarzy
+            value: Pielęgnacja Twarzy
+          - label: Inne
+            value: Inne
+      - name: price_pruszkow
+        label: Cena w Pruszkowie (zł)
+        type: number
+      - name: price_ostroleka
+        label: Cena w Ostrołęce (zł)
+        type: number
+      - name: duration
+        label: Czas zabiegu
+        type: string
+      - name: featured
+        label: Wyróżniony
+        type: boolean
+        default: false
+      - name: image
+        label: Zdjęcie
+        type: image
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: metaTitle
+            label: Meta Title
+            type: string
+          - name: metaDescription
+            label: Meta Description
+            type: text
+      - name: body
+        label: Treść
+        type: rich-text
+
+  # Static pages (strony)
+  - name: strony
+    label: Strony
+    type: collection
+    path: src/content/strony
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+        required: true
+      - name: description
+        label: Opis
+        type: text
+      - name: location
+        label: Lokalizacja
+        type: select
+        options:
+          - label: Globalna (wszystkie)
+            value: global
+          - label: Pruszków
+            value: pruszkow
+          - label: Ostrołęka
+            value: ostroleka
+      - name: body
+        label: Treść
+        type: rich-text
+
+  # Site settings
+  - name: settings
+    label: Ustawienia strony
+    type: file
+    path: src/data/settings.json
+    format: json
+    fields:
+      - name: siteName
+        label: Nazwa strony
+        type: string
+      - name: siteDescription
+        label: Opis strony
+        type: text
+      - name: defaultLocation
+        label: Domyślna lokalizacja
+        type: select
+        options:
+          - label: Pruszków
+            value: pruszkow
+          - label: Ostrołęka
+            value: ostroleka
+
+  # Locations config
+  - name: locations
+    label: Lokalizacje
+    type: file
+    path: src/data/locations.json
+    format: json
+    fields:
+      - name: pruszkow
+        label: Pruszków
+        type: object
+        fields:
+          - name: name
+            label: Nazwa
+            type: string
+          - name: slug
+            label: Slug
+            type: string
+          - name: address
+            label: Adres
+            type: object
+            fields:
+              - name: street
+                label: Ulica
+                type: string
+              - name: city
+                label: Miasto
+                type: string
+              - name: postalCode
+                label: Kod pocztowy
+                type: string
+          - name: phone
+            label: Telefon
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: googleMapsUrl
+            label: Link do Google Maps
+            type: string
+          - name: openingHours
+            label: Godziny otwarcia
+            type: object
+            fields:
+              - name: weekdays
+                label: Pon-Pt
+                type: string
+              - name: saturday
+                label: Sobota
+                type: string
+              - name: sunday
+                label: Niedziela
+                type: string
+          - name: social
+            label: Social Media
+            type: object
+            fields:
+              - name: facebook
+                label: Facebook
+                type: string
+              - name: instagram
+                label: Instagram
+                type: string
+      - name: ostroleka
+        label: Ostrołęka
+        type: object
+        fields:
+          - name: name
+            label: Nazwa
+            type: string
+          - name: slug
+            label: Slug
+            type: string
+          - name: address
+            label: Adres
+            type: object
+            fields:
+              - name: street
+                label: Ulica
+                type: string
+              - name: city
+                label: Miasto
+                type: string
+              - name: postalCode
+                label: Kod pocztowy
+                type: string
+          - name: phone
+            label: Telefon
+            type: string
+          - name: email
+            label: Email
+            type: string
+          - name: googleMapsUrl
+            label: Link do Google Maps
+            type: string
+          - name: openingHours
+            label: Godziny otwarcia
+            type: object
+            fields:
+              - name: weekdays
+                label: Pon-Pt
+                type: string
+              - name: saturday
+                label: Sobota
+                type: string
+              - name: sunday
+                label: Niedziela
+                type: string
+          - name: social
+            label: Social Media
+            type: object
+            fields:
+              - name: facebook
+                label: Facebook
+                type: string
+              - name: instagram
+                label: Instagram
+                type: string

@@ -11,8 +11,9 @@ const { location, currentPath } = Astro.props;
 const basePath = location ? `/${location}` : '';
 
 const navLinks = [
-  { label: 'Zabiegi', href: `${basePath}/zabiegi` },
   { label: 'O nas', href: `${basePath}/o-nas` },
+  { label: 'Zabiegi', href: `${basePath}/zabiegi` },
+  { label: 'Sklep', href: 'https://ilishop.pl', external: true },
   { label: 'Kontakt', href: `${basePath}/kontakt` },
 ];
 
@@ -29,53 +30,122 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
           <span class="text-text-light font-heading font-bold text-xl">i</span>
         </div>
         <span class="font-heading text-2xl text-text-deep group-hover:text-primary-medical transition-colors">
-          Iliclinic
+          Ili Clinic
         </span>
         {location && (
-          <span class="text-sm text-text-muted font-body">
+          <span class="hidden sm:inline text-sm text-text-muted font-body">
             {locations[location as keyof typeof locations]?.name}
           </span>
         )}
       </a>
 
-      <!-- Navigation -->
+      <!-- Desktop Navigation -->
       <nav class="hidden md:flex items-center gap-8">
         {navLinks.map(link => (
           <a 
             href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener' : undefined}
             class:list={[
               "font-body text-sm tracking-wide transition-colors relative",
-              currentPath.startsWith(link.href) 
+              !link.external && currentPath.startsWith(link.href) 
                 ? "text-primary-medical font-medium" 
                 : "text-text-deep hover:text-primary-medical"
             ]}
           >
             {link.label}
-            {currentPath.startsWith(link.href) && (
+            {!link.external && currentPath.startsWith(link.href) && (
               <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-medical"></span>
             )}
           </a>
         ))}
       </nav>
 
-      <!-- Location Switch & CTA -->
+      <!-- Right Side -->
       <div class="flex items-center gap-4">
         {location && otherLocationData && (
           <a 
             href={`/${otherLocation}`}
-            class="hidden sm:block text-sm text-text-muted hover:text-primary-medical transition-colors"
+            class="hidden lg:block text-sm text-text-muted hover:text-primary-medical transition-colors"
           >
-            Zobacz gabinet w {otherLocationData.name}
+            Gabinet w {otherLocationData.name}
           </a>
         )}
         
         <a 
           href={`${basePath}/kontakt`}
-          class="bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+          class="hidden sm:block bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+        >
+          Umów wizytę
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button 
+          type="button"
+          id="mobile-menu-btn"
+          class="md:hidden p-2 text-text-deep hover:text-primary-medical transition-colors"
+          aria-label="Menu"
+        >
+          <svg class="w-6 h-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-primary-medical/10 bg-surface-warm">
+    <nav class="px-4 py-4 space-y-1">
+      {navLinks.map(link => (
+        <a 
+          href={link.href}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener' : undefined}
+          class:list={[
+            "block py-3 px-4 rounded-sm font-body text-sm transition-colors",
+            !link.external && currentPath.startsWith(link.href) 
+              ? "bg-primary-medical/10 text-primary-medical font-medium" 
+              : "text-text-deep hover:bg-surface-cream"
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      
+      {location && otherLocationData && (
+        <a 
+          href={`/${otherLocation}`}
+          class="block py-3 px-4 rounded-sm text-sm text-text-muted hover:bg-surface-cream"
+        >
+          Gabinet w {otherLocationData.name}
+        </a>
+      )}
+      
+      <div class="pt-3">
+        <a 
+          href={`${basePath}/kontakt`}
+          class="block w-full text-center bg-primary-medical text-text-light px-5 py-3 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
         >
           Umów wizytę
         </a>
       </div>
-    </div>
+    </nav>
   </div>
 </header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = menuBtn?.querySelector('.menu-icon');
+  const closeIcon = menuBtn?.querySelector('.close-icon');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = mobileMenu?.classList.toggle('hidden');
+    menuIcon?.classList.toggle('hidden', !isOpen);
+    closeIcon?.classList.toggle('hidden', isOpen);
+  });
+</script>

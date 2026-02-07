@@ -20,6 +20,29 @@ const zabiegi = defineCollection({
   }),
 });
 
+// Static pages collection
+const strony = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    location: z.enum(['global', 'pruszkow', 'ostroleka']).default('global'),
+  }),
+});
+
+// Partner brands collection
+const marki = defineCollection({
+  type: 'content',
+  schema: z.object({
+    name: z.string(),
+    logo: z.string(),
+    url: z.string().optional(),
+    order: z.number().default(0),
+  }),
+});
+
 export const collections = {
   zabiegi,
+  strony,
+  marki,
 };

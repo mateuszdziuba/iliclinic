@@ -3,42 +3,42 @@
     "name": "Pruszków",
     "slug": "pruszkow",
     "address": {
-      "street": "ul. Przykładowa 10",
+      "street": "ul. Obrońców Pokoju 10/Lokal 4",
       "city": "Pruszków",
       "postalCode": "05-800"
     },
-    "phone": "+48 22 123 45 67",
-    "email": "pruszkow@iliclinic.pl",
-    "googleMapsUrl": "https://maps.google.com/?cid=PRUSZKÓW_CID",
+    "phone": "+48 660 176 464",
+    "email": "kontakt@iliclinic.pl",
+    "googleMapsUrl": "https://maps.google.com/?q=Ili+Clinic+Pruszków",
     "openingHours": {
-      "weekdays": "9:00 - 19:00",
-      "saturday": "9:00 - 14:00",
+      "weekdays": "10:00 - 20:00",
+      "saturday": "Po wcześniejszym umówieniu",
       "sunday": "Zamknięte"
     },
     "social": {
-      "facebook": "https://facebook.com/iliclinic.pruszkow",
-      "instagram": "https://instagram.com/iliclinic.pruszkow"
+      "facebook": "https://www.facebook.com/ili.clinic",
+      "instagram": "https://www.instagram.com/patricia.kosmetolog/"
     }
   },
   "ostroleka": {
     "name": "Ostrołęka",
     "slug": "ostroleka",
     "address": {
-      "street": "ul. Przykładowa 5",
+      "street": "ul. Fieldorfa Nila 13",
       "city": "Ostrołęka",
-      "postalCode": "07-400"
+      "postalCode": "07-410"
     },
-    "phone": "+48 29 123 45 67",
-    "email": "ostroleka@iliclinic.pl",
-    "googleMapsUrl": "https://maps.google.com/?cid=OSTROLEKA_CID",
+    "phone": "+48 574 960 620",
+    "email": "kontakt@iliclinic.pl",
+    "googleMapsUrl": "https://maps.google.com/?q=Ili+Clinic+Ostrołęka",
     "openingHours": {
-      "weekdays": "9:00 - 18:00",
-      "saturday": "9:00 - 13:00",
+      "weekdays": "10:00 - 20:00",
+      "saturday": "Po wcześniejszym umówieniu",
       "sunday": "Zamknięte"
     },
     "social": {
-      "facebook": "https://facebook.com/iliclinic.ostroleka",
-      "instagram": "https://instagram.com/iliclinic.ostroleka"
+      "facebook": "https://www.facebook.com/ili.clinic",
+      "instagram": "https://www.instagram.com/patricia.kosmetolog/"
     }
   }
 }

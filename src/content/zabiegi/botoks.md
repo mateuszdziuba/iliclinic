@@ -1,11 +1,11 @@
 ---
-title: "Botoks - Toksyna Botulinowa"
-description: "Redukcja zmarszczek mimicznych i leczenie nadpotliwości przy użyciu toksyny botulinowej typu A."
+title: "Toksyna Botulinowa (Botoks)"
+description: "Redukcja zmarszczek mimicznych przy użyciu toksyny botulinowej. Naturalnie wygładzona skóra bez efektu maski."
 locations: ['pruszkow', 'ostroleka']
-price_pruszkow: 700
-price_ostroleka: 650
-duration: "30-45 minut"
-category: "Anti-aging"
+price_pruszkow: 500
+price_ostroleka: 500
+duration: "30 minut"
+category: "Medycyna Estetyczna"
 featured: true
 seo:
   metaTitle: "Botoks - Zabieg usuwania zmarszczek | Iliclinic"
@@ -14,7 +14,9 @@ seo:
 
 ## Czym jest zabieg botoksem?
 
-Botoks (toksyna botulinowa typu A) to jeden z najpopularniejszych zabiegów medycyny estetycznej na świecie. Preparat wstrzykiwany jest punktowo w mięśnie mimiczne, powodując ich czasowe rozluźnienie i wygładzenie zmarszczek.
+Toksyna botulinowa (popularnie nazywana botoksem) to jeden z najpopularniejszych zabiegów medycyny estetycznej na świecie. Preparat wstrzykiwany jest punktowo w mięśnie mimiczne, powodując ich czasowe rozluźnienie i wygładzenie zmarszczek.
+
+W Ili Clinic stawiamy na naturalne efekty - Twoja twarz zachowa pełną mimikę, a zmarszczki zostaną delikatnie wygładzone.
 
 ## Wskazania do zabiegu
 

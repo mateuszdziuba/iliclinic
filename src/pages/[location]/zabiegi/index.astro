@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import locations from '../../../data/locations.json';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return [
+    { params: { location: 'pruszkow' } },
+    { params: { location: 'ostroleka' } },
+  ];
+}
+
+const { location } = Astro.params;
+const locationData = locations[location as keyof typeof locations];
+
+// Get treatments available in this location
+const allTreatments = await getCollection('zabiegi');
+const treatments = allTreatments.filter(t => t.data.locations.includes(location));
+
+// Group by category with order
+const categoryOrder = ['Medycyna Estetyczna', 'Hi-Tech / Laser', 'Pielęgnacja Twarzy', 'Inne'];
+const groupedTreatments = categoryOrder.reduce((acc, category) => {
+  const categoryTreatments = treatments.filter(t => t.data.category === category);
+  if (categoryTreatments.length > 0) {
+    acc[category] = categoryTreatments;
+  }
+  return acc;
+}, {} as Record<string, typeof treatments>);
+---
+
+<BaseLayout 
+  title={`Zabiegi - Ili Clinic ${locationData.name}`}
+  description={`Oferta zabiegów medycyny estetycznej w Ili Clinic ${locationData.name}. Botoks, kwas hialuronowy, laser, mezoterapia i więcej.`}
+  location={location as 'pruszkow' | 'ostroleka'}
+>
+  <!-- Hero -->
+  <section class="py-16 lg:py-20 bg-surface-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-primary-medical font-medium mb-4 tracking-wide uppercase text-sm">
+        Ili Clinic {locationData.name}
+      </p>
+      <h1 class="font-heading text-4xl lg:text-5xl text-text-deep mb-6">
+        Nasze zabiegi
+      </h1>
+      <p class="text-lg text-text-muted max-w-2xl mx-auto">
+        Szeroki wachlarz usług z zakresu kosmetologii, medycyny estetycznej i Hi-Tech. 
+        Każdy zabieg poprzedzony jest bezpłatną konsultacją.
+      </p>
+    </div>
+  </section>
+
+  <!-- Treatments by Category -->
+  <section class="py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {Object.entries(groupedTreatments).map(([category, categoryTreatments]) => (
+        <div class="mb-16 last:mb-0">
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="font-heading text-2xl text-text-deep whitespace-nowrap">
+              {category}
+            </h2>
+            <div class="h-px bg-primary-medical/20 flex-1"></div>
+            <span class="text-text-muted text-sm whitespace-nowrap">
+              {categoryTreatments.length} {categoryTreatments.length === 1 ? 'zabieg' : 'zabiegów'}
+            </span>
+          </div>
+          
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categoryTreatments.map(treatment => {
+              const price = location === 'pruszkow' 
+                ? treatment.data.price_pruszkow 
+                : treatment.data.price_ostroleka;
+              
+              return (
+                <a 
+                  href={`/${location}/zabiegi/${treatment.slug}`}
+                  class="group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
+                >
+                  {/* Image placeholder */}
+                  <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative">
+                    {treatment.data.featured && (
+                      <span class="absolute top-4 left-4 bg-accent-gold text-text-deep text-xs font-medium px-3 py-1 rounded-sm">
+                        Polecany
+                      </span>
+                    )}
+                  </div>
+                  
+                  <div class="p-6">
+                    <h3 class="font-heading text-xl text-text-deep mb-3 group-hover:text-primary-medical transition-colors">
+                      {treatment.data.title}
+                    </h3>
+                    
+                    <p class="text-text-muted text-sm mb-4 line-clamp-2">
+                      {treatment.data.description}
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                      {price && (
+                        <span class="text-text-deep font-medium">
+                          od {price} zł
+                        </span>
+                      )}
+                      {treatment.data.duration && (
+                        <span class="text-text-muted text-sm">
+                          {treatment.data.duration}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-surface-cream">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="font-heading text-3xl text-text-deep mb-4">
+        Nie wiesz, który zabieg wybrać?
+      </h2>
+      <p class="text-text-muted mb-8 max-w-xl mx-auto">
+        Umów się na bezpłatną konsultację. Pomożemy dobrać najlepsze rozwiązanie 
+        dopasowane do Twoich potrzeb i oczekiwań.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a 
+          href={`tel:${locationData.phone.replace(/\s/g, '')}`}
+          class="inline-flex items-center gap-2 bg-primary-medical text-text-light px-8 py-4 rounded-sm font-medium hover:bg-primary-medical-dark transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Zadzwoń: {locationData.phone}
+        </a>
+        <a 
+          href={`/${location}/kontakt`}
+          class="inline-block border-2 border-primary-medical text-primary-medical px-8 py-4 rounded-sm font-medium hover:bg-primary-medical hover:text-text-light transition-colors"
+        >
+          Napisz do nas
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

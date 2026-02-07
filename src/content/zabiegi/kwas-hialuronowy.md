@@ -1,11 +1,11 @@
 ---
-title: "Kwas Hialuronowy - Wypełnianie"
-description: "Modelowanie i odmładzanie twarzy przy użyciu kwasu hialuronowego. Powiększanie ust, wypełnianie bruzd."
+title: "Kwas Hialuronowy"
+description: "Modelowanie i odmładzanie twarzy przy użyciu kwasu hialuronowego. Powiększanie ust, wypełnianie bruzd, konturowanie."
 locations: ['pruszkow', 'ostroleka']
-price_pruszkow: 900
-price_ostroleka: 850
+price_pruszkow: 800
+price_ostroleka: 800
 duration: "45-60 minut"
-category: "Modelowanie"
+category: "Medycyna Estetyczna"
 featured: true
 seo:
   metaTitle: "Kwas hialuronowy - Wypełnianie zmarszczek | Iliclinic"
