@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import locations from '../../../data/locations.json';
 import { getCollection } from 'astro:content';
@@ -67,6 +68,17 @@ const relatedTreatments = allTreatments
         <div class="lg:col-span-2">
           <!-- Header -->
           <header class="mb-10 pb-8 border-b border-primary-medical/10">
+            {treatment.data.image && (
+              <div class="mb-6 aspect-[16/9] overflow-hidden rounded-sm">
+                <img 
+                  src={treatment.data.image} 
+                  alt={treatment.data.title}
+                  class="w-full h-full object-cover"
+                  loading="eager"
+                />
+              </div>
+            )}
+            
             {treatment.data.category && (
               <p class="text-primary-medical font-medium mb-3 tracking-wide uppercase text-sm">
                 {treatment.data.category}
