@@ -59,6 +59,7 @@ content:
         label: Kategoria
         type: select
         options:
+          creatable: true,
           values:
             [ Medycyna Estetyczna,
             Hi-Tech / Laser,
