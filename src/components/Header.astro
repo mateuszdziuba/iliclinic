@@ -26,12 +26,11 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
       <a href={location ? `/${location}` : '/'} class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-primary-medical rounded-sm flex items-center justify-center">
-          <span class="text-text-light font-heading font-bold text-xl">i</span>
-        </div>
-        <span class="font-heading text-2xl text-text-deep group-hover:text-primary-medical transition-colors">
-          Ili Clinic
-        </span>
+        <img 
+          src="/images/logo-black.png" 
+          alt="Ili Clinic" 
+          class="h-12 w-auto"
+        />
         {location && (
           <span class="hidden sm:inline text-sm text-text-muted font-body">
             {locations[location as keyof typeof locations]?.name}
