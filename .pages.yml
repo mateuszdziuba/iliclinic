@@ -48,24 +48,18 @@ content:
         label: Lokalizacje
         type: select
         options:
-          - label: Pruszków
-            value: pruszkow
-          - label: Ostrołęka
-            value: ostroleka
+          - pruszkow
+          - ostroleka
         list: true
         required: true
       - name: category
         label: Kategoria
         type: select
         options:
-          - label: Medycyna Estetyczna
-            value: Medycyna Estetyczna
-          - label: Hi-Tech / Laser
-            value: Hi-Tech / Laser
-          - label: Pielęgnacja Twarzy
-            value: Pielęgnacja Twarzy
-          - label: Inne
-            value: Inne
+          - Medycyna Estetyczna
+          - Hi-Tech / Laser
+          - Pielęgnacja Twarzy
+          - Inne
       - name: price_pruszkow
         label: Cena w Pruszkowie (zł)
         type: number
@@ -114,12 +108,9 @@ content:
         label: Lokalizacja
         type: select
         options:
-          - label: Globalna (wszystkie)
-            value: global
-          - label: Pruszków
-            value: pruszkow
-          - label: Ostrołęka
-            value: ostroleka
+          - global
+          - pruszkow
+          - ostroleka
       - name: body
         label: Treść
         type: rich-text
