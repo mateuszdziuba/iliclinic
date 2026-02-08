@@ -5,7 +5,7 @@ description: Konsultacje i zabiegi na skórę głowy. Diagnostyka, stymulacja
 locations:
   - pruszkow
   - ostroleka
-category: Inne
+category: Włosy
 price_pruszkow: 200
 price_ostroleka: 200
 duration: 45-60 minut
