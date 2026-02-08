@@ -1,6 +1,6 @@
 ---
 name: Dermapen
-logo: /images/brands/dermapen.png
+logo: /images/dermapen-logo.png
 url: https://www.dermapen.com
 order: 3
 ---
