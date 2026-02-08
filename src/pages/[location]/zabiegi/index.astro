@@ -76,8 +76,16 @@ const groupedTreatments = categoryOrder.reduce((acc, category) => {
                   href={`/${location}/zabiegi/${treatment.slug}`}
                   class="group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
                 >
-                  {/* Image placeholder */}
-                  <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative">
+                  {/* Image */}
+                  <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative overflow-hidden">
+                    {treatment.data.image && (
+                      <img 
+                        src={treatment.data.image} 
+                        alt={treatment.data.title}
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    )}
                     {treatment.data.featured && (
                       <span class="absolute top-4 left-4 bg-accent-gold text-text-deep text-xs font-medium px-3 py-1 rounded-sm">
                         Polecany
