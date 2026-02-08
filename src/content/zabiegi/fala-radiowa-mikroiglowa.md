@@ -5,6 +5,7 @@ description: Gold Needle RF - intensywna przebudowa skóry i lifting przy użyci
 locations:
   - pruszkow
   - ostroleka
+category: Medycyna Estetyczna
 price_pruszkow: 700
 price_ostroleka: 700
 duration: 60 minut
