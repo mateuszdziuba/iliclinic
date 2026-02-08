@@ -1,44 +1,48 @@
 ---
-title: "Depilacja Laserowa"
-description: "Trwałe usuwanie owłosienia laserem AlexDual Xlase. Bezpieczna i skuteczna metoda dla każdego typu skóry."
-locations: ['pruszkow', 'ostroleka']
+title: Depilacja Laserowa
+description: Trwałe usuwanie owłosienia laserem AlexDual Xlase. Bezpieczna i
+  skuteczna metoda dla każdego typu skóry.
+locations:
+  - pruszkow
+  - ostroleka
+category: Hi-Tech / Laser
 price_pruszkow: 150
 price_ostroleka: 150
-duration: "15-60 minut"
-category: "Hi-Tech / Laser"
+duration: 15-60 minut
 featured: true
+image: /images/006d56a1-144d-496c-9438-8f498887e170.jpg
 seo:
-  metaTitle: "Depilacja laserowa - AlexDual Xlase | Iliclinic"
-  metaDescription: "Profesjonalna depilacja laserowa. Trwałe usuwanie owłosienia twarzy i ciała. Bezbolesna procedura."
+  metaTitle: Depilacja laserowa - AlexDual Xlase | Iliclinic
+  metaDescription: Profesjonalna depilacja laserowa. Trwałe usuwanie owłosienia
+    twarzy i ciała. Bezbolesna procedura.
 ---
-
 ## Depilacja laserowa AlexDual Xlase
 
 W Ili Clinic wykonujemy depilację laserową przy użyciu nowoczesnego urządzenia AlexDual Xlase. Laser skutecznie usuwa włosy na każdym obszarze ciała, zapewniając trwałe efekty.
 
 ## Zalety metody
 
-- **Trwałość** - znaczna redukcja owłosienia po serii zabiegów
-- **Bezpieczeństwo** - odpowiedni dla różnych typów skóry
-- **Komfort** - system chłodzenia minimalizuje dyskomfort
-- **Precyzja** - selektywne działanie na mieszki włosowe
+*   **Trwałość** - znaczna redukcja owłosienia po serii zabiegów
+*   **Bezpieczeństwo** - odpowiedni dla różnych typów skóry
+*   **Komfort** - system chłodzenia minimalizuje dyskomfort
+*   **Precyzja** - selektywne działanie na mieszki włosowe
 
 ## Obszary zabiegowe
 
-- Twarz (wąsik, broda, policzki)
-- Pachy
-- Bikini
-- Nogi
-- Ręce
-- Plecy
-- Klatka piersiowa
+*   Twarz (wąsik, broda, policzki)
+*   Pachy
+*   Bikini
+*   Nogi
+*   Ręce
+*   Plecy
+*   Klatka piersiowa
 
 ## Przebieg zabiegu
 
-1. Konsultacja i test skórny
-2. Przygotowanie obszaru
-3. Aplikacja impulsu laserowego
-4. Chłodzenie i pielęgnacja
+1.  Konsultacja i test skórny
+2.  Przygotowanie obszaru
+3.  Aplikacja impulsu laserowego
+4.  Chłodzenie i pielęgnacja
 
 ## Ile zabiegów potrzeba?
 
