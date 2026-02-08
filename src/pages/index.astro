@@ -95,3 +95,23 @@ const allLocations = Object.entries(locations);
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  // Auto-redirect if location is already saved
+  const savedLocation = localStorage.getItem('ili-location');
+  if (savedLocation && (savedLocation === 'pruszkow' || savedLocation === 'ostroleka')) {
+    window.location.href = `/${savedLocation}`;
+  }
+
+  // Save location when clicking on location cards
+  document.querySelectorAll('a[href^="/pruszkow"], a[href^="/ostroleka"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const href = link.getAttribute('href');
+      if (href?.startsWith('/pruszkow')) {
+        localStorage.setItem('ili-location', 'pruszkow');
+      } else if (href?.startsWith('/ostroleka')) {
+        localStorage.setItem('ili-location', 'ostroleka');
+      }
+    });
+  });
+</script>

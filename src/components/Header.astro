@@ -39,27 +39,29 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
         )}
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-8">
-        {navLinks.map(link => (
-          <a 
-            href={link.href}
-            target={link.external ? '_blank' : undefined}
-            rel={link.external ? 'noopener' : undefined}
-            class:list={[
-              "font-body text-sm tracking-wide transition-colors relative",
-              !link.external && currentPath.startsWith(link.href) 
-                ? "text-primary-medical font-medium" 
-                : "text-text-deep hover:text-primary-medical"
-            ]}
-          >
-            {link.label}
-            {!link.external && currentPath.startsWith(link.href) && (
-              <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-medical"></span>
-            )}
-          </a>
-        ))}
-      </nav>
+      <!-- Desktop Navigation - only show when location is selected -->
+      {location && (
+        <nav class="hidden md:flex items-center gap-8">
+          {navLinks.map(link => (
+            <a 
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener' : undefined}
+              class:list={[
+                "font-body text-sm tracking-wide transition-colors relative",
+                !link.external && currentPath.startsWith(link.href) 
+                  ? "text-primary-medical font-medium" 
+                  : "text-text-deep hover:text-primary-medical"
+              ]}
+            >
+              {link.label}
+              {!link.external && currentPath.startsWith(link.href) && (
+                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-medical"></span>
+              )}
+            </a>
+          ))}
+        </nav>
+      )}
 
       <!-- Right Side -->
       <div class="flex items-center gap-4">
@@ -72,69 +74,75 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
           </a>
         )}
         
-        <a 
-          href={`${basePath}/kontakt`}
-          class="hidden sm:block bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
-        >
-          Umów wizytę
-        </a>
+        {location && (
+          <a 
+            href={`${basePath}/kontakt`}
+            class="hidden sm:block bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+          >
+            Umów wizytę
+          </a>
+        )}
 
-        <!-- Mobile Menu Button -->
-        <button 
-          type="button"
-          id="mobile-menu-btn"
-          class="md:hidden p-2 text-text-deep hover:text-primary-medical transition-colors"
-          aria-label="Menu"
-        >
-          <svg class="w-6 h-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+        <!-- Mobile Menu Button - only show when location is selected -->
+        {location && (
+          <button 
+            type="button"
+            id="mobile-menu-btn"
+            class="md:hidden p-2 text-text-deep hover:text-primary-medical transition-colors"
+            aria-label="Menu"
+          >
+            <svg class="w-6 h-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
       </div>
     </div>
   </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-primary-medical/10 bg-surface-warm">
-    <nav class="px-4 py-4 space-y-1">
-      {navLinks.map(link => (
-        <a 
-          href={link.href}
-          target={link.external ? '_blank' : undefined}
-          rel={link.external ? 'noopener' : undefined}
-          class:list={[
-            "block py-3 px-4 rounded-sm font-body text-sm transition-colors",
-            !link.external && currentPath.startsWith(link.href) 
-              ? "bg-primary-medical/10 text-primary-medical font-medium" 
-              : "text-text-deep hover:bg-surface-cream"
-          ]}
-        >
-          {link.label}
-        </a>
-      ))}
-      
-      {location && otherLocationData && (
-        <a 
-          href={`/${otherLocation}`}
-          class="block py-3 px-4 rounded-sm text-sm text-text-muted hover:bg-surface-cream"
-        >
-          Gabinet w {otherLocationData.name}
-        </a>
-      )}
-      
-      <div class="pt-3">
-        <a 
-          href={`${basePath}/kontakt`}
-          class="block w-full text-center bg-primary-medical text-text-light px-5 py-3 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
-        >
-          Umów wizytę
-        </a>
-      </div>
-    </nav>
-  </div>
+  <!-- Mobile Menu - only show when location is selected -->
+  {location && (
+    <div id="mobile-menu" class="hidden md:hidden border-t border-primary-medical/10 bg-surface-warm">
+      <nav class="px-4 py-4 space-y-1">
+        {navLinks.map(link => (
+          <a 
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener' : undefined}
+            class:list={[
+              "block py-3 px-4 rounded-sm font-body text-sm transition-colors",
+              !link.external && currentPath.startsWith(link.href) 
+                ? "bg-primary-medical/10 text-primary-medical font-medium" 
+                : "text-text-deep hover:bg-surface-cream"
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+        
+        {otherLocationData && (
+          <a 
+            href={`/${otherLocation}`}
+            class="block py-3 px-4 rounded-sm text-sm text-text-muted hover:bg-surface-cream"
+          >
+            Gabinet w {otherLocationData.name}
+          </a>
+        )}
+        
+        <div class="pt-3">
+          <a 
+            href={`${basePath}/kontakt`}
+            class="block w-full text-center bg-primary-medical text-text-light px-5 py-3 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+          >
+            Umów wizytę
+          </a>
+        </div>
+      </nav>
+    </div>
+  )}
 </header>
 
 <script>
