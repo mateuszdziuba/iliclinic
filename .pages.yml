@@ -141,10 +141,8 @@ content:
         label: Domyślna lokalizacja
         type: select
         options:
-          - label: Pruszków
-            value: pruszkow
-          - label: Ostrołęka
-            value: ostroleka
+          - pruszkow
+          - ostroleka
 
   # Locations config
   - name: locations
