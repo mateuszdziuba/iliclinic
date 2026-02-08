@@ -17,15 +17,22 @@ const locationData = locations[location as keyof typeof locations];
 const allTreatments = await getCollection('zabiegi');
 const treatments = allTreatments.filter(t => t.data.locations.includes(location));
 
-// Group by category with order
+// Get unique categories
+const categories = [...new Set(treatments.map(t => t.data.category).filter(Boolean))];
 const categoryOrder = ['Medycyna Estetyczna', 'Hi-Tech / Laser', 'Pielęgnacja Twarzy', 'Inne'];
-const groupedTreatments = categoryOrder.reduce((acc, category) => {
-  const categoryTreatments = treatments.filter(t => t.data.category === category);
-  if (categoryTreatments.length > 0) {
-    acc[category] = categoryTreatments;
-  }
-  return acc;
-}, {} as Record<string, typeof treatments>);
+const sortedCategories = categoryOrder.filter(c => categories.includes(c));
+
+// Prepare treatments data for client-side filtering
+const treatmentsData = treatments.map(t => ({
+  slug: t.slug,
+  title: t.data.title,
+  description: t.data.description,
+  category: t.data.category,
+  price: location === 'pruszkow' ? t.data.price_pruszkow : t.data.price_ostroleka,
+  duration: t.data.duration,
+  image: t.data.image,
+  featured: t.data.featured,
+}));
 ---
 
 <BaseLayout 
@@ -49,78 +56,117 @@ const groupedTreatments = categoryOrder.reduce((acc, category) => {
     </div>
   </section>
 
-  <!-- Treatments by Category -->
-  <section class="py-16">
+  <!-- Search and Filters -->
+  <section class="py-8 bg-white border-b border-gray-100 sticky top-20 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      {Object.entries(groupedTreatments).map(([category, categoryTreatments]) => (
-        <div class="mb-16 last:mb-0">
-          <div class="flex items-center gap-4 mb-8">
-            <h2 class="font-heading text-2xl text-text-deep whitespace-nowrap">
-              {category}
-            </h2>
-            <div class="h-px bg-primary-medical/20 flex-1"></div>
-            <span class="text-text-muted text-sm whitespace-nowrap">
-              {categoryTreatments.length} {categoryTreatments.length === 1 ? 'zabieg' : 'zabiegów'}
-            </span>
-          </div>
-          
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categoryTreatments.map(treatment => {
-              const price = location === 'pruszkow' 
-                ? treatment.data.price_pruszkow 
-                : treatment.data.price_ostroleka;
-              
-              return (
-                <a 
-                  href={`/${location}/zabiegi/${treatment.slug}`}
-                  class="group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
-                >
-                  {/* Image */}
-                  <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative overflow-hidden">
-                    {treatment.data.image && (
-                      <img 
-                        src={treatment.data.image} 
-                        alt={treatment.data.title}
-                        class="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    )}
-                    {treatment.data.featured && (
-                      <span class="absolute top-4 left-4 bg-accent-gold text-text-deep text-xs font-medium px-3 py-1 rounded-sm">
-                        Polecany
-                      </span>
-                    )}
-                  </div>
-                  
-                  <div class="p-6">
-                    <h3 class="font-heading text-xl text-text-deep mb-3 group-hover:text-primary-medical transition-colors">
-                      {treatment.data.title}
-                    </h3>
-                    
-                    <p class="text-text-muted text-sm mb-4 line-clamp-2">
-                      {treatment.data.description}
-                    </p>
-                    
-                    <div class="flex items-center justify-between">
-                      {price && (
-                        <span class="text-text-deep font-medium">
-                          od {price} zł
-                        </span>
-                      )}
-                      {treatment.data.duration && (
-                        <span class="text-text-muted text-sm">
-                          {treatment.data.duration}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
+      <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <!-- Search -->
+        <div class="relative w-full md:w-80">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Szukaj zabiegu..."
+            class="w-full pl-10 pr-4 py-3 border border-primary-medical/20 rounded-sm bg-surface-cream/50 text-text-deep placeholder:text-text-muted/60 focus:outline-none focus:border-primary-medical focus:ring-1 focus:ring-primary-medical transition-colors"
+          />
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
         </div>
-      ))}
+        
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2 justify-center">
+          <button 
+            data-category="all"
+            class="filter-btn active px-4 py-2 text-sm font-medium rounded-sm transition-colors bg-primary-medical text-white"
+          >
+            Wszystkie
+          </button>
+          {sortedCategories.map(category => (
+            <button 
+              data-category={category}
+              class="filter-btn px-4 py-2 text-sm font-medium rounded-sm transition-colors bg-surface-cream text-text-deep hover:bg-primary-medical/10"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      <!-- Results count -->
+      <p id="results-count" class="mt-4 text-sm text-text-muted text-center md:text-left">
+        Znaleziono <span id="count">{treatments.length}</span> zabiegów
+      </p>
+    </div>
+  </section>
+
+  <!-- Treatments Grid -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div id="treatments-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {treatmentsData.map(treatment => (
+          <a 
+            href={`/${location}/zabiegi/${treatment.slug}`}
+            class="treatment-card group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
+            data-title={treatment.title.toLowerCase()}
+            data-description={treatment.description.toLowerCase()}
+            data-category={treatment.category}
+          >
+            <!-- Image -->
+            <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative overflow-hidden">
+              {treatment.image && (
+                <img 
+                  src={treatment.image} 
+                  alt={treatment.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
+              {treatment.featured && (
+                <span class="absolute top-4 left-4 bg-accent-gold text-text-deep text-xs font-medium px-3 py-1 rounded-sm">
+                  Polecany
+                </span>
+              )}
+            </div>
+            
+            <div class="p-6">
+              <p class="text-primary-medical text-xs font-medium uppercase tracking-wide mb-2">
+                {treatment.category}
+              </p>
+              <h3 class="font-heading text-xl text-text-deep mb-3 group-hover:text-primary-medical transition-colors">
+                {treatment.title}
+              </h3>
+              
+              <p class="text-text-muted text-sm mb-4 line-clamp-2">
+                {treatment.description}
+              </p>
+              
+              <div class="flex items-center justify-between">
+                {treatment.price && (
+                  <span class="text-text-deep font-medium">
+                    od {treatment.price} zł
+                  </span>
+                )}
+                {treatment.duration && (
+                  <span class="text-text-muted text-sm">
+                    {treatment.duration}
+                  </span>
+                )}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+      
+      <!-- No results message -->
+      <div id="no-results" class="hidden py-16 text-center">
+        <svg class="w-16 h-16 mx-auto text-text-muted/40 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p class="text-text-muted text-lg">Nie znaleziono zabiegów spełniających kryteria</p>
+        <button id="reset-filters" class="mt-4 text-primary-medical font-medium hover:underline">
+          Wyczyść filtry
+        </button>
+      </div>
     </div>
   </section>
 
@@ -154,3 +200,97 @@ const groupedTreatments = categoryOrder.reduce((acc, category) => {
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const treatmentCards = document.querySelectorAll('.treatment-card');
+  const countElement = document.getElementById('count');
+  const noResultsElement = document.getElementById('no-results');
+  const treatmentsGrid = document.getElementById('treatments-grid');
+  const resetButton = document.getElementById('reset-filters');
+
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  function filterTreatments() {
+    let visibleCount = 0;
+
+    treatmentCards.forEach(card => {
+      const element = card as HTMLElement;
+      const title = element.dataset.title || '';
+      const description = element.dataset.description || '';
+      const category = element.dataset.category || '';
+
+      const matchesSearch = searchQuery === '' || 
+        title.includes(searchQuery) || 
+        description.includes(searchQuery);
+      
+      const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+      if (matchesSearch && matchesCategory) {
+        element.style.display = '';
+        visibleCount++;
+      } else {
+        element.style.display = 'none';
+      }
+    });
+
+    // Update count
+    if (countElement) {
+      countElement.textContent = visibleCount.toString();
+    }
+
+    // Show/hide no results message
+    if (noResultsElement && treatmentsGrid) {
+      if (visibleCount === 0) {
+        noResultsElement.classList.remove('hidden');
+        treatmentsGrid.classList.add('hidden');
+      } else {
+        noResultsElement.classList.add('hidden');
+        treatmentsGrid.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Search input handler
+  searchInput?.addEventListener('input', (e) => {
+    searchQuery = (e.target as HTMLInputElement).value.toLowerCase();
+    filterTreatments();
+  });
+
+  // Filter buttons handler
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update active state
+      filterButtons.forEach(b => {
+        b.classList.remove('active', 'bg-primary-medical', 'text-white');
+        b.classList.add('bg-surface-cream', 'text-text-deep');
+      });
+      btn.classList.add('active', 'bg-primary-medical', 'text-white');
+      btn.classList.remove('bg-surface-cream', 'text-text-deep');
+
+      activeCategory = (btn as HTMLElement).dataset.category || 'all';
+      filterTreatments();
+    });
+  });
+
+  // Reset filters button
+  resetButton?.addEventListener('click', () => {
+    searchQuery = '';
+    activeCategory = 'all';
+    if (searchInput) searchInput.value = '';
+    
+    filterButtons.forEach(b => {
+      b.classList.remove('active', 'bg-primary-medical', 'text-white');
+      b.classList.add('bg-surface-cream', 'text-text-deep');
+    });
+    const allBtn = document.querySelector('[data-category="all"]');
+    if (allBtn) {
+      allBtn.classList.add('active', 'bg-primary-medical', 'text-white');
+      allBtn.classList.remove('bg-surface-cream', 'text-text-deep');
+    }
+    
+    filterTreatments();
+  });
+</script>
