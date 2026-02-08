@@ -81,7 +81,7 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
           <img 
             src="/images/hero-clinic.jpg"
             alt="Wnętrze gabinetu Ili Clinic"
-            class="w-full h-auto mask-organic"
+            class="w-full h-auto max-h-[70vh] object-cover mask-organic"
             width="600"
             height="600"
           />
@@ -201,7 +201,7 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
           <img 
             src="/images/IMG_7809.jpg"
             alt="Gabinet zabiegowy Ili Clinic"
-            class="w-full h-auto rounded-sm shadow-lg"
+            class="w-full h-auto max-h-[70vh] object-cover rounded-sm shadow-lg"
             width="600"
             height="600"
           />
@@ -234,7 +234,15 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
                 href={`/${location}/zabiegi/${treatment.slug}`}
                 class="group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
               >
-                <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative">
+                <div class="aspect-[4/3] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10 relative overflow-hidden">
+                  {treatment.data.image && (
+                    <img 
+                      src={treatment.data.image} 
+                      alt={treatment.data.title}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
                   <span class="absolute top-3 left-3 bg-accent-gold text-text-deep text-xs font-medium px-2 py-1 rounded-sm">
                     Polecany
                   </span>
