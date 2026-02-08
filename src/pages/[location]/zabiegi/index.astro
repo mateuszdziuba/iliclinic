@@ -17,10 +17,15 @@ const locationData = locations[location as keyof typeof locations];
 const allTreatments = await getCollection('zabiegi');
 const treatments = allTreatments.filter(t => t.data.locations.includes(location));
 
-// Get unique categories
-const categories = [...new Set(treatments.map(t => t.data.category).filter(Boolean))];
-const categoryOrder = ['Medycyna Estetyczna', 'Hi-Tech / Laser', 'Pielęgnacja Twarzy', 'Inne'];
-const sortedCategories = categoryOrder.filter(c => categories.includes(c));
+// Get unique categories dynamically from content
+const allCategories = [...new Set(treatments.map(t => t.data.category).filter(Boolean))] as string[];
+
+// Known categories in preferred order, then add any new ones from CMS
+const knownCategoryOrder = ['Medycyna Estetyczna', 'Hi-Tech / Laser', 'Pielęgnacja Twarzy', 'Inne'];
+const sortedCategories = [
+  ...knownCategoryOrder.filter(c => allCategories.includes(c)),
+  ...allCategories.filter(c => !knownCategoryOrder.includes(c))
+];
 
 // Prepare treatments data for client-side filtering
 const treatmentsData = treatments.map(t => ({
