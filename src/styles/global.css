@@ -55,13 +55,13 @@
 }
 
 [data-location="pruszkow"] {
-  --theme-primary: oklch(0.30 0.01 200); /* Charcoal / Grey */
-  --theme-primary-light: oklch(0.40 0.01 200);
-  --theme-surface: oklch(0.95 0.01 75); /* Cool Beige / Greige */
-  --theme-surface-dim: oklch(0.92 0.01 75);
-  --theme-text-main: oklch(0.20 0.01 200);
-  --theme-text-muted: oklch(0.45 0.01 200);
-  --theme-accent: oklch(0.55 0.04 40); /* Warm Mud / Clay */
+  --theme-primary: oklch(0.40 0.05 60); /* Cashmere / Warm Brown */
+  --theme-primary-light: oklch(0.50 0.05 60);
+  --theme-surface: oklch(0.96 0.02 80); /* Light Beige / Cream */
+  --theme-surface-dim: oklch(0.93 0.02 80);
+  --theme-text-main: oklch(0.25 0.03 60); /* Dark Warm Brown */
+  --theme-text-muted: oklch(0.45 0.03 60);
+  --theme-accent: oklch(0.65 0.06 60); /* Soft Cashmere Accent */
 }
 
 /* Base Styles */

@@ -78,20 +78,23 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
         </div>
 
         <!-- Call to Action / Image context -->
-        <div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-end h-full mt-12 lg:mt-0">
-          <div class="text-reveal-mask mb-6 lg:mb-12 w-full lg:w-auto">
+        <div class="lg:col-span-4 flex flex-col items-start lg:items-end justify-end h-full mt-12 lg:mt-0 relative">
+          <div class="text-reveal-mask mb-6 lg:mb-12 w-full lg:w-auto relative z-20">
             <a href={`/${location}/kontakt`} data-hero-text
-              class="text-reveal-inner inline-flex items-center justify-center w-full lg:w-32 lg:h-32 bg-primary text-surface rounded-full font-body text-xs uppercase tracking-widest hover:scale-105 transition-transform duration-500 py-4 lg:py-0 text-center">
+              class="text-reveal-inner inline-flex items-center justify-center w-full lg:w-32 lg:h-32 bg-primary text-surface rounded-full font-body text-xs uppercase tracking-widest hover:scale-105 transition-transform duration-500 py-4 lg:py-0 text-center shadow-2xl">
               Umów wizytę
             </a>
           </div>
           
-          <div class="w-full relative rounded-2xl overflow-hidden aspect-[4/3] transform origin-bottom" data-hero-img>
-            <div class="absolute inset-0 bg-black/10 z-10 mix-blend-overlay"></div>
+          <div class="w-full relative origin-bottom" data-hero-img>
+            <!-- Original Hero framing: Organic background mask & accent box -->
+            <div class="absolute -top-4 -right-4 w-1/2 h-full bg-primary/5 mask-organic scale-110 z-0"></div>
+            <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-accent/30 rounded-sm z-0"></div>
+            
             <img 
               src="/images/hero-clinic.jpg" 
               alt="Ili Clinic Wnętrze" 
-              class="w-full h-full object-cover"
+              class="w-full h-auto max-h-[60vh] object-cover mask-organic relative z-10 shadow-lg"
             />
           </div>
         </div>
@@ -127,55 +130,109 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 lg:gap-y-32">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
         <!-- Service 1 -->
-        <article class="group" data-scroll-fade>
-          <div class="relative overflow-hidden mb-8 rounded-2xl aspect-[4/5] bg-surface-dim">
-            <img src="https://images.unsplash.com/photo-1612349317150-e4105a018bb5?q=80&w=1200&auto=format&fit=crop" alt="Medycyna Estetyczna" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <article class="group bg-surface-dim p-8 rounded-2xl hover:bg-surface-warm transition-colors duration-500 hover-lift text-center" data-scroll-fade>
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">01. Pielęgnacja</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Kosmetologia</h3>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-2">Pielęgnacja</p>
+          <h3 class="font-heading text-2xl text-text-main mb-3 group-hover:text-primary transition-colors">Kosmetologia</h3>
           <p class="font-body text-sm text-text-muted leading-relaxed">Zabiegi pielęgnacyjne i odmładzające dla Twojej skóry.</p>
         </article>
         
         <!-- Service 2 -->
-        <article class="group md:mt-32" data-scroll-fade>
-          <div class="relative overflow-hidden mb-8 rounded-2xl aspect-[4/5] bg-surface-dim">
-            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop" alt="Kosmetologia Hi-Tech" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-accent/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+        <article class="group bg-surface-dim p-8 rounded-2xl hover:bg-surface-warm transition-colors duration-500 hover-lift text-center" data-scroll-fade>
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+            </svg>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">02. Iniekcje</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Medycyna Estetyczna</h3>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-2">Iniekcje</p>
+          <h3 class="font-heading text-2xl text-text-main mb-3 group-hover:text-primary transition-colors">Medycyna Estetyczna</h3>
           <p class="font-body text-sm text-text-muted leading-relaxed">Botoks, wypełniacze, stymulatory tkankowe.</p>
         </article>
 
         <!-- Service 3 -->
-        <article class="group" data-scroll-fade>
-          <div class="relative overflow-hidden mb-8 rounded-2xl aspect-[4/5] bg-surface-dim">
-            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop" alt="Kosmetologia Pielęgnacyjna" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0 transition-all" />
+        <article class="group bg-surface-dim p-8 rounded-2xl hover:bg-surface-warm transition-colors duration-500 hover-lift text-center" data-scroll-fade>
+          <div class="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">03. Technologie</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Hi-Tech / Laser</h3>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-2">Technologie</p>
+          <h3 class="font-heading text-2xl text-text-main mb-3 group-hover:text-primary transition-colors">Hi-Tech / Laser</h3>
           <p class="font-body text-sm text-text-muted leading-relaxed">Depilacja laserowa, termolifting, fala radiowa.</p>
         </article>
 
         <!-- Service 4 -->
-        <article class="group md:mt-32" data-scroll-fade>
-          <div class="relative overflow-hidden mb-8 rounded-2xl aspect-[4/5] bg-surface-dim">
-            <img src="https://images.unsplash.com/photo-1582216173007-827cb6372551?q=80&w=1200&auto=format&fit=crop" alt="Trychologia" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+        <article class="group bg-surface-dim p-8 rounded-2xl hover:bg-surface-warm transition-colors duration-500 hover-lift text-center" data-scroll-fade>
+           <div class="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
+            </svg>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">04. Skóra Głowy</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Trychologia</h3>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-2">Skóra Głowy</p>
+          <h3 class="font-heading text-2xl text-text-main mb-3 group-hover:text-primary transition-colors">Trychologia</h3>
           <p class="font-body text-sm text-text-muted leading-relaxed">Konsultacje i zabiegi na skórę głowy.</p>
         </article>
       </div>
     </div>
   </section>
 
+  <!-- Team Philosophy / Original Image Restored -->
+  <section class="py-32 bg-surface-dim relative overflow-hidden">
+    <!-- Background element -->
+    <div class="absolute -top-1/4 -right-1/4 w-1/2 h-full bg-primary/5 mask-organic opacity-50 z-0 pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div data-scroll-fade>
+          <p class="font-body text-[10px] uppercase tracking-widest text-primary mb-4">
+            Doświadczenie i pasja
+          </p>
+          <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl text-text-main mb-8 leading-[1.1]">
+            Nasz zespół <br/><span class="italic text-primary">profesjonalistów</span>
+          </h2>
+          
+          <p class="font-body text-lg text-text-muted mb-6">
+            Specjalizujemy się w różnych dziedzinach, co pozwala nam zaopiekować się 
+            naszymi pacjentami w pełni. Osiągamy optymalne wyniki, zachowując najwyższe standardy.
+          </p>
+          
+          <div class="h-px w-16 bg-primary mb-6"></div>
+          
+          <p class="font-body text-sm text-text-muted max-w-md mb-10 leading-relaxed">
+            Dzięki doświadczeniu i ciągle poszerzanej wiedzy możemy świadczyć usługi skuteczne, 
+            bezpieczne i dopasowane do Twoich indywidualnych potrzeb, niezależnie od problemu.
+          </p>
+          
+          <a href={`/${location}/o-nas`} class="inline-flex items-center gap-4 text-primary font-body text-xs uppercase tracking-widest hover:gap-6 transition-all group">
+            <span class="inline-block border border-primary/30 rounded-full px-6 py-3 group-hover:bg-primary group-hover:text-surface transition-colors">Poznaj nas bliżej</span>
+          </a>
+        </div>
+        
+        <div class="relative" data-scroll-fade>
+          <!-- Additional design frames mimicking the original organic look -->
+          <div class="absolute -bottom-6 -left-6 w-3/4 h-3/4 bg-primary/10 rounded-3xl z-0"></div>
+          <div class="absolute top-4 -right-4 w-24 h-24 bg-accent/20 rounded-full z-0 blur-lg"></div>
+
+          <img 
+            src="/images/IMG_7809.jpg"
+            alt="Gabinet zabiegowy Ili Clinic"
+            class="w-full h-auto object-cover rounded-[2rem] shadow-2xl relative z-10"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- Featured Treatments List (Interactive Accordion Style) -->
   {featuredTreatments.length > 0 && (
-    <section class="py-32 bg-surface-dim">
+    <section class="py-32 bg-surface">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-16">
           <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">Najpopularniejsze zabiegi</p>
