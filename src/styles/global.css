@@ -1,67 +1,126 @@
 @import "tailwindcss";
 
-/* Iliclinic Design System - Premium Medical Aesthetic */
+/* Iliclinic Cinematic Design System */
 
 @theme {
-  /* Typography - Sophisticated fonts */
+  /* Cinematic Typography */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
 
-  /* Colors - Premium Medical Palette (Navy + Beige) */
-  --color-primary-medical: oklch(0.25 0.08 260);
-  --color-primary-medical-light: oklch(0.35 0.07 260);
-  --color-primary-medical-dark: oklch(0.18 0.09 260);
+  /* Theme agnostic utility colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Semantic Tokens mapped to variables (defined below) */
+  --color-primary: var(--theme-primary);
+  --color-primary-light: var(--theme-primary-light);
+  --color-surface: var(--theme-surface);
+  --color-surface-dim: var(--theme-surface-dim);
+  --color-text-main: var(--theme-text-main);
+  --color-text-muted: var(--theme-text-muted);
+  --color-accent: var(--theme-accent);
 
-  --color-surface-warm: oklch(0.96 0.02 70);
-  --color-surface-cream: oklch(0.94 0.03 75);
-  --color-surface-dark: oklch(0.18 0.02 260);
+  /* Legacy aliases for existing components while migrating */
+  --color-primary-medical: var(--theme-primary);
+  --color-surface-warm: var(--theme-surface);
+  --color-surface-cream: var(--theme-surface-dim);
+  --color-text-deep: var(--theme-text-main);
+  --color-accent-gold: var(--theme-accent);
 
-  --color-text-deep: oklch(0.20 0.02 260);
-  --color-text-muted: oklch(0.45 0.02 260);
-  --color-text-light: oklch(0.98 0.01 70);
-
-  --color-accent-gold: oklch(0.65 0.12 75);
-  --color-accent-rose: oklch(0.65 0.10 15);
-
-  /* Custom border-radius for organic shapes */
+  /* Shapes */
   --radius-organic: 50% 20% 40% 30% / 30% 50% 20% 40%;
   --radius-soft: 1rem 0.5rem 1rem 0.5rem;
 }
 
+/* -- Base Theme Definitions -- */
+:root {
+  /* Default Fallback (Ostrołęka / Default) - Navy & Beige */
+  --theme-primary: oklch(0.28 0.06 255); /* Deep Navy */
+  --theme-primary-light: oklch(0.38 0.05 255);
+  --theme-surface: oklch(0.96 0.02 70); /* Warm Beige */
+  --theme-surface-dim: oklch(0.93 0.03 70);
+  --theme-text-main: oklch(0.20 0.04 255);
+  --theme-text-muted: oklch(0.45 0.02 255);
+  --theme-accent: oklch(0.70 0.12 65); /* Gold / Bronze */
+}
+
+[data-location="ostroleka"] {
+  --theme-primary: oklch(0.25 0.08 260); /* Navy */
+  --theme-primary-light: oklch(0.35 0.07 260);
+  --theme-surface: oklch(0.96 0.02 70); /* Beige */
+  --theme-surface-dim: oklch(0.94 0.03 75);
+  --theme-text-main: oklch(0.20 0.02 260);
+  --theme-text-muted: oklch(0.45 0.02 260);
+  --theme-accent: oklch(0.65 0.12 75);
+}
+
+[data-location="pruszkow"] {
+  --theme-primary: oklch(0.30 0.01 200); /* Charcoal / Grey */
+  --theme-primary-light: oklch(0.40 0.01 200);
+  --theme-surface: oklch(0.95 0.01 75); /* Cool Beige / Greige */
+  --theme-surface-dim: oklch(0.92 0.01 75);
+  --theme-text-main: oklch(0.20 0.01 200);
+  --theme-text-muted: oklch(0.45 0.01 200);
+  --theme-accent: oklch(0.55 0.04 40); /* Warm Mud / Clay */
+}
+
 /* Base Styles */
 html {
-  scroll-behavior: smooth;
+  /* Let lenis handle scroll behavior, no smooth scroll here */
+  background-color: var(--theme-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-body);
-  color: var(--color-text-deep);
-  background-color: var(--color-surface-warm);
+  color: var(--theme-text-main);
+  background-color: var(--theme-surface);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
-  font-weight: 500;
-  line-height: 1.2;
-  /* Color controlled by Tailwind classes or inherited from parent */
+  font-weight: 400; /* Cinematic headings, light weight */
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-/* Utility classes for organic shapes */
-.mask-organic {
-  border-radius: var(--radius-organic);
+/* Lenis Smooth Scroll Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
-.mask-soft {
-  border-radius: var(--radius-soft);
-}
+/* Utilities */
+.mask-organic { border-radius: var(--radius-organic); }
+.mask-soft { border-radius: var(--radius-soft); }
 
-/* Premium hover transitions */
-.hover-lift {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
+.hover-lift { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -8px oklch(0.30 0.02 280 / 0.15);
+  box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.1);
+}
+
+.text-reveal-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+.text-reveal-inner {
+  display: inline-block;
+  transform: translateY(100%);
+  will-change: transform;
 }

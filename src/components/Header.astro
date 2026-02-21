@@ -11,90 +11,86 @@ const { location, currentPath } = Astro.props;
 const basePath = location ? `/${location}` : '';
 
 const navLinks = [
-  { label: 'O nas', href: `${basePath}/o-nas` },
-  { label: 'Zabiegi', href: `${basePath}/zabiegi` },
+  { label: 'Filozofia', href: `${basePath}/o-nas` },
+  { label: 'Protokoły', href: `${basePath}/zabiegi` },
   { label: 'Sklep', href: 'https://ilishop.pl', external: true },
-  { label: 'Kontakt', href: `${basePath}/kontakt` },
 ];
 
-const otherLocation = location === 'pruszkow' ? 'ostroleka' : 'pruszkow';
-const otherLocationData = locations[otherLocation as keyof typeof locations];
+const otherLocation = location === 'pruszkow' ? 'ostroleka' : '';
+const otherLocationData = otherLocation ? locations[otherLocation as keyof typeof locations] : null;
+
+// Determine if we need to show the location switch (only if we have a valid location)
+const validLocation = location === 'pruszkow' || location === 'ostroleka';
 ---
 
-<header class="bg-surface-warm/80 backdrop-blur-md sticky top-0 z-50 border-b border-primary-medical/10">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-20">
-      <!-- Logo -->
-      <a href={location ? `/${location}` : '/'} class="flex items-center gap-3 group">
-        <img 
-          src="/images/logo-black.png" 
-          alt="Ili Clinic" 
-          class="h-12 w-auto"
-        />
-        {location && (
-          <span class="hidden sm:inline text-sm text-text-muted font-body">
+<header 
+  id="cinematic-nav" 
+  class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl rounded-full transition-all duration-700 bg-surface/0 text-white border border-white/0"
+>
+  <div class="px-6 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo as Type -->
+      <a href={validLocation ? `/${location}` : '/'} class="flex items-center gap-3 group">
+        <span class="font-heading font-medium tracking-widest text-lg uppercase transition-colors">
+          Ili Clinic
+        </span>
+        {validLocation && (
+          <span class="hidden sm:inline-block font-body text-[10px] tracking-widest uppercase opacity-60 border border-current rounded-full px-2 py-0.5">
             {locations[location as keyof typeof locations]?.name}
           </span>
         )}
       </a>
 
-      <!-- Desktop Navigation - only show when location is selected -->
-      {location && (
-        <nav class="hidden md:flex items-center gap-8">
+      <!-- Desktop Navigation -->
+      {validLocation && (
+        <nav class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {navLinks.map(link => (
             <a 
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener' : undefined}
-              class:list={[
-                "font-body text-sm tracking-wide transition-colors relative",
-                !link.external && currentPath.startsWith(link.href) 
-                  ? "text-primary-medical font-medium" 
-                  : "text-text-deep hover:text-primary-medical"
-              ]}
+              class="font-body text-xs tracking-wider uppercase opacity-70 hover:opacity-100 transition-opacity"
             >
               {link.label}
-              {!link.external && currentPath.startsWith(link.href) && (
-                <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-medical"></span>
-              )}
             </a>
           ))}
         </nav>
       )}
 
-      <!-- Right Side -->
+      <!-- Right Side / CTA -->
       <div class="flex items-center gap-4">
-        {location && otherLocationData && (
+        {validLocation && otherLocationData && (
           <a 
             href={`/${otherLocation}`}
-            class="hidden lg:block text-sm text-text-muted hover:text-primary-medical transition-colors"
+            class="hidden lg:block font-body text-[10px] uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity"
           >
-            Gabinet w {otherLocationData.name}
+            Gabinet {otherLocationData.name}
           </a>
         )}
         
-        {location && (
+        {validLocation && (
           <a 
             href={`${basePath}/kontakt`}
-            class="hidden sm:block bg-primary-medical text-text-light px-5 py-2.5 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+            target={otherLocation ? undefined : '_self'}
+            class="hidden sm:inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-full text-xs tracking-wider uppercase font-medium hover-lift transition-transform"
           >
-            Umów wizytę
+            Rezerwacja
           </a>
         )}
 
-        <!-- Mobile Menu Button - only show when location is selected -->
-        {location && (
+        <!-- Mobile Menu Button -->
+        {validLocation && (
           <button 
             type="button"
             id="mobile-menu-btn"
-            class="md:hidden p-2 text-text-deep hover:text-primary-medical transition-colors"
+            class="md:hidden p-2 opacity-80 hover:opacity-100 transition-opacity"
             aria-label="Menu"
           >
-            <svg class="w-6 h-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <svg class="w-5 h-5 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <svg class="w-6 h-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            <svg class="w-5 h-5 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         )}
@@ -102,21 +98,19 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
     </div>
   </div>
 
-  <!-- Mobile Menu - only show when location is selected -->
-  {location && (
-    <div id="mobile-menu" class="hidden md:hidden border-t border-primary-medical/10 bg-surface-warm">
-      <nav class="px-4 py-4 space-y-1">
+  <!-- Mobile Menu -->
+  {validLocation && (
+    <div 
+      id="mobile-menu" 
+      class="hidden md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-surface/95 backdrop-blur-xl rounded-3xl border border-primary/5 shadow-2xl overflow-hidden origin-top transition-all"
+    >
+      <nav class="px-6 py-8 flex flex-col gap-6 text-text-main">
         {navLinks.map(link => (
           <a 
             href={link.href}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
-            class:list={[
-              "block py-3 px-4 rounded-sm font-body text-sm transition-colors",
-              !link.external && currentPath.startsWith(link.href) 
-                ? "bg-primary-medical/10 text-primary-medical font-medium" 
-                : "text-text-deep hover:bg-surface-cream"
-            ]}
+            class="font-heading text-2xl"
           >
             {link.label}
           </a>
@@ -125,18 +119,18 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
         {otherLocationData && (
           <a 
             href={`/${otherLocation}`}
-            class="block py-3 px-4 rounded-sm text-sm text-text-muted hover:bg-surface-cream"
+            class="font-body text-xs tracking-widest uppercase opacity-60 pt-4 border-t border-primary/10"
           >
-            Gabinet w {otherLocationData.name}
+            Zmień na {otherLocationData.name}
           </a>
         )}
         
-        <div class="pt-3">
+        <div class="pt-4 mt-2">
           <a 
             href={`${basePath}/kontakt`}
-            class="block w-full text-center bg-primary-medical text-text-light px-5 py-3 rounded-sm text-sm font-medium hover:bg-primary-medical-dark transition-colors"
+            class="flex items-center justify-center w-full bg-primary text-surface px-6 py-4 rounded-full text-sm font-medium tracking-wide uppercase"
           >
-            Umów wizytę
+            Rezerwacja Terminu
           </a>
         </div>
       </nav>
@@ -145,14 +139,56 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
 </header>
 
 <script>
+  // Cinematic scroll morphing
+  const nav = document.getElementById('cinematic-nav');
   const menuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   const menuIcon = menuBtn?.querySelector('.menu-icon');
   const closeIcon = menuBtn?.querySelector('.close-icon');
 
+  const checkScroll = () => {
+    if (!nav) return;
+    if (window.scrollY > 80) {
+      nav.classList.remove('bg-surface/0', 'text-white', 'border-white/0');
+      // Adding text-black or text-text-main when scrolled down assuming white background
+      nav.classList.add('bg-surface/90', 'backdrop-blur-xl', 'text-text-main', 'border-primary/10', 'shadow-[0_8px_30px_rgb(0,0,0,0.04)]');
+      
+      const cta = nav.querySelector('a[href$="/kontakt"]');
+      if (cta) {
+        cta.classList.remove('bg-white', 'text-black');
+        cta.classList.add('bg-primary', 'text-surface');
+      }
+    } else {
+      nav.classList.add('bg-surface/0', 'text-white', 'border-white/0');
+      nav.classList.remove('bg-surface/90', 'backdrop-blur-xl', 'text-text-main', 'border-primary/10', 'shadow-[0_8px_30px_rgb(0,0,0,0.04)]');
+
+      const cta = nav.querySelector('a[href$="/kontakt"]');
+      if (cta) {
+        cta.classList.add('bg-white', 'text-black');
+        cta.classList.remove('bg-primary', 'text-surface');
+      }
+    }
+  };
+
+  window.addEventListener('scroll', checkScroll, { passive: true });
+  checkScroll();
+
   menuBtn?.addEventListener('click', () => {
     const isOpen = mobileMenu?.classList.toggle('hidden');
     menuIcon?.classList.toggle('hidden', !isOpen);
     closeIcon?.classList.toggle('hidden', isOpen);
+    
+    if (!isOpen && nav) {
+      nav.classList.remove('bg-surface/0', 'text-white', 'border-white/0');
+      nav.classList.add('bg-surface/95', 'backdrop-blur-xl', 'text-text-main', 'border-primary/10');
+      
+      const cta = nav.querySelector('a[href$="/kontakt"]');
+      if (cta && window.scrollY <= 80) {
+        cta.classList.remove('bg-white', 'text-black');
+        cta.classList.add('bg-primary', 'text-surface');
+      }
+    } else {
+      checkScroll();
+    }
   });
 </script>
