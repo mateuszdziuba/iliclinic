@@ -45,22 +45,34 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
         <div class="lg:col-span-8 flex flex-col justify-end">
           <div class="text-reveal-mask mb-6">
             <span class="text-reveal-inner font-body text-[10px] tracking-[0.2em] text-primary uppercase inline-block border border-primary/20 rounded-full px-3 py-1" data-hero-text>
-              Medycyna Estetyczna & Kosmetologia
+              Ili Clinic {locationData.name}
             </span>
           </div>
 
-          <h1 class="font-heading text-5xl sm:text-7xl lg:text-[7rem] leading-[0.9] tracking-[-0.03em] text-text-main mb-8">
+          <h1 class="font-heading text-5xl sm:text-7xl lg:text-[6rem] leading-[0.9] tracking-[-0.03em] text-text-main mb-8">
             <div class="text-reveal-mask w-full">
-              <span class="text-reveal-inner block" data-hero-text>Architektura</span>
+              <span class="text-reveal-inner block" data-hero-text>Klinika Zdrowej</span>
             </div>
             <div class="text-reveal-mask w-full">
-              <span class="text-reveal-inner block italic text-primary" data-hero-text>Zdrowej Skóry.</span>
+              <span class="text-reveal-inner block italic text-primary" data-hero-text>Skóry.</span>
             </div>
           </h1>
 
+          <div class="text-reveal-mask mb-4">
+            <p class="text-reveal-inner font-body text-text-main max-w-lg text-sm sm:text-base leading-relaxed font-medium" data-hero-text>
+              Skóra, zdrowie, relaks
+            </p>
+          </div>
+
+          <div class="text-reveal-mask mb-2">
+            <p class="text-reveal-inner font-body text-text-muted max-w-lg text-sm sm:text-base leading-relaxed" data-hero-text>
+              Ili Clinic zostało stworzone by koncentrować się na człowieku i jego potrzebach.
+            </p>
+          </div>
+
           <div class="text-reveal-mask">
-            <p class="text-reveal-inner font-body text-text-muted max-w-md text-sm sm:text-base leading-relaxed" data-hero-text>
-              Ekskluzywna przestrzeń w {locationData.address.city}, w której medycyna spotyka się z holistyczną dbałością o Twoje wewnętrzne i zewnętrzne piękno.
+            <p class="text-reveal-inner font-body text-text-muted max-w-lg text-sm sm:text-base leading-relaxed" data-hero-text>
+              Charakteryzuje nas holistyczne podejście do dbania o zdrowie, ciało i duszę. Oferujemy nie jedno, a wiele rozwiązań na Twoje problemy z zakresu zdrowia skóry i ciała.
             </p>
           </div>
         </div>
@@ -70,7 +82,7 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
           <div class="text-reveal-mask mb-6 lg:mb-12 w-full lg:w-auto">
             <a href={`/${location}/kontakt`} data-hero-text
               class="text-reveal-inner inline-flex items-center justify-center w-full lg:w-32 lg:h-32 bg-primary text-surface rounded-full font-body text-xs uppercase tracking-widest hover:scale-105 transition-transform duration-500 py-4 lg:py-0 text-center">
-              Rezerwacja
+              Umów wizytę
             </a>
           </div>
           
@@ -91,11 +103,11 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
   <!-- Scrolling Manifesto -->
   <section class="py-32 bg-primary text-surface relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto text-center font-heading text-3xl sm:text-5xl lg:text-6xl leading-[1.2] tracking-tight" data-scroll-fade>
-        „Wierzymy, że <span class="italic text-accent">prawdziwe piękno</span> to harmonia pomiędzy zdrowiem organizmu, a zewnętrznym blaskiem skóry.”
+      <div class="max-w-4xl mx-auto text-center font-heading text-3xl sm:text-4xl lg:text-5xl leading-[1.2] tracking-tight" data-scroll-fade>
+        „Nasz zespół nie powstał przez przypadek. <span class="italic text-accent">Łączy nas doświadczenie</span> i pasja do tego co robimy.”
       </div>
       <div class="mt-12 text-center" data-scroll-fade>
-        <span class="font-body text-xs tracking-widest uppercase opacity-60">Filozofia Ili Clinic</span>
+        <span class="font-body text-xs tracking-widest uppercase opacity-60">Nasz zespół / Doświadczenie i pasja</span>
       </div>
     </div>
   </section>
@@ -104,11 +116,14 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
   <section class="py-32 bg-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-        <h2 class="font-heading text-4xl sm:text-5xl lg:text-7xl leading-none text-text-main" data-scroll-fade>
-          Protokoły <br/><span class="italic text-primary">Terapii</span>
-        </h2>
+        <div>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4" data-scroll-fade>Szeroki wachlarz usług</p>
+          <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl leading-none text-text-main" data-scroll-fade>
+            W czym możemy <br/><span class="italic text-primary">Ci pomóc?</span>
+          </h2>
+        </div>
         <a href={`/${location}/zabiegi`} class="font-body text-xs uppercase tracking-widest text-text-main border-b border-text-main pb-1 hover:text-primary transition-colors" data-scroll-fade>
-          Poznaj wszystkie
+          Zobacz pełną ofertę
         </a>
       </div>
 
@@ -119,9 +134,9 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
             <img src="https://images.unsplash.com/photo-1612349317150-e4105a018bb5?q=80&w=1200&auto=format&fit=crop" alt="Medycyna Estetyczna" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
             <div class="absolute inset-0 bg-primary/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">01. Procedury Iniekcyjne</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Medycyna Estetyczna</h3>
-          <p class="font-body text-sm text-text-muted leading-relaxed">Inteligentne stymulatory tkankowe, toksyna botulinowa oraz zaawansowane wypełniacze przywracające utraconą architekturę twarzy z zachowaniem pełnej naturalności.</p>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">01. Pielęgnacja</p>
+          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Kosmetologia</h3>
+          <p class="font-body text-sm text-text-muted leading-relaxed">Zabiegi pielęgnacyjne i odmładzające dla Twojej skóry.</p>
         </article>
         
         <!-- Service 2 -->
@@ -130,9 +145,9 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
             <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1200&auto=format&fit=crop" alt="Kosmetologia Hi-Tech" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
             <div class="absolute inset-0 bg-accent/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">02. Zaawansowane Technologie</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Kosmetologia Hi-Tech</h3>
-          <p class="font-body text-sm text-text-muted leading-relaxed">Laseroterapia, fale radiowe RF i zogniskowane ultradźwięki (HIFU). Precyzyjne urządzenia sprzętowe warunkujące bezapelacyjną przebudowę struktur skóry.</p>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">02. Iniekcje</p>
+          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Medycyna Estetyczna</h3>
+          <p class="font-body text-sm text-text-muted leading-relaxed">Botoks, wypełniacze, stymulatory tkankowe.</p>
         </article>
 
         <!-- Service 3 -->
@@ -140,9 +155,9 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
           <div class="relative overflow-hidden mb-8 rounded-2xl aspect-[4/5] bg-surface-dim">
             <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop" alt="Kosmetologia Pielęgnacyjna" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0 transition-all" />
           </div>
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">03. Prewencja i Ochrona</p>
-          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Dermatologia & Pielęgnacja</h3>
-          <p class="font-body text-sm text-text-muted leading-relaxed">Spersonalizowane terapie leczenia trądziku, przebarwień i blizn. Oczyszczanie wodorowe, peelingi chemiczne i mikronakłuwanie (Dermapen) dla codziennej rewitalizacji.</p>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">03. Technologie</p>
+          <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Hi-Tech / Laser</h3>
+          <p class="font-body text-sm text-text-muted leading-relaxed">Depilacja laserowa, termolifting, fala radiowa.</p>
         </article>
 
         <!-- Service 4 -->
@@ -152,7 +167,7 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
           </div>
           <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">04. Skóra Głowy</p>
           <h3 class="font-heading text-3xl text-text-main mb-4 group-hover:text-primary transition-colors">Trychologia</h3>
-          <p class="font-body text-sm text-text-muted leading-relaxed">Specjalistyczna diagnostyka i bezprecedensowe terapie leczenia łysienia oraz chorób owłosionej skóry głowy.</p>
+          <p class="font-body text-sm text-text-muted leading-relaxed">Konsultacje i zabiegi na skórę głowy.</p>
         </article>
       </div>
     </div>
@@ -163,9 +178,9 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
     <section class="py-32 bg-surface-dim">
       <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-16">
-          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">Sygnaturowe Zabiegi</p>
+          <p class="font-body text-[10px] uppercase tracking-widest text-text-muted mb-4">Najpopularniejsze zabiegi</p>
           <h2 class="font-heading text-4xl sm:text-5xl text-text-main">
-            Rekomendacje Experta
+            Polecane zabiegi
           </h2>
         </div>
 
@@ -199,7 +214,8 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
     <section class="py-24 bg-surface border-t border-primary/5">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-          <span class="font-body text-[10px] uppercase tracking-[0.2em] text-text-muted">Laboratoria & Technologie</span>
+          <h2 class="font-heading text-4xl sm:text-5xl text-text-main mb-4">Współpracujemy z najlepszymi</h2>
+          <span class="font-body text-[10px] uppercase tracking-[0.2em] text-text-muted">Zaufane marki</span>
         </div>
         <div class="flex flex-wrap justify-center gap-12 lg:gap-24 items-center opacity-60 mix-blend-multiply">
           {brands.map(brand => (
