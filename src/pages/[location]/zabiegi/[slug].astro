@@ -46,266 +46,263 @@ const relatedTreatments = allTreatments
   location={location as 'pruszkow' | 'ostroleka'}
 >
   <!-- Breadcrumbs -->
-  <div class="bg-surface-cream py-4">
+  <div class="bg-surface pt-28 pb-4 border-b border-primary/10 relative z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <nav class="text-sm">
-        <ol class="flex items-center gap-2 text-text-muted">
-          <li><a href={`/${location}`} class="hover:text-primary-medical">{locationData.name}</a></li>
-          <li class="text-primary-medical/40">/</li>
-          <li><a href={`/${location}/zabiegi`} class="hover:text-primary-medical">Zabiegi</a></li>
-          <li class="text-primary-medical/40">/</li>
-          <li class="text-text-deep font-medium">{treatment.data.title}</li>
+      <nav class="font-body text-[10px] uppercase tracking-[0.15em]">
+        <ol class="flex items-center gap-3 text-text-muted">
+          <li><a href={`/${location}`} class="hover:text-primary transition-colors">{locationData.name}</a></li>
+          <li class="text-primary/40">/</li>
+          <li><a href={`/${location}/zabiegi`} class="hover:text-primary transition-colors">Zabiegi</a></li>
+          <li class="text-primary/40">/</li>
+          <li class="text-text-main font-medium">{treatment.data.title}</li>
         </ol>
       </nav>
     </div>
   </div>
 
-  <article class="py-12 lg:py-16">
+  <article class="bg-surface pt-12 lg:pt-20 pb-24 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-3 gap-12">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-20">
         
         <!-- Main Content -->
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-8">
           <!-- Header -->
-          <header class="mb-10 pb-8 border-b border-primary-medical/10">
-            {treatment.data.image && (
-              <div class="mb-6 aspect-[16/9] overflow-hidden rounded-sm">
-                <img 
-                  src={treatment.data.image} 
-                  alt={treatment.data.title}
-                  class="w-full h-full object-cover"
-                  loading="eager"
-                />
-              </div>
-            )}
-            
+          <header class="mb-16">
             {treatment.data.category && (
-              <p class="text-primary-medical font-medium mb-3 tracking-wide uppercase text-sm">
+              <p class="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-6">
                 {treatment.data.category}
               </p>
             )}
             
-            <h1 class="font-heading text-3xl lg:text-4xl text-text-deep mb-4">
+            <h1 class="font-heading text-5xl sm:text-6xl lg:text-7xl text-text-main mb-8 leading-[0.95] tracking-[-0.02em]">
               {treatment.data.title}
             </h1>
             
-            <p class="text-lg text-text-muted leading-relaxed">
+            <p class="font-body text-xl text-text-muted leading-relaxed max-w-3xl mb-12">
               {treatment.data.description}
             </p>
+
+            {treatment.data.image && (
+              <div class="mb-16 relative group" data-scroll-fade>
+                <!-- Cinematic framing -->
+                <div class="absolute -inset-4 border border-primary/20 rounded-[2.5rem] mix-blend-multiply opacity-50 z-0 scale-95 transition-transform duration-700 group-hover:scale-100 hidden md:block"></div>
+                <div class="aspect-[16/9] lg:aspect-[21/9] overflow-hidden rounded-3xl relative z-10 shadow-2xl mask-organic">
+                  <div class="absolute inset-0 bg-accent/10 mix-blend-overlay z-10 h-full w-full pointer-events-none"></div>
+                  <img 
+                    src={treatment.data.image} 
+                    alt={treatment.data.title}
+                    class="w-full h-full object-cover filter grayscale-[20%] group-hover:grayscale-0 transition-all duration-[2s] group-hover:scale-105"
+                    loading="eager"
+                  />
+                </div>
+              </div>
+            )}
             
             <!-- Quick Info Pills -->
-            <div class="mt-6 flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-4 border-y border-primary/10 py-6">
               {price && (
-                <span class="inline-flex items-center gap-2 bg-primary-medical/10 text-primary-medical px-4 py-2 rounded-sm text-sm font-medium">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <span class="inline-flex items-center gap-3 bg-surface-dim px-6 py-3 rounded-full font-body text-xs tracking-widest uppercase text-text-main border border-primary/10">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   od {price} zł
                 </span>
               )}
               {treatment.data.duration && (
-                <span class="inline-flex items-center gap-2 bg-surface-cream text-text-deep px-4 py-2 rounded-sm text-sm">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <span class="inline-flex items-center gap-3 bg-surface-dim px-6 py-3 rounded-full font-body text-xs tracking-widest uppercase text-text-main border border-primary/10">
+                  <svg class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   {treatment.data.duration}
                 </span>
               )}
-              <span class="inline-flex items-center gap-2 bg-accent-gold/30 text-text-deep px-4 py-2 rounded-sm text-sm font-medium">
-                ✓ Bezpłatna konsultacja
+              <span class="inline-flex items-center gap-3 bg-primary/5 text-primary px-6 py-3 rounded-full font-body text-xs tracking-widest uppercase border border-primary/20">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
+                </svg>
+                Bezpłatna konsultacja
               </span>
             </div>
           </header>
 
           <!-- Content in Accordion Style -->
-          <div class="space-y-4">
-            <details class="group border border-primary-medical/10 bg-white" open>
-              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-surface-cream/50 transition-colors">
-                <h2 class="font-heading text-xl text-text-deep">Opis zabiegu</h2>
-                <svg class="w-5 h-5 text-primary-medical transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+          <div class="border-t border-primary/10 mt-12">
+            <details class="group border-b border-primary/10" open>
+              <summary class="flex items-center justify-between py-8 cursor-pointer hover:text-primary transition-colors focus:outline-none">
+                <h2 class="font-heading text-3xl text-text-main group-hover:text-primary transition-colors">Opis zabiegu</h2>
+                <span class="relative w-8 h-8 flex items-center justify-center border border-primary/20 rounded-full group-open:bg-primary/5 transition-colors">
+                  <span class="absolute w-3 h-px bg-primary transition-transform duration-300"></span>
+                  <span class="absolute w-px h-3 bg-primary transition-transform duration-300 group-open:rotate-90"></span>
+                </span>
               </summary>
-              <div class="px-5 pb-5 prose prose-lg max-w-none 
-                prose-headings:font-heading prose-headings:text-text-deep prose-headings:text-lg prose-headings:mt-6 prose-headings:mb-3
-                prose-p:text-text-muted prose-p:leading-relaxed prose-p:my-3
-                prose-a:text-primary-medical prose-a:no-underline hover:prose-a:underline
-                prose-strong:text-text-deep prose-strong:font-semibold
-                prose-ul:text-text-muted prose-ul:my-3
-                prose-li:marker:text-primary-medical prose-li:my-1
+              <div class="pb-10 pt-2 prose prose-lg md:prose-xl max-w-none font-body
+                prose-headings:font-heading prose-headings:text-text-main prose-headings:text-2xl prose-headings:mt-8 prose-headings:mb-6 prose-headings:font-normal
+                prose-p:text-text-muted prose-p:leading-relaxed prose-p:mb-6
+                prose-a:text-primary prose-a:underline-offset-4 hover:prose-a:text-text-main transition-colors
+                prose-strong:text-text-main prose-strong:font-medium
+                prose-ul:text-text-muted prose-ul:my-6 prose-ul:list-none prose-ul:pl-0
+                prose-li:relative prose-li:pl-6 prose-li:mb-3
+                prose-li:before:content-[''] prose-li:before:absolute prose-li:before:left-0 prose-li:before:top-[0.6em] prose-li:before:w-1.5 prose-li:before:h-1.5 prose-li:before:bg-primary prose-li:before:rounded-full
               ">
                 <Content />
               </div>
             </details>
 
-            <details class="group border border-primary-medical/10 bg-white">
-              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-surface-cream/50 transition-colors">
-                <h2 class="font-heading text-xl text-text-deep">Dla kogo jest ten zabieg?</h2>
-                <svg class="w-5 h-5 text-primary-medical transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+            <details class="group border-b border-primary/10">
+              <summary class="flex items-center justify-between py-8 cursor-pointer hover:text-primary transition-colors focus:outline-none">
+                <h2 class="font-heading text-3xl text-text-main group-hover:text-primary transition-colors">Dla kogo jest ten zabieg?</h2>
+                <span class="relative w-8 h-8 flex items-center justify-center border border-primary/20 rounded-full group-open:bg-primary/5 transition-colors">
+                  <span class="absolute w-3 h-px bg-primary transition-transform duration-300"></span>
+                  <span class="absolute w-px h-3 bg-primary transition-transform duration-300 group-open:rotate-90"></span>
+                </span>
               </summary>
-              <div class="px-5 pb-5 text-text-muted">
-                <p class="mb-4">Zabieg jest odpowiedni dla osób, które:</p>
-                <ul class="space-y-2">
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              <div class="pb-10 pt-4 text-text-muted font-body text-lg leading-relaxed">
+                <p class="mb-6">Zabieg jest odpowiedni dla osób, które:</p>
+                <ul class="space-y-4">
+                  <li class="flex items-start gap-4">
+                    <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Chcą poprawić wygląd i kondycję skóry</span>
+                    <span>Chcą poprawić wygląd i kondycję skóry.</span>
                   </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  <li class="flex items-start gap-4">
+                    <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Szukają bezpiecznych i sprawdzonych rozwiązań</span>
+                    <span>Szukają bezpiecznych i sprawdzonych rozwiązań w dziedzinie medycyny estetycznej.</span>
                   </li>
-                  <li class="flex items-start gap-2">
-                    <svg class="w-5 h-5 text-primary-medical shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  <li class="flex items-start gap-4">
+                    <svg class="w-6 h-6 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
                     </svg>
-                    <span>Cenią naturalne i subtelne efekty</span>
+                    <span>Cenią naturalne, długotrwałe i w pełni odwracalne efekty.</span>
                   </li>
                 </ul>
-                <p class="mt-4 text-sm">Dokładne wskazania omówimy podczas bezpłatnej konsultacji.</p>
+                <p class="mt-8 pt-6 border-t border-primary/10 text-sm tracking-widest uppercase text-text-main">Więcej szczegółów udostępnimy podczas planowania terapii.</p>
               </div>
             </details>
 
-            <details class="group border border-primary-medical/10 bg-white">
-              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-surface-cream/50 transition-colors">
-                <h2 class="font-heading text-xl text-text-deep">Jak przygotować się do zabiegu?</h2>
-                <svg class="w-5 h-5 text-primary-medical transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
+            <details class="group border-b border-primary/10">
+              <summary class="flex items-center justify-between py-8 cursor-pointer hover:text-primary transition-colors focus:outline-none">
+                <h2 class="font-heading text-3xl text-text-main group-hover:text-primary transition-colors">Jak przygotować się do zabiegu?</h2>
+                <span class="relative w-8 h-8 flex items-center justify-center border border-primary/20 rounded-full group-open:bg-primary/5 transition-colors">
+                  <span class="absolute w-3 h-px bg-primary transition-transform duration-300"></span>
+                  <span class="absolute w-px h-3 bg-primary transition-transform duration-300 group-open:rotate-90"></span>
+                </span>
               </summary>
-              <div class="px-5 pb-5 text-text-muted">
-                <ul class="space-y-2">
-                  <li class="flex items-start gap-2">
-                    <span class="text-primary-medical font-medium">1.</span>
-                    <span>Umów się na bezpłatną konsultację</span>
+              <div class="pb-10 pt-4 text-text-muted font-body text-lg leading-relaxed">
+                <ul class="space-y-6 list-none pl-0">
+                  <li class="flex items-start gap-5">
+                    <span class="text-primary font-heading text-2xl leading-none">01</span>
+                    <span class="mt-1">Umawiamy się na szczegółową analizę podczas pierwszej konsultacji.</span>
                   </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-primary-medical font-medium">2.</span>
-                    <span>Poinformuj nas o przyjmowanych lekach</span>
+                  <li class="flex items-start gap-5">
+                    <span class="text-primary font-heading text-2xl leading-none">02</span>
+                    <span class="mt-1">Informujesz lekarza lub kosmetologa o wszystkich przyjmowanych obecnie lekach i schorzeniach przewlekłych.</span>
                   </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-primary-medical font-medium">3.</span>
-                    <span>Unikaj alkoholu i aspiryny przed zabiegiem</span>
+                  <li class="flex items-start gap-5">
+                    <span class="text-primary font-heading text-2xl leading-none">03</span>
+                    <span class="mt-1">Dla bezpieczeństwa, przez min. 24h przed procedurą unikaj używek (np. alkoholu) oraz leków przeciwzakrzepowych (wymagana konsultacja u lekarza rodzinnego).</span>
                   </li>
-                  <li class="flex items-start gap-2">
-                    <span class="text-primary-medical font-medium">4.</span>
-                    <span>Przyjdź z czystą skórą (bez makijażu)</span>
+                  <li class="flex items-start gap-5">
+                    <span class="text-primary font-heading text-2xl leading-none">04</span>
+                    <span class="mt-1">Staw się w dniu zabiegu wypoczęty z czystą skórą bez ciężkiego makijażu.</span>
                   </li>
                 </ul>
-              </div>
-            </details>
-
-            <details class="group border border-primary-medical/10 bg-white">
-              <summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-surface-cream/50 transition-colors">
-                <h2 class="font-heading text-xl text-text-deep">Często zadawane pytania</h2>
-                <svg class="w-5 h-5 text-primary-medical transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </summary>
-              <div class="px-5 pb-5">
-                <div class="space-y-4">
-                  <div class="border-b border-gray-100 pb-4">
-                    <p class="font-medium text-text-deep mb-2">Czy zabieg jest bolesny?</p>
-                    <p class="text-text-muted text-sm">Stosujemy znieczulenie miejscowe, które minimalizuje dyskomfort. Większość pacjentów opisuje zabieg jako bezbolesny lub lekko nieprzyjemny.</p>
-                  </div>
-                  <div class="border-b border-gray-100 pb-4">
-                    <p class="font-medium text-text-deep mb-2">Jak długo utrzymują się efekty?</p>
-                    <p class="text-text-muted text-sm">Czas utrzymywania się efektów zależy od rodzaju zabiegu i indywidualnych predyspozycji. Szczegóły omówimy podczas konsultacji.</p>
-                  </div>
-                  <div>
-                    <p class="font-medium text-text-deep mb-2">Czy potrzebna jest rekonwalescencja?</p>
-                    <p class="text-text-muted text-sm">Okres rekonwalescencji zależy od rodzaju zabiegu. Po niektórych zabiegach można od razu wrócić do codziennych aktywności.</p>
-                  </div>
-                </div>
               </div>
             </details>
           </div>
         </div>
 
         <!-- Sidebar -->
-        <aside class="lg:col-span-1">
-          <div class="sticky top-8 space-y-6">
+        <aside class="lg:col-span-4">
+          <div class="sticky top-32 space-y-10">
             
-            <!-- CTA Card -->
-            <div class="bg-primary-medical p-6 text-white">
-              <h3 class="font-heading text-xl mb-3">Umów wizytę</h3>
-              <p class="text-white/90 text-sm mb-6">
-                Bezpłatna konsultacja w Ili Clinic {locationData.name}.
+            <!-- Book CTA -->
+            <div class="bg-text-main p-10 relative overflow-hidden group">
+              <div class="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+              
+              <h3 class="font-heading text-3xl text-surface mb-6 relative z-10 leading-tight">Gotowa na metamorfozę?</h3>
+              <p class="font-body text-surface/70 text-sm mb-10 leading-relaxed max-w-[200px] relative z-10">
+                Pomożemy dopasować idealne rozwiązanie do Twoich potrzeb w {locationData.name}.
               </p>
               
-              <div class="space-y-3">
+              <div class="space-y-4 relative z-10">
                 <a 
                   href={`tel:${locationData.phone.replace(/\s/g, '')}`}
-                  class="flex items-center justify-center gap-2 bg-white text-primary-medical px-6 py-3 rounded-sm font-medium hover:bg-surface-cream transition-colors w-full"
+                  class="flex items-center justify-center gap-3 bg-primary text-surface px-8 py-4 rounded-full font-body text-xs tracking-widest uppercase hover:bg-surface hover:text-primary transition-all duration-300 w-full"
                 >
-                  <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                   {locationData.phone}
                 </a>
                 <a 
                   href={`/${location}/kontakt`}
-                  class="flex items-center justify-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-sm font-medium hover:bg-white/10 transition-colors w-full"
+                  class="flex items-center justify-center gap-3 border border-surface/20 text-surface px-8 py-4 rounded-full font-body text-xs tracking-widest uppercase hover:bg-surface/10 transition-colors w-full"
                 >
-                  Formularz kontaktowy
+                  Wyślij zapytanie
                 </a>
               </div>
             </div>
 
-            <!-- Price Card -->
-            <div class="bg-surface-cream p-6">
-              <h3 class="font-heading text-lg text-text-deep mb-4">Szczegóły</h3>
+            <!-- Meta Information Details -->
+            <div class="bg-surface-dim border border-primary/5 p-8">
+              <h3 class="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-8 border-b border-primary/10 pb-4">
+                Informacje o zabiegu
+              </h3>
               
-              <div class="space-y-3 text-sm">
+              <div class="space-y-6 font-body text-sm">
                 {price && (
-                  <div class="flex justify-between py-2 border-b border-primary-medical/10">
-                    <span class="text-text-muted">Cena od</span>
-                    <span class="font-heading text-lg text-primary-medical">{price} zł</span>
+                  <div class="flex justify-between items-center group">
+                    <span class="text-text-muted group-hover:text-text-main transition-colors duration-300">Cena wyjściowa</span>
+                    <span class="font-heading text-xl text-text-main group-hover:text-primary transition-colors">{price} zł</span>
                   </div>
                 )}
                 
                 {treatment.data.duration && (
-                  <div class="flex justify-between py-2 border-b border-primary-medical/10">
-                    <span class="text-text-muted">Czas zabiegu</span>
-                    <span class="text-text-deep font-medium">{treatment.data.duration}</span>
+                  <div class="flex justify-between items-center group pt-6 border-t border-primary/5">
+                    <span class="text-text-muted group-hover:text-text-main transition-colors duration-300">Czas trwania</span>
+                    <span class="text-text-main font-medium">{treatment.data.duration}</span>
                   </div>
                 )}
                 
-                <div class="flex justify-between py-2 border-b border-primary-medical/10">
-                  <span class="text-text-muted">Gabinet</span>
-                  <span class="text-text-deep font-medium">{locationData.name}</span>
+                <div class="flex justify-between items-center group pt-6 border-t border-primary/5">
+                  <span class="text-text-muted group-hover:text-text-main transition-colors duration-300">Główna klinika</span>
+                  <span class="text-text-main font-medium">{locationData.name}</span>
                 </div>
                 
-                <div class="flex justify-between py-2">
-                  <span class="text-text-muted">Konsultacja</span>
-                  <span class="text-primary-medical font-medium">Bezpłatna</span>
+                <div class="flex justify-between items-center group pt-6 border-t border-primary/5">
+                  <span class="text-text-muted group-hover:text-text-main transition-colors duration-300">Kwalifikacja</span>
+                  <span class="text-primary font-medium border border-primary/20 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest">Wymagana</span>
                 </div>
               </div>
             </div>
 
-            <!-- Location Info -->
-            <div class="border border-gray-100 p-6">
-              <h3 class="font-heading text-lg text-text-deep mb-4">Lokalizacja</h3>
-              <p class="text-text-muted text-sm mb-2">
-                {locationData.address.street}<br />
-                {locationData.address.postalCode} {locationData.address.city}
-              </p>
-              <p class="text-text-muted text-sm mb-4">
-                Pon-Pt: {locationData.openingHours.weekdays}
-              </p>
-              <a 
-                href={locationData.googleMapsUrl}
-                target="_blank"
-                rel="noopener"
-                class="text-primary-medical text-sm hover:underline"
-              >
-                Zobacz na mapie →
-              </a>
+            <!-- Clinic Contact Mini -->
+            <div class="p-8 border border-primary/10 bg-surface">
+              <div class="mb-4">
+                <svg class="w-6 h-6 text-primary mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <h3 class="font-heading text-xl text-text-main mb-2">Zapraszamy do nas</h3>
+                <p class="font-body text-text-muted text-sm leading-relaxed mb-6">
+                  {locationData.address.street}<br />
+                  {locationData.address.postalCode} {locationData.address.city}
+                </p>
+                <p class="font-body text-text-muted text-xs bg-surface-dim inline-block px-4 py-2 rounded-sm border border-primary/5 mb-6">
+                  {locationData.openingHours.weekdays}
+                </p>
+                <a 
+                  href={locationData.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="font-body text-[10px] uppercase tracking-widest text-primary border-b border-primary/30 pb-1 hover:border-primary transition-colors block w-max"
+                >
+                  Otwórz w mapach
+                </a>
+              </div>
             </div>
           </div>
         </aside>
@@ -315,13 +312,16 @@ const relatedTreatments = allTreatments
 
   <!-- Related Treatments -->
   {relatedTreatments.length > 0 && (
-    <section class="py-16 bg-surface-cream">
+    <section class="py-24 bg-surface border-t border-primary/10">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="font-heading text-2xl text-text-deep mb-8">
+        <p class="font-body text-[10px] uppercase tracking-[0.2em] text-primary mb-4 text-center">
+          Inne możliwości
+        </p>
+        <h2 class="font-heading text-4xl lg:text-5xl text-text-main mb-16 text-center">
           Podobne zabiegi
         </h2>
         
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-primary/10">
           {relatedTreatments.map(related => {
             const relatedPrice = location === 'pruszkow' 
               ? related.data.price_pruszkow 
@@ -330,18 +330,40 @@ const relatedTreatments = allTreatments
             return (
               <a 
                 href={`/${location}/zabiegi/${related.slug}`}
-                class="group bg-white border border-primary-medical/10 overflow-hidden hover-lift"
+                class="group bg-surface border-b border-r border-primary/10 flex flex-col hover:bg-surface-dim transition-colors duration-500 overflow-hidden min-h-[400px]"
               >
-                <div class="aspect-[16/9] bg-gradient-to-br from-primary-medical/10 to-accent-gold/10"></div>
-                <div class="p-5">
-                  <h3 class="font-heading text-lg text-text-deep mb-2 group-hover:text-primary-medical transition-colors">
+                <!-- Image Section -->
+                <div class="relative h-48 w-full overflow-hidden bg-surface-dim border-b border-primary/10">
+                  {related.data.image ? (
+                    <img 
+                      src={related.data.image} 
+                      alt={related.data.title}
+                      class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="w-full h-full bg-primary/5 flex items-center justify-center">
+                      <svg class="w-12 h-12 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                      </svg>
+                    </div>
+                  )}
+                  <div class="absolute top-4 left-4 z-10">
+                    <span class="bg-surface/90 backdrop-blur-md text-primary text-[9px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border border-primary/10">
+                      {related.data.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="p-8 flex flex-col flex-1 relative z-10">
+                  <h3 class="font-heading text-2xl text-text-main mb-3 group-hover:text-primary transition-colors leading-tight">
                     {related.data.title}
                   </h3>
-                  <p class="text-text-muted text-sm mb-3 line-clamp-2">
+                  <p class="font-body text-text-muted text-sm leading-relaxed line-clamp-2 mb-4">
                     {related.data.description}
                   </p>
                   {relatedPrice && (
-                    <span class="text-primary-medical font-medium text-sm">
+                    <span class="mt-auto pt-4 border-t border-primary/10 font-body text-text-main text-sm font-medium tracking-wide">
                       od {relatedPrice} zł
                     </span>
                   )}
@@ -350,24 +372,18 @@ const relatedTreatments = allTreatments
             );
           })}
         </div>
+        
+        <div class="mt-16 text-center">
+          <a 
+            href={`/${location}/zabiegi`}
+            class="inline-flex items-center gap-4 text-primary font-body text-xs uppercase tracking-widest hover:gap-6 transition-all group"
+          >
+            <span class="inline-block border border-primary/30 rounded-full px-6 py-3 group-hover:bg-primary group-hover:text-surface transition-colors">ZOBACZ WSZYSTKIE ZABIEGI</span>
+          </a>
+        </div>
       </div>
     </section>
   )}
-
-  <!-- Back Link -->
-  <div class="py-8 border-t border-gray-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <a 
-        href={`/${location}/zabiegi`}
-        class="inline-flex items-center gap-2 text-primary-medical hover:text-primary-medical-dark transition-colors"
-      >
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Wróć do wszystkich zabiegów
-      </a>
-    </div>
-  </div>
 </BaseLayout>
 
 <style>
