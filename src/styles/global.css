@@ -3,9 +3,9 @@
 /* Iliclinic Cinematic Design System */
 
 @theme {
-  /* Cinematic Typography */
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  /* Editorial Typography */
+  --font-heading: 'Noto Serif', serif;
+  --font-body: 'Work Sans', sans-serif;
 
   /* Theme agnostic utility colors */
   --color-white: #ffffff;
