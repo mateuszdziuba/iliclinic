@@ -37,13 +37,13 @@ Tasks:
 - [ ] Verify all internal links resolve correctly
 
 ### Phase 5 — Sample content & launch readiness
-**Goal**: Site is presentable with real or realistic content.
+**Goal**: Site is presentable with real or realistic content. Build succeeds, no /undefined URLs, mobile layouts verified.
 
-Tasks:
-- [ ] Add at least 1 sample technologia entry per location in PagesCMS/markdown
-- [ ] Verify `astro build` completes without errors
-- [ ] Verify no `/undefined` URLs in build output
-- [ ] Check mobile layout on all pages
+**Plans:** 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md — Create two sample technologia entries (laser-frakcyjny, ultradzwieki-hifu) for both locations
+- [ ] 05-02-PLAN.md — Run production build, verify no /undefined URLs, human mobile layout verification
 
 ## Quick Tasks Completed
 
