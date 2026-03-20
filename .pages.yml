@@ -91,6 +91,11 @@ content:
         type: list
         item:
           type: string
+      - name: przygotowanie_do_zabiegu
+        label: Przygotowanie do zabiegu
+        type: list
+        item:
+          type: string
       - name: seo
         label: SEO
         type: object
@@ -103,67 +108,6 @@ content:
             type: text
       - name: body
         label: Treść
-        type: rich-text
-
-  # Technologies collection (technologie)
-  - name: technologie
-    label: Technologie
-    type: collection
-    path: src/content/technologie
-    format: yaml-frontmatter
-    fields:
-      - name: name
-        label: Nazwa technologii
-        type: string
-        required: true
-      - name: description
-        label: Krótki opis
-        type: text
-        required: true
-      - name: image
-        label: Zdjęcie
-        type: image
-      - name: producent
-        label: Producent / Marka
-        type: string
-      - name: category
-        label: Kategoria
-        type: select
-        options:
-          creatable: true
-          values:
-            - Laser
-            - RF / Radiofrequency
-            - Ultrasound
-            - Mesotherapy
-            - Inne
-      - name: locations
-        label: Dostępna w
-        type: select
-        options:
-          multiple: true
-          values:
-            - value: pruszkow
-              label: Pruszków
-            - value: ostroleka
-              label: Ostrołęka
-        required: true
-      - name: featured
-        label: Wyróżniona
-        type: boolean
-        default: false
-      - name: seo
-        label: SEO
-        type: object
-        fields:
-          - name: metaTitle
-            label: Meta Title
-            type: string
-          - name: metaDescription
-            label: Meta Description
-            type: text
-      - name: body
-        label: Opis technologii
         type: rich-text
 
   # Static pages (strony)

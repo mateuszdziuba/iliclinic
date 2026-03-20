@@ -16,24 +16,7 @@ const zabiegi = defineCollection({
     image: z.string().optional(),
     wskazania: z.array(z.string()).optional(),
     przeciwwskazania: z.array(z.string()).optional(),
-    seo: z.object({
-      metaTitle: z.string().optional(),
-      metaDescription: z.string().optional(),
-    }).optional(),
-  }),
-});
-
-// Technologies collection
-const technologie = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/technologie' }),
-  schema: z.object({
-    name: z.string(),
-    description: z.string(),
-    image: z.string().optional(),
-    producent: z.string().optional(),
-    category: z.string().optional(),
-    locations: z.array(z.enum(['pruszkow', 'ostroleka'])),
-    featured: z.boolean().default(false),
+    przygotowanie_do_zabiegu: z.array(z.string()).optional(),
     seo: z.object({
       metaTitle: z.string().optional(),
       metaDescription: z.string().optional(),
@@ -64,7 +47,6 @@ const marki = defineCollection({
 
 export const collections = {
   zabiegi,
-  technologie,
   strony,
   marki,
 };

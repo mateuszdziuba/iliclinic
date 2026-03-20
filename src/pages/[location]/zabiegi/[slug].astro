@@ -25,6 +25,9 @@ const locationData = locations[location as keyof typeof locations];
 const price = location === 'pruszkow'
   ? treatment.data.price_pruszkow
   : treatment.data.price_ostroleka;
+const wskazania = treatment.data.wskazania ?? [];
+const przeciwwskazania = treatment.data.przeciwwskazania ?? [];
+const przygotowanieDoZabiegu = treatment.data.przygotowanie_do_zabiegu ?? [];
 
 const { Content } = await render(treatment);
 
@@ -212,67 +215,66 @@ const relatedTreatments = allTreatments
 
         </div>
 
-        <!-- ── For whom — dark accent card, full width bottom ── -->
-        <div class="lg:col-span-6 bg-primary rounded-[32px] p-8 lg:p-10 relative overflow-hidden" data-scroll-fade>
-          <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-surface/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-          <p class="font-body text-[9px] uppercase tracking-[0.3em] text-surface/50 mb-6 font-medium">Dla kogo</p>
-          <h3 class="font-heading text-2xl lg:text-3xl text-surface mb-8 font-light leading-snug">
-            Kto skorzysta<br />na tym zabiegu?
-          </h3>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-4">
-              <span class="w-5 h-5 rounded-full border border-surface/30 flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-2.5 h-2.5 text-surface" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <span class="font-body text-surface/75 text-sm leading-relaxed font-light">Osoby chcące poprawić wygląd i kondycję skóry</span>
-            </li>
-            <li class="flex items-start gap-4">
-              <span class="w-5 h-5 rounded-full border border-surface/30 flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-2.5 h-2.5 text-surface" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <span class="font-body text-surface/75 text-sm leading-relaxed font-light">Szukający bezpiecznych i sprawdzonych rozwiązań</span>
-            </li>
-            <li class="flex items-start gap-4">
-              <span class="w-5 h-5 rounded-full border border-surface/30 flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-2.5 h-2.5 text-surface" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
-                </svg>
-              </span>
-              <span class="font-body text-surface/75 text-sm leading-relaxed font-light">Ceniący naturalne i długotrwałe efekty</span>
-            </li>
-          </ul>
-          <p class="mt-8 pt-6 border-t border-surface/10 font-body text-[9px] uppercase tracking-[0.2em] text-surface/40">
-            Szczegóły ustalane indywidualnie podczas konsultacji
-          </p>
-        </div>
+        {wskazania.length > 0 && (
+          <div class="lg:col-span-4 bg-primary rounded-[32px] p-8 lg:p-10 relative overflow-hidden" data-scroll-fade>
+            <div class="absolute top-0 right-0 w-48 h-48 rounded-full bg-surface/5 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <p class="font-body text-[9px] uppercase tracking-[0.3em] text-surface/50 mb-6 font-medium">Dla kogo</p>
+            <h3 class="font-heading text-2xl lg:text-3xl text-surface mb-8 font-light leading-snug">
+              Kto skorzysta<br />na tym zabiegu?
+            </h3>
+            <ul class="space-y-4">
+              {wskazania.map((wskazanie) => (
+                <li class="flex items-start gap-4">
+                  <span class="w-5 h-5 rounded-full border border-surface/30 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-2.5 h-2.5 text-surface" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span class="font-body text-surface/75 text-sm leading-relaxed font-light">{wskazanie}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="mt-8 pt-6 border-t border-surface/10 font-body text-[9px] uppercase tracking-[0.2em] text-surface/40">
+              Szczegóły ustalane indywidualnie podczas konsultacji
+            </p>
+          </div>
+        )}
 
-        <!-- ── Preparation steps card ── -->
-        <div class="lg:col-span-6 bg-surface-dim border border-primary/8 rounded-[32px] p-8 lg:p-10" data-scroll-fade>
-          <p class="font-body text-[9px] uppercase tracking-[0.3em] text-primary mb-6 font-medium">Przygotowanie</p>
-          <h3 class="font-heading text-2xl text-text-main mb-8 font-light">Jak się przygotować?</h3>
-          <ol class="space-y-6">
-            <li class="flex items-start gap-5">
-              <span class="text-primary font-heading text-2xl leading-none font-light shrink-0 w-8">01</span>
-              <span class="font-body text-text-muted text-sm leading-relaxed font-light pt-0.5">Umawiamy się na szczegółową analizę podczas pierwszej konsultacji.</span>
-            </li>
-            <li class="flex items-start gap-5">
-              <span class="text-primary font-heading text-2xl leading-none font-light shrink-0 w-8">02</span>
-              <span class="font-body text-text-muted text-sm leading-relaxed font-light pt-0.5">Informujesz lekarza o wszystkich przyjmowanych lekach i schorzeniach przewlekłych.</span>
-            </li>
-            <li class="flex items-start gap-5">
-              <span class="text-primary font-heading text-2xl leading-none font-light shrink-0 w-8">03</span>
-              <span class="font-body text-text-muted text-sm leading-relaxed font-light pt-0.5">Przez min. 24h przed zabiegiem unikaj alkoholu i leków przeciwzakrzepowych.</span>
-            </li>
-            <li class="flex items-start gap-5">
-              <span class="text-primary font-heading text-2xl leading-none font-light shrink-0 w-8">04</span>
-              <span class="font-body text-text-muted text-sm leading-relaxed font-light pt-0.5">Staw się wypoczęty z czystą skórą bez ciężkiego makijażu.</span>
-            </li>
-          </ol>
-        </div>
+        {przeciwwskazania.length > 0 && (
+          <div class="lg:col-span-4 bg-surface-dim border border-primary/8 rounded-[32px] p-8 lg:p-10" data-scroll-fade>
+            <p class="font-body text-[9px] uppercase tracking-[0.3em] text-primary mb-6 font-medium">Przeciwwskazania</p>
+            <h3 class="font-heading text-2xl text-text-main mb-8 font-light">Kiedy odłożyć zabieg?</h3>
+            <ul class="space-y-5">
+              {przeciwwskazania.map((przeciwwskazanie) => (
+                <li class="flex items-start gap-4">
+                  <span class="w-5 h-5 rounded-full border border-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <svg class="w-2.5 h-2.5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </span>
+                  <span class="font-body text-text-muted text-sm leading-relaxed font-light">{przeciwwskazanie}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {przygotowanieDoZabiegu.length > 0 && (
+          <div class="lg:col-span-4 bg-surface rounded-[32px] p-8 lg:p-10 border border-primary/10" data-scroll-fade>
+            <p class="font-body text-[9px] uppercase tracking-[0.3em] text-primary mb-6 font-medium">Przygotowanie do zabiegu</p>
+            <h3 class="font-heading text-2xl text-text-main mb-8 font-light">Jak się przygotować?</h3>
+            <ol class="space-y-6">
+              {przygotowanieDoZabiegu.map((krok, index) => (
+                <li class="flex items-start gap-5">
+                  <span class="text-primary font-heading text-2xl leading-none font-light shrink-0 w-8">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span class="font-body text-text-muted text-sm leading-relaxed font-light pt-0.5">{krok}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
 
         <!-- ── Location card — small ── -->
         <div class="lg:col-span-4 border border-primary/10 rounded-[32px] p-8 bg-surface" data-scroll-fade>
