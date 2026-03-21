@@ -65,7 +65,9 @@ const treatmentsData = treatments.map(t => ({
   <!-- ─── FILTERS ────────────────────────────────────────────── -->
   <div id="filter-bar" class="fixed bottom-6 left-0 right-0 z-40 px-6 py-3 flex flex-col-reverse items-center gap-2 pointer-events-none">
     <!-- Pill container -->
-    <div class="bg-white/85 backdrop-blur-lg border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-full px-5 py-2.5 flex items-center gap-3 w-full max-w-3xl overflow-hidden pointer-events-auto">
+    <div class="bg-white/85 backdrop-blur-lg border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-[32px] px-5 py-3 flex flex-col gap-2.5 w-full max-w-4xl pointer-events-auto">
+      <!-- Row 1: Search -->
+      <div class="flex items-center gap-3">
       <!-- Search icon -->
       <svg class="w-3.5 h-3.5 text-text-muted shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -77,10 +79,11 @@ const treatmentsData = treatments.map(t => ({
         placeholder="Szukaj zabiegu..."
         class="flex-1 min-w-[120px] bg-transparent font-body text-xs text-text-main placeholder:text-text-muted/60 focus:outline-none"
       />
+      </div>
       <!-- Divider -->
-      <span class="w-px h-4 bg-primary/15 shrink-0"></span>
-      <!-- Category filter buttons -->
-      <div class="flex items-center gap-1.5 flex-nowrap overflow-x-auto scrollbar-hide" id="filter-buttons" style="-webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;">
+      <span class="h-px w-full bg-primary/10"></span>
+      <!-- Row 2: Category filter buttons -->
+      <div class="flex items-center gap-1.5 flex-wrap" id="filter-buttons">
         <button
           data-category="all"
           class="filter-btn active px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all bg-primary text-surface border border-primary whitespace-nowrap shrink-0"
