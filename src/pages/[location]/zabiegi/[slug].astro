@@ -378,11 +378,24 @@ const relatedTreatments = allTreatments
 
 </BaseLayout>
 
+<style>
+  /* Safety: scroll-fade elements start visible; JS animates from partial opacity only when off-screen */
+  [data-scroll-fade] { opacity: 1; }
+</style>
+
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Safety: ensure hero and scroll-fade elements become visible even if GSAP fails
+  const safetyTimeout = setTimeout(() => {
+    document.querySelectorAll('[data-hero],[data-hero-image],[data-scroll-fade]').forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+  }, 2000);
 
   // Hero entrance — staggered left/right
   gsap.fromTo('[data-hero]',
@@ -394,18 +407,27 @@ const relatedTreatments = allTreatments
     { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: 'power3.out', delay: 0.3 }
   );
 
-  // Bento cards — scroll-triggered
+  clearTimeout(safetyTimeout);
+
+  // Bento cards — check viewport first to avoid stuck opacity:0
   document.querySelectorAll('[data-scroll-fade]').forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 35 },
-      {
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      gsap.fromTo(el,
+        { opacity: 0.3, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.04 }
+      );
+    } else {
+      gsap.set(el, { opacity: 0, y: 35 });
+      gsap.to(el, {
         opacity: 1,
         y: 0,
         duration: 1.0,
         ease: 'power3.out',
         delay: i * 0.04,
         scrollTrigger: { trigger: el, start: 'top 88%' },
-      }
-    );
+      });
+    }
   });
 </script>

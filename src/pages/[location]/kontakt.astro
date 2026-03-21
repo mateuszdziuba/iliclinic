@@ -194,11 +194,24 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&h
 
 </BaseLayout>
 
+<style>
+  /* Safety: scroll-fade elements start visible; JS animates from partial opacity only when off-screen */
+  [data-scroll-fade] { opacity: 1; }
+</style>
+
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
   gsap.registerPlugin(ScrollTrigger);
+
+  // Safety: ensure hero and scroll-fade elements become visible even if GSAP fails
+  const safetyTimeout = setTimeout(() => {
+    document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade]').forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+  }, 2000);
 
   gsap.fromTo('[data-hero-label]',
     { opacity: 0, y: 20 },
@@ -213,16 +226,26 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&h
     { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.5 }
   );
 
+  clearTimeout(safetyTimeout);
+
+  // Scroll fade elements — check viewport first to avoid stuck opacity:0
   document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 40 },
-      {
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      gsap.fromTo(el,
+        { opacity: 0.3, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+      );
+    } else {
+      gsap.set(el, { opacity: 0, y: 35 });
+      gsap.to(el, {
         opacity: 1,
         y: 0,
         duration: 1.1,
         ease: 'power3.out',
         scrollTrigger: { trigger: el, start: 'top 88%' },
-      }
-    );
+      });
+    }
   });
 </script>

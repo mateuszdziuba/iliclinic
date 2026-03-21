@@ -305,6 +305,8 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
       transparent 100%
     );
   }
+  /* Safety: scroll-fade elements start visible; JS will animate from partial opacity only when off-screen */
+  [data-scroll-fade] { opacity: 1; }
 </style>
 
 <script>
@@ -313,26 +315,40 @@ const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // Safety: ensure hero elements become visible even if GSAP fails or takes too long
+  const safetyTimeout = setTimeout(() => {
+    document.querySelectorAll('[data-hero-content],[data-scroll-fade]').forEach(el => {
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'none';
+    });
+  }, 2000);
+
   // Hero entrance
   gsap.fromTo('[data-hero-content]',
     { opacity: 0, y: 50 },
     { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out', delay: 0.3 }
   );
 
-  // Scroll fade elements
+  clearTimeout(safetyTimeout);
+
+  // Scroll fade elements — check viewport first to avoid stuck opacity:0
   document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 40 },
-      {
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      gsap.fromTo(el,
+        { opacity: 0.3, y: 15 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+      );
+    } else {
+      gsap.set(el, { opacity: 0, y: 35 });
+      gsap.to(el, {
         opacity: 1,
         y: 0,
         duration: 1.1,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 88%',
-        }
-      }
-    );
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      });
+    }
   });
 </script>
