@@ -47,12 +47,12 @@ const treatmentsData = treatments.map(t => ({
 >
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->
-  <section class="pt-32 pb-16 lg:pt-40 lg:pb-20 bg-surface text-center">
+  <section class="pt-28 pb-12 lg:pt-40 lg:pb-20 bg-surface text-center">
     <div class="max-w-7xl mx-auto px-6">
       <p class="font-body text-[10px] uppercase tracking-[0.4em] text-primary mb-6 font-medium" data-hero-label>
         Ili Clinic {locationData.name}
       </p>
-      <h1 class="font-heading text-5xl sm:text-7xl lg:text-8xl text-text-main mb-8 leading-[0.9] tracking-[-0.02em]" data-hero-title>
+      <h1 class="font-heading text-4xl sm:text-6xl lg:text-8xl text-text-main mb-8 leading-[0.9] tracking-[-0.02em]" data-hero-title>
         Nasze <em class="not-italic text-primary italic">zabiegi</em>
       </h1>
       <p class="font-body text-text-muted max-w-xl mx-auto leading-relaxed font-light" data-hero-desc>
@@ -63,9 +63,9 @@ const treatmentsData = treatments.map(t => ({
   </section>
 
   <!-- ─── FILTERS ────────────────────────────────────────────── -->
-  <div id="filter-bar" class="sticky top-[88px] z-40 px-4 py-3 flex flex-col items-center gap-2">
+  <div id="filter-bar" class="sticky top-[88px] z-40 px-6 py-3 flex flex-col items-center gap-2">
     <!-- Pill container -->
-    <div class="bg-white/85 backdrop-blur-xl border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.06)] rounded-full px-5 py-2.5 flex flex-wrap items-center gap-3 w-full max-w-3xl">
+    <div class="bg-white/75 backdrop-blur-md border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.06)] rounded-full px-5 py-2.5 flex items-center gap-3 w-full max-w-3xl overflow-hidden">
       <!-- Search icon -->
       <svg class="w-3.5 h-3.5 text-text-muted shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -80,17 +80,17 @@ const treatmentsData = treatments.map(t => ({
       <!-- Divider -->
       <span class="w-px h-4 bg-primary/15 shrink-0"></span>
       <!-- Category filter buttons -->
-      <div class="flex items-center gap-1.5 flex-wrap" id="filter-buttons">
+      <div class="flex items-center gap-1.5 flex-nowrap overflow-x-auto scrollbar-hide" id="filter-buttons" style="-webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;">
         <button
           data-category="all"
-          class="filter-btn active px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all bg-primary text-surface border border-primary"
+          class="filter-btn active px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all bg-primary text-surface border border-primary whitespace-nowrap shrink-0"
         >
           Wszystkie
         </button>
         {sortedCategories.map(category => (
           <button
             data-category={category}
-            class="filter-btn px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all border border-primary/20 text-text-muted hover:border-primary hover:text-text-main"
+            class="filter-btn px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all border border-primary/20 text-text-muted hover:border-primary hover:text-text-main whitespace-nowrap shrink-0"
           >
             {category}
           </button>
