@@ -65,7 +65,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
         {validLocation && otherLocationData && (
           <a
             href={`/${otherLocation}`}
-            class="hidden lg:block font-body text-[9px] uppercase tracking-widest opacity-40 hover:opacity-80 transition-opacity"
+            class="hidden md:block font-body text-[9px] uppercase tracking-widest opacity-40 hover:opacity-80 transition-opacity"
           >
             {otherLocationData.name}
           </a>
@@ -107,8 +107,18 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
       class="hidden md:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full bg-surface/95 backdrop-blur-xl rounded-3xl border border-primary/5 shadow-2xl overflow-hidden origin-top transition-all"
     >
       <nav class="px-6 py-8 flex flex-col gap-6 text-text-main">
+        {otherLocationData && (
+          <a
+            href={`/${otherLocation}`}
+            class="self-start inline-flex items-center gap-2 bg-surface-dim border border-primary/20 text-text-muted px-4 py-2 rounded-full font-body text-[9px] tracking-[0.15em] uppercase hover:border-primary hover:text-text-main transition-all"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-primary/40 shrink-0"></span>
+            Gabinet · {otherLocationData.name}
+          </a>
+        )}
+
         {navLinks.map(link => (
-          <a 
+          <a
             href={link.href}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
@@ -117,18 +127,9 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
             {link.label}
           </a>
         ))}
-        
-        {otherLocationData && (
-          <a 
-            href={`/${otherLocation}`}
-            class="font-body text-xs tracking-widest uppercase opacity-60 pt-4 border-t border-primary/10"
-          >
-            Gabinet w {otherLocationData.name}
-          </a>
-        )}
-        
+
         <div class="pt-4 mt-2">
-          <a 
+          <a
             href={`${basePath}/kontakt`}
             class="flex items-center justify-center w-full bg-primary text-surface px-6 py-4 rounded-full text-sm font-medium tracking-wide uppercase"
           >
