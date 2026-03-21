@@ -46,7 +46,7 @@ const relatedTreatments = allTreatments
 >
 
   <!-- ─── BREADCRUMBS ────────────────────────────────────────── -->
-  <div class="bg-surface pt-28 pb-4 border-b border-primary/10 relative z-30">
+  <div class="bg-surface pt-36 pb-4 border-b border-primary/10 relative z-30">
     <div class="max-w-7xl mx-auto px-6">
       <nav class="font-body text-[10px] uppercase tracking-[0.15em]">
         <ol class="flex items-center gap-3 text-text-muted">
@@ -157,16 +157,16 @@ const relatedTreatments = allTreatments
         <div class="lg:col-span-4 flex flex-col gap-6">
 
           <!-- Book CTA card -->
-          <div class="bg-text-main rounded-[32px] p-8 relative overflow-hidden group" data-scroll-fade>
+          <div class="bg-text-main rounded-[32px] p-5 sm:p-8 relative overflow-hidden group" data-scroll-fade>
             <div class="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[32px]"></div>
-            <h3 class="font-heading text-2xl text-surface mb-3 relative z-10 leading-tight font-light">Gotowa na<br />metamorfozę?</h3>
-            <p class="font-body text-surface/50 text-sm mb-7 relative z-10 font-light">
+            <h3 class="font-heading text-xl sm:text-2xl text-surface mb-2 sm:mb-3 relative z-10 leading-tight font-light">Gotowa na<br />metamorfozę?</h3>
+            <p class="font-body text-surface/50 text-xs sm:text-sm mb-4 sm:mb-7 relative z-10 font-light">
               Bezpłatna konsultacja w {locationData.name}.
             </p>
-            <div class="space-y-2.5 relative z-10">
+            <div class="space-y-2 sm:space-y-2.5 relative z-10">
               <a
                 href={`tel:${locationData.phone.replace(/\s/g, '')}`}
-                class="flex items-center justify-center gap-3 bg-primary text-surface px-6 py-3.5 rounded-full font-body text-[10px] tracking-widest uppercase hover:bg-surface hover:text-primary transition-all duration-300 w-full"
+                class="flex items-center justify-center gap-3 bg-primary text-surface px-5 py-3 sm:px-6 sm:py-3.5 rounded-full font-body text-[10px] tracking-widest uppercase hover:bg-surface hover:text-primary transition-all duration-300 w-full"
               >
                 <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -175,7 +175,7 @@ const relatedTreatments = allTreatments
               </a>
               <a
                 href={`/${location}/kontakt`}
-                class="flex items-center justify-center border border-surface/20 text-surface px-6 py-3.5 rounded-full font-body text-[10px] tracking-widest uppercase hover:bg-surface/10 transition-colors w-full"
+                class="flex items-center justify-center border border-surface/20 text-surface px-5 py-3 sm:px-6 sm:py-3.5 rounded-full font-body text-[10px] tracking-widest uppercase hover:bg-surface/10 transition-colors w-full"
               >
                 Wyślij zapytanie
               </a>
