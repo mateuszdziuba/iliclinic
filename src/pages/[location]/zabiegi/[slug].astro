@@ -46,7 +46,7 @@ const relatedTreatments = allTreatments
 >
 
   <!-- ─── BREADCRUMBS ────────────────────────────────────────── -->
-  <div class="bg-surface pt-36 pb-4 border-b border-primary/10 relative z-30">
+  <div class="bg-surface pt-48 pb-4 border-b border-primary/10 relative z-30">
     <div class="max-w-7xl mx-auto px-6">
       <nav class="font-body text-[10px] uppercase tracking-[0.15em]">
         <ol class="flex items-center gap-3 text-text-muted">
@@ -406,8 +406,6 @@ const relatedTreatments = allTreatments
     { opacity: 0, y: 60, scale: 0.98 },
     { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: 'power3.out', delay: 0.3 }
   );
-
-  clearTimeout(safetyTimeout);
 
   // Bento cards — check viewport first to avoid stuck opacity:0
   document.querySelectorAll('[data-scroll-fade]').forEach((el, i) => {
