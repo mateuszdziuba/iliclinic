@@ -144,7 +144,12 @@ const treatmentsData = treatments.map(t => ({
               </div>
               {treatment.featured && (
                 <div class="absolute top-4 right-4">
-                  <span class="bg-accent/90 backdrop-blur-md text-surface text-[9px] uppercase tracking-[0.2em] px-3 py-1 rounded-full font-body">
+                  <span class:list={[
+                    'backdrop-blur-md text-[9px] uppercase tracking-[0.2em] px-3 py-1 rounded-full font-body',
+                    location === 'ostroleka'
+                      ? 'bg-primary-light/85 text-white border border-white/10'
+                      : 'bg-accent/90 text-surface',
+                  ]}>
                     Polecany
                   </span>
                 </div>
@@ -239,67 +244,86 @@ const treatmentsData = treatments.map(t => ({
 
   gsap.registerPlugin(ScrollTrigger);
 
+  let animationContext: gsap.Context | undefined;
+  let initFrame = 0;
+
+  function revealElement(target: Element, options: { duration?: number; delay?: number; start?: string } = {}) {
+    const el = target as HTMLElement;
+    const hasAuthoredTransform = /translate-|rotate-|scale-|skew-/.test(el.className);
+    const rect = el.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    const fromVars = hasAuthoredTransform ? { opacity: 0.01 } : { opacity: 0.01, y: 24 };
+    const toVars = {
+      opacity: 1,
+      ...(hasAuthoredTransform ? {} : { y: 0 }),
+      duration: options.duration ?? 0.5,
+      delay: options.delay ?? 0,
+      ease: 'power2.out',
+      clearProps: hasAuthoredTransform ? 'opacity' : 'opacity,transform',
+    };
+
+    if (inView) {
+      gsap.fromTo(el, fromVars, toVars);
+      return;
+    }
+
+    gsap.set(el, fromVars);
+    gsap.to(el, {
+      ...toVars,
+      scrollTrigger: {
+        trigger: el,
+        start: options.start ?? 'top 92%',
+        once: true,
+      },
+    });
+  }
+
   function initAnimations() {
-    const safetyTimeout = setTimeout(() => {
+    animationContext?.revert();
+
+    const safetyTimeout = window.setTimeout(() => {
       document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade],.treatment-card').forEach(el => {
-        (el as HTMLElement).style.opacity = '1';
-        (el as HTMLElement).style.transform = 'none';
+        const node = el as HTMLElement;
+        node.style.opacity = '1';
+        node.style.transform = '';
       });
     }, 2000);
 
-    // Hero entrance
-    gsap.fromTo('[data-hero-label]', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 });
-    gsap.fromTo('[data-hero-title]', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.2 });
-    gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.45,
-      onComplete: () => clearTimeout(safetyTimeout) });
+    animationContext = gsap.context(() => {
+      // Hero entrance
+      gsap.fromTo('[data-hero-label]', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', delay: 0.05, clearProps: 'opacity,transform' });
+      gsap.fromTo('[data-hero-title]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.1, clearProps: 'opacity,transform' });
+      gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.18,
+        clearProps: 'opacity,transform',
+        onComplete: () => clearTimeout(safetyTimeout) });
 
-    // Cards stagger — check viewport to avoid stuck opacity:0
-    const cards = document.querySelectorAll('.treatment-card');
-    const firstCard = cards[0];
-    if (firstCard) {
-      const rect = firstCard.getBoundingClientRect();
-      const cardsInView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (cardsInView) {
-        gsap.fromTo(cards,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.06, delay: 0.55 }
-        );
-      } else {
-        cards.forEach(card => {
-          const cardRect = card.getBoundingClientRect();
-          const cardInView = cardRect.top < window.innerHeight && cardRect.bottom > 0;
-          if (cardInView) {
-            gsap.fromTo(card, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-          } else {
-            gsap.set(card, { opacity: 0, y: 30 });
-            gsap.to(card, {
-              opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-              scrollTrigger: { trigger: card, start: 'top 88%' },
-            });
-          }
-        });
-      }
-    }
+      const cards = Array.from(document.querySelectorAll('.treatment-card'));
+      gsap.fromTo(cards,
+        { opacity: 0.01, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.42,
+          ease: 'power2.out',
+          stagger: 0.035,
+          delay: 0.22,
+          clearProps: 'opacity,transform',
+        }
+      );
 
-    // CTA scroll fade — check viewport first
-    document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (inView) {
-        gsap.fromTo(el, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      } else {
-        gsap.set(el, { opacity: 0, y: 35 });
-        gsap.to(el, {
-          opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 88%' },
-        });
-      }
+      document.querySelectorAll('[data-scroll-fade]').forEach(el => {
+        revealElement(el, { duration: 0.55, start: 'top 92%' });
+      });
     });
   } // end initAnimations
 
-  // astro:page-load fires after view transition completes — safe to animate
-  document.addEventListener('astro:page-load', initAnimations);
-  initAnimations();
+  function scheduleAnimations() {
+    cancelAnimationFrame(initFrame);
+    initFrame = requestAnimationFrame(initAnimations);
+  }
+
+  document.addEventListener('astro:page-load', scheduleAnimations);
+  scheduleAnimations();
 
   // ── Filter logic ──
   const searchInput = document.getElementById('search-input') as HTMLInputElement;

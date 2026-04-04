@@ -45,13 +45,13 @@
 }
 
 [data-location="ostroleka"] {
-  --theme-primary: oklch(0.25 0.08 260); /* Navy */
-  --theme-primary-light: oklch(0.35 0.07 260);
-  --theme-surface: oklch(0.96 0.02 70); /* Beige */
-  --theme-surface-dim: oklch(0.94 0.03 75);
-  --theme-text-main: oklch(0.20 0.02 260);
-  --theme-text-muted: oklch(0.45 0.02 260);
-  --theme-accent: oklch(0.65 0.12 75);
+  --theme-primary: oklch(0.19 0.03 255); /* Navy Graphite */
+  --theme-primary-light: oklch(0.29 0.04 255);
+  --theme-surface: oklch(0.95 0.01 255); /* Cool Stone */
+  --theme-surface-dim: oklch(0.90 0.015 255);
+  --theme-text-main: oklch(0.17 0.02 255);
+  --theme-text-muted: oklch(0.41 0.015 255);
+  --theme-accent: oklch(0.68 0.09 78);
 }
 
 [data-location="pruszkow"] {

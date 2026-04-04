@@ -20,6 +20,7 @@ const {
   location,
   canonical,
   hideHeader = false,
+  hideFooter = false,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -49,7 +50,7 @@ const currentPath = Astro.url.pathname;
     <slot />
   </main>
 
-  <Footer location={location} />
+  {!hideFooter && <Footer location={location} />}
   <CookieBanner />
 
   <script>

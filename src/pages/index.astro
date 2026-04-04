@@ -7,10 +7,12 @@ const allLocations = Object.entries(locations);
 const locationConfig = {
   pruszkow: {
     image: '/images/hero-clinic.jpg',
+    video: '/1.mp4',
     color: 'oklch(0.32 0.06 55)',
   },
   ostroleka: {
     image: '/images/IMG_7809.jpg',
+    video: '/2.mp4',
     color: 'oklch(0.22 0.07 258)',
   },
 } as const;
@@ -20,11 +22,18 @@ const locationConfig = {
   title="Wybierz lokalizację"
   description="Ili Clinic – Gabinety medycyny estetycznej w Pruszkowie i Ostrołęce."
   hideHeader={true}
+  hideFooter={true}
 >
   <section class="split-root relative h-screen flex flex-col sm:flex-row overflow-hidden">
 
+    <div class="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex justify-center pointer-events-none sm:hidden">
+      <p class="font-body text-white/30 text-[8px] uppercase tracking-[0.35em] whitespace-nowrap">
+        Wybierz najbliższy gabinet
+      </p>
+    </div>
+
     <!-- Logo centered at top -->
-    <div class="absolute top-7 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none">
+    <div class="absolute top-12 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none sm:top-7">
       <img src="/images/logo-white.png" alt="Ili Clinic" class="h-9 sm:h-11 w-auto drop-shadow-lg" />
     </div>
 
@@ -41,11 +50,24 @@ const locationConfig = {
           class="location-panel group relative flex-1 overflow-hidden"
           data-location={key}
         >
-          <!-- Photo background -->
+          <!-- Still background -->
           <div
             class="absolute inset-0 bg-cover bg-center transition-transform duration-[1.4s] ease-out scale-[1.06] group-hover:scale-100"
             style={`background-image: url(${cfg.image})`}
           ></div>
+
+          <!-- Hover video -->
+          <video
+            class="split-video absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 ease-out pointer-events-none"
+            data-hover-video
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster={cfg.image}
+          >
+            <source src={cfg.video} type="video/mp4" />
+          </video>
 
           <!-- Color wash + gradient -->
           <div
@@ -99,7 +121,7 @@ const locationConfig = {
     })}
 
     <!-- Bottom hint -->
-    <div class="absolute bottom-5 left-0 right-0 z-30 flex justify-center pointer-events-none">
+    <div class="absolute bottom-5 left-0 right-0 z-30 hidden justify-center pointer-events-none sm:flex">
       <p class="font-body text-white/25 text-[8px] uppercase tracking-[0.35em]">
         Wybierz najbliższy gabinet
       </p>
@@ -111,6 +133,11 @@ const locationConfig = {
 <style>
   .location-panel {
     transition: flex-grow 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .location-panel:hover .split-video,
+  .location-panel:focus-within .split-video {
+    opacity: 1;
   }
 
   /* Expand hovered panel, shrink other — desktop only */
@@ -150,5 +177,25 @@ const locationConfig = {
       const loc = (el as HTMLElement).dataset.location;
       if (loc) localStorage.setItem('ili-location', loc);
     });
+  });
+
+  document.querySelectorAll('[data-location]').forEach(panel => {
+    const video = panel.querySelector('[data-hover-video]') as HTMLVideoElement | null;
+    if (!video) return;
+
+    const playVideo = () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    };
+
+    const stopVideo = () => {
+      video.pause();
+      video.currentTime = 0;
+    };
+
+    panel.addEventListener('mouseenter', playVideo);
+    panel.addEventListener('mouseleave', stopVideo);
+    panel.addEventListener('focusin', playVideo);
+    panel.addEventListener('focusout', stopVideo);
   });
 </script>
