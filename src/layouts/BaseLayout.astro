@@ -1,20 +1,25 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
   description?: string;
   location?: 'pruszkow' | 'ostroleka';
   canonical?: string;
+  hideHeader?: boolean;
+  hideFooter?: boolean;
 }
 
-const { 
-  title, 
-  description = 'Iliclinic - Gabinet Medycyny Estetycznej w Pruszkowie i Ostrołęce', 
+const {
+  title,
+  description = 'Iliclinic - Gabinet Medycyny Estetycznej w Pruszkowie i Ostrołęce',
   location,
-  canonical 
+  canonical,
+  hideHeader = false,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
@@ -27,23 +32,25 @@ const currentPath = Astro.url.pathname;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   {canonical && <link rel="canonical" href={canonical} />}
-  
+
   <!-- Cinematic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <title>{title} | Iliclinic</title>
+  <ClientRouter />
 </head>
 <body class="min-h-screen flex flex-col font-body selection:bg-accent/20 selection:text-primary">
-  <Header location={location} currentPath={currentPath} />
-  
+  {!hideHeader && <Header location={location} currentPath={currentPath} />}
+
   <main class="flex-1">
     <slot />
   </main>
-  
+
   <Footer location={location} />
+  <CookieBanner />
 
   <script>
     import Lenis from '@studio-freight/lenis';
@@ -52,30 +59,39 @@ const currentPath = Astro.url.pathname;
 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Initialize Lenis Smooth Scroll
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+    let lenis: InstanceType<typeof Lenis> | null = null;
+    let lenisTicker: ((time: number) => void) | null = null;
 
-    lenis.on('scroll', ScrollTrigger.update);
-    
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-    
-    gsap.ticker.lagSmoothing(0);
+    function initLenis() {
+      // Clean up previous instance before re-initializing
+      if (lenisTicker) gsap.ticker.remove(lenisTicker);
+      lenis?.destroy();
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+      lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        orientation: 'vertical',
+        gestureOrientation: 'vertical',
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
+
+      lenis.on('scroll', ScrollTrigger.update);
+
+      lenisTicker = (time: number) => lenis!.raf(time * 1000);
+      gsap.ticker.add(lenisTicker);
+      gsap.ticker.lagSmoothing(0);
     }
-    requestAnimationFrame(raf);
+
+    // Kill all ScrollTrigger instances before each page swap
+    document.addEventListener('astro:before-swap', () => {
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    });
+
+    // Re-init Lenis after each page transition and on first load
+    document.addEventListener('astro:page-load', initLenis);
+    initLenis();
   </script>
 </body>
 </html>

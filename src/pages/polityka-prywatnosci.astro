@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getEntry, render } from 'astro:content';
+
+const page = await getEntry('strony', 'polityka-prywatnosci');
+if (!page) return Astro.redirect('/');
+const { Content } = await render(page);
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+
+  <!-- Hero -->
+  <div class="pt-44 pb-16 bg-surface border-b border-primary/10">
+    <div class="max-w-3xl mx-auto px-6">
+      <span class="font-body text-[10px] uppercase tracking-[0.4em] text-primary mb-6 block font-medium" data-hero-label>Dokumenty prawne</span>
+      <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl text-text-main font-light leading-[0.95] tracking-[-0.02em]" data-hero-title>
+        {page.data.title}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="py-20 bg-surface">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="legal-content" data-scroll-fade>
+        <Content />
+      </div>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  .legal-content :global(h1) {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--theme-text-main);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+  .legal-content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 300;
+    color: var(--theme-text-main);
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--theme-primary) 10%, transparent);
+  }
+  .legal-content :global(h3) {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--theme-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .legal-content :global(p) {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--theme-text-muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+  .legal-content :global(strong) {
+    color: var(--theme-text-main);
+    font-weight: 500;
+  }
+  .legal-content :global(ul),
+  .legal-content :global(ol) {
+    margin: 1rem 0 1.25rem 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  .legal-content :global(ul li),
+  .legal-content :global(ol li) {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--theme-text-muted);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    position: relative;
+    font-weight: 300;
+  }
+  .legal-content :global(ul li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.35rem;
+    height: 0.35rem;
+    background: var(--theme-primary);
+    border-radius: 50%;
+  }
+  .legal-content :global(ol) {
+    counter-reset: legal-counter;
+  }
+  .legal-content :global(ol li) {
+    counter-increment: legal-counter;
+  }
+  .legal-content :global(ol li::before) {
+    content: counter(legal-counter) '.';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 0.75rem;
+    color: var(--theme-primary);
+    font-weight: 500;
+  }
+  .legal-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+  .legal-content :global(th) {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background: color-mix(in srgb, var(--theme-primary) 6%, transparent);
+    color: var(--theme-text-main);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid color-mix(in srgb, var(--theme-primary) 15%, transparent);
+  }
+  .legal-content :global(td) {
+    padding: 0.75rem 1rem;
+    color: var(--theme-text-muted);
+    border-bottom: 1px solid color-mix(in srgb, var(--theme-primary) 8%, transparent);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .legal-content :global(a) {
+    color: var(--theme-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .legal-content :global(hr) {
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--theme-primary) 10%, transparent);
+    margin: 2.5rem 0;
+  }
+  .legal-content :global(em) {
+    font-style: italic;
+    color: var(--theme-text-muted);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function init() {
+    gsap.fromTo('[data-hero-label]', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.1 });
+    gsap.fromTo('[data-hero-title]', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.2 });
+    gsap.fromTo('[data-scroll-fade]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out', delay: 0.4 });
+  }
+
+  document.addEventListener('astro:page-load', init);
+  init();
+</script>

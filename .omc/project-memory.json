@@ -1,0 +1,228 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775331059513,
+  "projectRoot": "/Users/mati/Mine/iliclinic",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "astro",
+        "version": "6.1.3",
+        "category": "fullstack"
+      }
+    ],
+    "packageManager": "pnpm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "pnpm build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "pnpm dev",
+    "scripts": {
+      "dev": "astro dev",
+      "build": "astro build",
+      "preview": "astro preview",
+      "astro": "astro"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": "ES modules",
+    "testPattern": null,
+    "fileOrganization": "type-based"
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "public",
+      "src"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "dist": {
+      "path": "dist",
+      "purpose": "Distribution/build output",
+      "fileCount": 3,
+      "lastAccessed": 1775331059484,
+      "keyFiles": [
+        "favicon.ico",
+        "favicon.svg",
+        "index.html"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 2,
+      "lastAccessed": 1775331059485,
+      "keyFiles": [
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1775331059493,
+      "keyFiles": [
+        "content.config.ts"
+      ]
+    },
+    "src/components": {
+      "path": "src/components",
+      "purpose": "UI components",
+      "fileCount": 2,
+      "lastAccessed": 1775331059495,
+      "keyFiles": [
+        "Footer.astro",
+        "Header.astro"
+      ]
+    },
+    "src/data": {
+      "path": "src/data",
+      "purpose": "Data files",
+      "fileCount": 2,
+      "lastAccessed": 1775331059495,
+      "keyFiles": [
+        "locations.json",
+        "settings.json"
+      ]
+    },
+    "src/pages": {
+      "path": "src/pages",
+      "purpose": "Page components",
+      "fileCount": 1,
+      "lastAccessed": 1775331059496,
+      "keyFiles": [
+        "index.astro"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/pages/[location]/index.astro",
+      "accessCount": 10,
+      "lastAccessed": 1775333095174,
+      "type": "file"
+    },
+    {
+      "path": "src/layouts/BaseLayout.astro",
+      "accessCount": 8,
+      "lastAccessed": 1775333126658,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Header.astro",
+      "accessCount": 5,
+      "lastAccessed": 1775332576823,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/[location]/zabiegi/index.astro",
+      "accessCount": 5,
+      "lastAccessed": 1775332604451,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Footer.astro",
+      "accessCount": 4,
+      "lastAccessed": 1775332792584,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/[location]/kontakt.astro",
+      "accessCount": 4,
+      "lastAccessed": 1775332829770,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/[location]/o-nas.astro",
+      "accessCount": 4,
+      "lastAccessed": 1775332843938,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/[location]/zabiegi/[slug].astro",
+      "accessCount": 3,
+      "lastAccessed": 1775332610170,
+      "type": "file"
+    },
+    {
+      "path": "src/content/strony/polityka-prywatnosci.md",
+      "accessCount": 2,
+      "lastAccessed": 1775331915686,
+      "type": "file"
+    },
+    {
+      "path": "src/data/locations.json",
+      "accessCount": 2,
+      "lastAccessed": 1775331980588,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/polityka-prywatnosci.astro",
+      "accessCount": 2,
+      "lastAccessed": 1775332615397,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/regulamin.astro",
+      "accessCount": 2,
+      "lastAccessed": 1775332616931,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/index.astro",
+      "accessCount": 2,
+      "lastAccessed": 1775333088953,
+      "type": "file"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 1,
+      "lastAccessed": 1775331218863,
+      "type": "file"
+    },
+    {
+      "path": "src/content.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775331303196,
+      "type": "file"
+    },
+    {
+      "path": "src/components/CookieBanner.astro",
+      "accessCount": 1,
+      "lastAccessed": 1775331826292,
+      "type": "file"
+    },
+    {
+      "path": "src/content/strony/regulamin.md",
+      "accessCount": 1,
+      "lastAccessed": 1775331870819,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

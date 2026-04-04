@@ -28,7 +28,7 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&h
   <section class="pt-44 lg:pt-44 pb-20 bg-surface">
     <div class="max-w-7xl mx-auto px-6">
       <span class="text-primary font-body tracking-[0.4em] uppercase text-[10px] mb-8 block font-medium" data-hero-label>Kontakt</span>
-      <h1 class="font-heading text-6xl sm:text-7xl lg:text-9xl text-text-main leading-[0.9] tracking-[-0.02em] mb-6" data-hero-title>
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-7xl text-text-main leading-[0.95] tracking-[-0.02em] mb-6" data-hero-title>
         Gabinet<br /><em class="not-italic text-primary">w {locationData.name}</em>
       </h1>
       <p class="font-body text-text-muted text-lg leading-relaxed max-w-md font-light mt-8" data-hero-desc>
@@ -205,47 +205,32 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&h
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Safety: ensure hero and scroll-fade elements become visible even if GSAP fails
-  const safetyTimeout = setTimeout(() => {
-    document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade]').forEach(el => {
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.transform = 'none';
-    });
-  }, 2000);
-
-  gsap.fromTo('[data-hero-label]',
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 }
-  );
-  gsap.fromTo('[data-hero-title]',
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.2 }
-  );
-  gsap.fromTo('[data-hero-desc]',
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.5 }
-  );
-
-  clearTimeout(safetyTimeout);
-
-  // Scroll fade elements — check viewport first to avoid stuck opacity:0
-  document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (inView) {
-      gsap.fromTo(el,
-        { opacity: 0.3, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-      );
-    } else {
-      gsap.set(el, { opacity: 0, y: 35 });
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1.1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' },
+  function initAnimations() {
+    const safetyTimeout = setTimeout(() => {
+      document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade]').forEach(el => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
       });
-    }
-  });
+    }, 2000);
+
+    gsap.fromTo('[data-hero-label]', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+    gsap.fromTo('[data-hero-title]', { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out', delay: 0.2 });
+    gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out', delay: 0.5,
+      onComplete: () => clearTimeout(safetyTimeout) });
+
+    document.querySelectorAll('[data-scroll-fade]').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        gsap.fromTo(el, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      } else {
+        gsap.set(el, { opacity: 0, y: 35 });
+        gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' } });
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initAnimations);
+  initAnimations();
 </script>

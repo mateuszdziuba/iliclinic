@@ -52,7 +52,7 @@ const treatmentsData = treatments.map(t => ({
       <p class="font-body text-[10px] uppercase tracking-[0.4em] text-primary mb-6 font-medium" data-hero-label>
         Ili Clinic {locationData.name}
       </p>
-      <h1 class="font-heading text-4xl sm:text-6xl lg:text-8xl text-text-main mb-8 leading-[0.9] tracking-[-0.02em]" data-hero-title>
+      <h1 class="font-heading text-3xl sm:text-5xl lg:text-7xl text-text-main mb-8 leading-[0.95] tracking-[-0.02em]" data-hero-title>
         Nasze <em class="not-italic text-primary italic">zabiegi</em>
       </h1>
       <p class="font-body text-text-muted max-w-xl mx-auto leading-relaxed font-light" data-hero-desc>
@@ -228,8 +228,9 @@ const treatmentsData = treatments.map(t => ({
 </BaseLayout>
 
 <style>
-  /* Safety: scroll-fade elements start visible; JS animates from partial opacity only when off-screen */
-  [data-scroll-fade] { opacity: 1; }
+  /* Safety: elements start visible so they're never stuck invisible if GSAP fails */
+  [data-hero-label],[data-hero-title],[data-hero-desc],
+  [data-scroll-fade], .treatment-card { opacity: 1; }
 </style>
 
 <script>
@@ -238,71 +239,67 @@ const treatmentsData = treatments.map(t => ({
 
   gsap.registerPlugin(ScrollTrigger);
 
-  // Safety: ensure all animated elements become visible even if GSAP fails
-  const safetyTimeout = setTimeout(() => {
-    document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade]').forEach(el => {
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.transform = 'none';
-    });
-    document.querySelectorAll('.treatment-card').forEach(el => {
-      (el as HTMLElement).style.opacity = '1';
-      (el as HTMLElement).style.transform = 'none';
-    });
-  }, 2000);
-
-  // Hero entrance
-  gsap.fromTo('[data-hero-label]', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 });
-  gsap.fromTo('[data-hero-title]', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.2 });
-  gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.45 });
-
-  // Cards stagger — check viewport to avoid stuck opacity:0
-  const cards = document.querySelectorAll('.treatment-card');
-  const firstCard = cards[0];
-  if (firstCard) {
-    const rect = firstCard.getBoundingClientRect();
-    const cardsInView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (cardsInView) {
-      gsap.fromTo(cards,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.06, delay: 0.55 }
-      );
-    } else {
-      cards.forEach(card => {
-        const cardRect = card.getBoundingClientRect();
-        const cardInView = cardRect.top < window.innerHeight && cardRect.bottom > 0;
-        if (cardInView) {
-          gsap.fromTo(card, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        } else {
-          gsap.set(card, { opacity: 0, y: 30 });
-          gsap.to(card, {
-            opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-            scrollTrigger: { trigger: card, start: 'top 88%' },
-          });
-        }
+  function initAnimations() {
+    const safetyTimeout = setTimeout(() => {
+      document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade],.treatment-card').forEach(el => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
       });
-    }
-  }
+    }, 2000);
 
-  // CTA scroll fade — check viewport first
-  document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (inView) {
-      gsap.fromTo(el,
-        { opacity: 0.3, y: 15 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-      );
-    } else {
-      gsap.set(el, { opacity: 0, y: 35 });
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1.0,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' },
-      });
+    // Hero entrance
+    gsap.fromTo('[data-hero-label]', { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+    gsap.fromTo('[data-hero-title]', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', delay: 0.2 });
+    gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.45,
+      onComplete: () => clearTimeout(safetyTimeout) });
+
+    // Cards stagger — check viewport to avoid stuck opacity:0
+    const cards = document.querySelectorAll('.treatment-card');
+    const firstCard = cards[0];
+    if (firstCard) {
+      const rect = firstCard.getBoundingClientRect();
+      const cardsInView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (cardsInView) {
+        gsap.fromTo(cards,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.06, delay: 0.55 }
+        );
+      } else {
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardInView = cardRect.top < window.innerHeight && cardRect.bottom > 0;
+          if (cardInView) {
+            gsap.fromTo(card, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+          } else {
+            gsap.set(card, { opacity: 0, y: 30 });
+            gsap.to(card, {
+              opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+              scrollTrigger: { trigger: card, start: 'top 88%' },
+            });
+          }
+        });
+      }
     }
-  });
+
+    // CTA scroll fade — check viewport first
+    document.querySelectorAll('[data-scroll-fade]').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) {
+        gsap.fromTo(el, { opacity: 0.3, y: 15 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      } else {
+        gsap.set(el, { opacity: 0, y: 35 });
+        gsap.to(el, {
+          opacity: 1, y: 0, duration: 1.0, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' },
+        });
+      }
+    });
+  } // end initAnimations
+
+  // astro:page-load fires after view transition completes — safe to animate
+  document.addEventListener('astro:page-load', initAnimations);
+  initAnimations();
 
   // ── Filter logic ──
   const searchInput = document.getElementById('search-input') as HTMLInputElement;

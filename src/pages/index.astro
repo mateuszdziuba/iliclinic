@@ -3,115 +3,152 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import locations from '../data/locations.json';
 
 const allLocations = Object.entries(locations);
+
+const locationConfig = {
+  pruszkow: {
+    image: '/images/hero-clinic.jpg',
+    color: 'oklch(0.32 0.06 55)',
+  },
+  ostroleka: {
+    image: '/images/IMG_7809.jpg',
+    color: 'oklch(0.22 0.07 258)',
+  },
+} as const;
 ---
 
-<BaseLayout title="Wybierz lokalizację" description="Iliclinic - Gabinety medycyny estetycznej w Pruszkowie i Ostrołęce. Wybierz najbliższy gabinet.">
-  <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Background gradient -->
-    <div class="absolute inset-0 bg-gradient-to-br from-surface-warm via-surface-cream to-surface-warm"></div>
-    
-    <!-- Decorative shapes -->
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary-medical/5 mask-organic"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent-gold/5 mask-organic"></div>
-    
-    <div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
-      <!-- Logo -->
-      <div class="mb-8">
-        <img 
-          src="/images/logo-gold.png" 
-          alt="Ili Clinic" 
-          class="h-24 md:h-32 w-auto mx-auto"
-        />
-      </div>
-      
-      <p class="text-xl md:text-2xl text-text-muted font-body mb-4">
-        Gabinet Medycyny Estetycznej
-      </p>
-      
-      <p class="text-lg text-text-muted/80 max-w-2xl mx-auto mb-12">
-        Profesjonalna pielęgnacja i zabiegi estetyczne w dwóch lokalizacjach. 
-        Zaufaj ekspertom i rozbudź naturalne piękno.
-      </p>
+<BaseLayout
+  title="Wybierz lokalizację"
+  description="Ili Clinic – Gabinety medycyny estetycznej w Pruszkowie i Ostrołęce."
+  hideHeader={true}
+>
+  <section class="split-root relative h-screen flex flex-col sm:flex-row overflow-hidden">
 
-      <!-- Location Selector -->
-      <div class="mb-8">
-        <p class="text-sm text-text-muted uppercase tracking-widest mb-6">
-          Wybierz lokalizację
-        </p>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          {allLocations.map(([key, location]) => (
-            <a 
-              href={`/${key}`}
-              class="group relative bg-white/80 backdrop-blur-sm border border-primary-medical/10 p-8 hover-lift"
-            >
-              <!-- Hover accent -->
-              <div class="absolute inset-0 bg-gradient-to-br from-primary-medical/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              
-              <div class="relative">
-                <h2 class="font-heading text-3xl text-text-deep mb-3 group-hover:text-primary-medical transition-colors">
-                  {location.name}
-                </h2>
-                
-                <p class="text-text-muted text-sm mb-4">
-                  {location.address.street}<br />
-                  {location.address.postalCode} {location.address.city}
-                </p>
-                
-                <div class="flex items-center gap-2 text-primary-medical font-medium text-sm">
-                  Zobacz gabinet
-                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- Logo centered at top -->
+    <div class="absolute top-7 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none">
+      <img src="/images/logo-white.png" alt="Ili Clinic" class="h-9 sm:h-11 w-auto drop-shadow-lg" />
+    </div>
+
+    <!-- Vertical/horizontal divider -->
+    <div class="split-divider absolute sm:left-1/2 sm:top-0 sm:bottom-0 sm:w-px sm:h-auto
+                left-0 right-0 top-1/2 h-px sm:transform-none
+                bg-white/20 z-20 pointer-events-none"></div>
+
+    {allLocations.map(([key, location], i) => {
+      const cfg = locationConfig[key as keyof typeof locationConfig];
+      return (
+        <a
+          href={`/${key}`}
+          class="location-panel group relative flex-1 overflow-hidden"
+          data-location={key}
+        >
+          <!-- Photo background -->
+          <div
+            class="absolute inset-0 bg-cover bg-center transition-transform duration-[1.4s] ease-out scale-[1.06] group-hover:scale-100"
+            style={`background-image: url(${cfg.image})`}
+          ></div>
+
+          <!-- Color wash + gradient -->
+          <div
+            class="absolute inset-0"
+            style={`background: linear-gradient(to top, ${cfg.color} 0%, color-mix(in srgb, ${cfg.color} 70%, transparent) 50%, color-mix(in srgb, ${cfg.color} 30%, transparent) 100%); opacity: 0.82;`}
+          ></div>
+          <div class="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-700"></div>
+
+          <!-- Panel content -->
+          <div class="relative h-full flex flex-col justify-between p-8 sm:p-10 md:p-14 lg:p-16">
+
+            <!-- Top: decorative number -->
+            <div class="self-start mt-14 sm:mt-16">
+              <span class="font-heading text-white/10 text-8xl sm:text-[10rem] font-light leading-none select-none">
+                0{i + 1}
+              </span>
+            </div>
+
+            <!-- Bottom: city info -->
+            <div class="translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+              <p class="font-body text-white/40 text-[9px] uppercase tracking-[0.45em] mb-4">
+                Ili Clinic
+              </p>
+              <h2 class="font-heading text-white font-light leading-[0.88] mb-5
+                          text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                {location.name}
+              </h2>
+              <p class="font-body text-white/55 text-sm font-light leading-relaxed mb-7 sm:mb-9">
+                {location.address.street}<br />
+                {location.address.postalCode} {location.address.city}
+              </p>
+
+              <!-- CTA row -->
+              <div class="flex items-center gap-3">
+                <span class="font-body text-white/70 group-hover:text-white text-[9px] uppercase tracking-[0.25em] transition-colors duration-300">
+                  Wejdź do gabinetu
+                </span>
+                <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center
+                            group-hover:bg-white group-hover:border-white transition-all duration-400">
+                  <svg class="w-3 h-3 text-white group-hover:text-black/60 transition-colors duration-300"
+                       fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
               </div>
-            </a>
-          ))}
-        </div>
-      </div>
+            </div>
 
-      <!-- Trust badges -->
-      <div class="flex flex-wrap justify-center gap-8 text-text-muted/60 text-sm">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-          Certyfikowani specjaliści
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-          </svg>
-          Naturalne efekty
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          Ponad 10 lat doświadczenia
-        </div>
-      </div>
+          </div>
+        </a>
+      );
+    })}
+
+    <!-- Bottom hint -->
+    <div class="absolute bottom-5 left-0 right-0 z-30 flex justify-center pointer-events-none">
+      <p class="font-body text-white/25 text-[8px] uppercase tracking-[0.35em]">
+        Wybierz najbliższy gabinet
+      </p>
     </div>
+
   </section>
 </BaseLayout>
+
+<style>
+  .location-panel {
+    transition: flex-grow 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Expand hovered panel, shrink other — desktop only */
+  @media (min-width: 640px) {
+    .split-divider {
+      left: 50%;
+      transition: left 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .split-root:has(.location-panel:hover) .location-panel {
+      flex-grow: 0.8;
+    }
+    .split-root:has(.location-panel:hover) .location-panel:hover {
+      flex-grow: 1.2;
+    }
+
+    .split-root:has(.location-panel[data-location="pruszkow"]:hover) .split-divider {
+      left: 60%;
+    }
+
+    .split-root:has(.location-panel[data-location="ostroleka"]:hover) .split-divider {
+      left: 40%;
+    }
+  }
+</style>
 
 <script>
   // Auto-redirect if location is already saved
   const savedLocation = localStorage.getItem('ili-location');
-  if (savedLocation && (savedLocation === 'pruszkow' || savedLocation === 'ostroleka')) {
+  if (savedLocation === 'pruszkow' || savedLocation === 'ostroleka') {
     window.location.href = `/${savedLocation}`;
   }
 
-  // Save location when clicking on location cards
-  document.querySelectorAll('a[href^="/pruszkow"], a[href^="/ostroleka"]').forEach(link => {
-    link.addEventListener('click', () => {
-      const href = link.getAttribute('href');
-      if (href?.startsWith('/pruszkow')) {
-        localStorage.setItem('ili-location', 'pruszkow');
-      } else if (href?.startsWith('/ostroleka')) {
-        localStorage.setItem('ili-location', 'ostroleka');
-      }
+  // Save chosen location
+  document.querySelectorAll('[data-location]').forEach(el => {
+    el.addEventListener('click', () => {
+      const loc = (el as HTMLElement).dataset.location;
+      if (loc) localStorage.setItem('ili-location', loc);
     });
   });
 </script>
