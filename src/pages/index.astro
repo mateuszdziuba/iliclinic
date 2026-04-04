@@ -24,6 +24,13 @@ const locationConfig = {
   hideHeader={true}
   hideFooter={true}
 >
+  <script is:inline>
+    const savedLocation = localStorage.getItem('ili-location');
+    if (savedLocation === 'pruszkow' || savedLocation === 'ostroleka') {
+      window.location.replace(`/${savedLocation}`);
+    }
+  </script>
+
   <section class="split-root relative h-screen flex flex-col sm:flex-row overflow-hidden">
 
     <div class="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex justify-center pointer-events-none sm:hidden">
@@ -165,12 +172,6 @@ const locationConfig = {
 </style>
 
 <script>
-  // Auto-redirect if location is already saved
-  const savedLocation = localStorage.getItem('ili-location');
-  if (savedLocation === 'pruszkow' || savedLocation === 'ostroleka') {
-    window.location.href = `/${savedLocation}`;
-  }
-
   // Save chosen location
   document.querySelectorAll('[data-location]').forEach(el => {
     el.addEventListener('click', () => {
