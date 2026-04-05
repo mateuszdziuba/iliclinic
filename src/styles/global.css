@@ -4,8 +4,8 @@
 
 @theme {
   /* Editorial Typography */
-  --font-heading: 'Noto Serif', serif;
-  --font-body: 'Work Sans', sans-serif;
+  --font-heading: var(--font-ili-heading), serif;
+  --font-body: var(--font-ili-body), sans-serif;
 
   /* Theme agnostic utility colors */
   --color-white: #ffffff;

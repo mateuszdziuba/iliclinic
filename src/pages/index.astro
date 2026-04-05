@@ -25,9 +25,14 @@ const locationConfig = {
   },
 } as const;
 
+const [pruszkowPoster, ostrolekaPoster] = await Promise.all([
+  getImage({ src: heroClinic, width: 1280, format: 'webp', quality: 68 }),
+  getImage({ src: heroOstroleka, width: 1280, format: 'webp', quality: 68 }),
+]);
+
 const panelPosters = {
-  pruszkow: await getImage({ src: heroClinic, width: 1440, format: 'webp', quality: 72 }),
-  ostroleka: await getImage({ src: heroOstroleka, width: 1440, format: 'webp', quality: 72 }),
+  pruszkow: pruszkowPoster,
+  ostroleka: ostrolekaPoster,
 } as const;
 ---
 
@@ -100,7 +105,7 @@ const panelPosters = {
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
             poster={poster.src}
           >
             <source src={cfg.video} type="video/mp4" />
@@ -214,12 +219,41 @@ const panelPosters = {
     const video = panel.querySelector('[data-hover-video]') as HTMLVideoElement | null;
     if (!video) return;
 
-    const playVideo = () => {
+    let pendingPlay = false;
+
+    const startPlayback = () => {
       video.currentTime = 0;
       video.play().catch(() => {});
     };
 
+    const primeVideo = () => {
+      if (video.dataset.primed === 'true') return;
+
+      video.dataset.primed = 'true';
+      video.preload = 'auto';
+      video.load();
+    };
+
+    const playVideo = () => {
+      pendingPlay = true;
+      primeVideo();
+
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        startPlayback();
+        return;
+      }
+
+      video.addEventListener(
+        'loadeddata',
+        () => {
+          if (pendingPlay) startPlayback();
+        },
+        { once: true }
+      );
+    };
+
     const stopVideo = () => {
+      pendingPlay = false;
       video.pause();
       video.currentTime = 0;
     };

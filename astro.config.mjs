@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
@@ -10,6 +10,24 @@ export default defineConfig({
   site: 'https://iliclinic.pl',
   adapter: vercel(),
   integrations: [sitemap()],
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Noto Serif',
+      cssVariable: '--font-ili-heading',
+      weights: [300, 400],
+      styles: ['normal', 'italic'],
+      subsets: ['latin', 'latin-ext'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Work Sans',
+      cssVariable: '--font-ili-body',
+      weights: [300, 400, 500, 600],
+      styles: ['normal'],
+      subsets: ['latin', 'latin-ext'],
+    },
+  ],
   vite: {
     plugins: [tailwindcss()]
   }
