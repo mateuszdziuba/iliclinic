@@ -1,6 +1,8 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
+export const prerender = false;
+
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 type ContactPayload = {
