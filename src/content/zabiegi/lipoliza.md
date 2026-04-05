@@ -6,8 +6,8 @@ duration: "30-45 minut"
 category: "Medycyna Estetyczna"
 featured: false
 seo:
-  metaTitle: "Lipoliza iniekcyjna - redukcja tłuszczu bez operacji | Iliclinic"
-  metaDescription: "Lipoliza iniekcyjna - niechirurgiczna redukcja tkanki tłuszczowej. Modelowanie podbródka i sylwetki."
+  metaTitle: "Lipoliza iniekcyjna | ili Clinic"
+  metaDescription: "Lipoliza iniekcyjna w ili Clinic wspiera redukcję miejscowej tkanki tłuszczowej i modelowanie podbródka oraz wybranych partii sylwetki."
 ---
 
 ## Czym jest lipoliza iniekcyjna?

@@ -6,6 +6,8 @@ export const prerender = false;
 
 const { location } = Astro.params;
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const locationSeo = (locationData as any).seo ?? {};
 if (!locationData || location !== 'pruszkow') {
   return Astro.redirect('/');
 }
@@ -64,8 +66,8 @@ function pluralServices(n: number) {
 ---
 
 <BaseLayout
-  title={`Cennik — Ili Clinic ${locationData.name}`}
-  description={`Aktualny cennik zabiegów Ili Clinic ${locationData.name}. Medycyna estetyczna, pielęgnacja twarzy, depilacja laserowa, trychologia i wiele więcej.`}
+  title={locationSeo.pricingTitle ?? `Cennik — ${salonName}`}
+  description={locationSeo.pricingDescription ?? `Aktualny cennik zabiegów ${salonName}. Medycyna estetyczna, pielęgnacja twarzy, depilacja laserowa, trychologia i wiele więcej.`}
   location={location as 'pruszkow' | 'ostroleka'}
 >
 

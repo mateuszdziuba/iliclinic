@@ -124,6 +124,16 @@ content:
       - name: description
         label: Opis
         type: text
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: metaTitle
+            label: Meta Title
+            type: string
+          - name: metaDescription
+            label: Meta Description
+            type: text
       - name: location
         label: Lokalizacja
         type: select
@@ -152,6 +162,16 @@ content:
       - name: siteDescription
         label: Opis strony
         type: text
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: homeTitle
+            label: Home Meta Title
+            type: string
+          - name: homeDescription
+            label: Home Meta Description
+            type: text
       - name: defaultLocation
         label: Domyślna lokalizacja
         type: select
@@ -176,6 +196,43 @@ content:
           - name: name
             label: Nazwa
             type: string
+          - name: salonName
+            label: Nazwa salonu
+            type: string
+          - name: seo
+            label: SEO
+            type: object
+            fields:
+              - name: homeTitle
+                label: Home Meta Title
+                type: string
+              - name: homeDescription
+                label: Home Meta Description
+                type: text
+              - name: treatmentsTitle
+                label: Zabiegi Meta Title
+                type: string
+              - name: treatmentsDescription
+                label: Zabiegi Meta Description
+                type: text
+              - name: contactTitle
+                label: Kontakt Meta Title
+                type: string
+              - name: contactDescription
+                label: Kontakt Meta Description
+                type: text
+              - name: aboutTitle
+                label: O nas Meta Title
+                type: string
+              - name: aboutDescription
+                label: O nas Meta Description
+                type: text
+              - name: pricingTitle
+                label: Cennik Meta Title
+                type: string
+              - name: pricingDescription
+                label: Cennik Meta Description
+                type: text
           - name: slug
             label: Slug
             type: string
@@ -231,6 +288,43 @@ content:
           - name: name
             label: Nazwa
             type: string
+          - name: salonName
+            label: Nazwa salonu
+            type: string
+          - name: seo
+            label: SEO
+            type: object
+            fields:
+              - name: homeTitle
+                label: Home Meta Title
+                type: string
+              - name: homeDescription
+                label: Home Meta Description
+                type: text
+              - name: treatmentsTitle
+                label: Zabiegi Meta Title
+                type: string
+              - name: treatmentsDescription
+                label: Zabiegi Meta Description
+                type: text
+              - name: contactTitle
+                label: Kontakt Meta Title
+                type: string
+              - name: contactDescription
+                label: Kontakt Meta Description
+                type: text
+              - name: aboutTitle
+                label: O nas Meta Title
+                type: string
+              - name: aboutDescription
+                label: O nas Meta Description
+                type: text
+              - name: pricingTitle
+                label: Cennik Meta Title
+                type: string
+              - name: pricingDescription
+                label: Cennik Meta Description
+                type: text
           - name: slug
             label: Slug
             type: string

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import locations from '../data/locations.json';
+import settings from '../data/settings.json';
 
 const allLocations = Object.entries(locations);
 
@@ -19,8 +20,8 @@ const locationConfig = {
 ---
 
 <BaseLayout
-  title="Wybierz lokalizację"
-  description="Ili Clinic – Gabinety medycyny estetycznej w Pruszkowie i Ostrołęce."
+  title={settings.seo?.homeTitle ?? 'Medycyna estetyczna Pruszków i Ostrołęka'}
+  description={settings.seo?.homeDescription ?? settings.siteDescription}
   hideHeader={true}
   hideFooter={true}
 >
@@ -41,7 +42,7 @@ const locationConfig = {
 
     <!-- Logo centered at top -->
     <div class="absolute top-12 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none sm:top-7">
-      <img src="/images/logo-white.png" alt="Ili Clinic" class="h-9 sm:h-11 w-auto drop-shadow-lg" />
+      <img src="/images/logo-white.png" alt="ili Clinic" class="h-9 sm:h-11 w-auto drop-shadow-lg" />
     </div>
 
     <!-- Vertical/horizontal divider -->
@@ -96,7 +97,7 @@ const locationConfig = {
             <!-- Bottom: city info -->
             <div class="translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
               <p class="font-body text-white/40 text-[9px] uppercase tracking-[0.45em] mb-4">
-                Ili Clinic
+                ili Clinic
               </p>
               <h2 class="font-heading text-white font-light leading-[0.88] mb-5
                           text-4xl sm:text-5xl md:text-6xl lg:text-7xl">

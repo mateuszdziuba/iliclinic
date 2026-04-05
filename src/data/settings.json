@@ -1,5 +1,9 @@
 {
-  "siteName": "Iliclinic",
-  "siteDescription": "Gabinet Medycyny Estetycznej w Pruszkowie i Ostrołęce",
+  "siteName": "ili Clinic",
+  "siteDescription": "Gabinet medycyny estetycznej w Pruszkowie i Ostrołęce",
+  "seo": {
+    "homeTitle": "Medycyna estetyczna Pruszków i Ostrołęka | ili Clinic",
+    "homeDescription": "Wybierz gabinet ili Clinic w Pruszkowie lub Ostrołęce. Medycyna estetyczna, kosmetologia, depilacja laserowa, trychologia i konsultacje."
+  },
   "defaultLocation": "pruszkow"
 }

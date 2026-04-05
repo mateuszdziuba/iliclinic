@@ -12,6 +12,8 @@ export function getStaticPaths() {
 
 const location = Astro.params.location as 'pruszkow' | 'ostroleka';
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const locationSeo = (locationData as any).seo ?? {};
 
 // Get treatments available in this location
 const allTreatments = await getCollection('zabiegi');
@@ -41,8 +43,8 @@ const treatmentsData = treatments.map(t => ({
 ---
 
 <BaseLayout
-  title={`Zabiegi — Medycyna Estetyczna w ${(locationData as any).locative} | Ili Clinic`}
-  description={`Zabiegi medycyny estetycznej w Ili Clinic ${locationData.name}: botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF, lipoliza, mezoterapia, trychologia. Bezpłatna konsultacja.`}
+  title={locationSeo.treatmentsTitle ?? `Zabiegi — Medycyna Estetyczna w ${(locationData as any).locative}`}
+  description={locationSeo.treatmentsDescription ?? `Zabiegi medycyny estetycznej w ${salonName}: botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF, lipoliza, mezoterapia, trychologia. Bezpłatna konsultacja.`}
   location={location as 'pruszkow' | 'ostroleka'}
 >
 
@@ -50,7 +52,7 @@ const treatmentsData = treatments.map(t => ({
   <section class="pt-48 pb-12 lg:pt-44 lg:pb-20 bg-surface text-center">
     <div class="max-w-7xl mx-auto px-6">
       <p class="font-body text-[10px] uppercase tracking-[0.4em] text-primary mb-6 font-medium" data-hero-label>
-        Ili Clinic {locationData.name}
+        {salonName}
       </p>
       <h1 class="font-heading text-3xl sm:text-5xl lg:text-7xl text-text-main mb-8 leading-[0.95] tracking-[-0.02em]" data-hero-title>
         Nasze <em class="not-italic text-primary italic">zabiegi</em>

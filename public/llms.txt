@@ -1,10 +1,25 @@
-# Ili Clinic — Gabinet Medycyny Estetycznej
+# ili Clinic
 
-Ili Clinic to kameralne studio medycyny estetycznej z dwoma gabinetami w Polsce:
-- **Ili Clinic Pruszków** — ul. Obrońców Pokoju 10/4, 05-800 Pruszków, tel. +48 660 176 464
-- **Ili Clinic Ostrołęka** — ul. Fieldorfa Nila 13, 07-410 Ostrołęka, tel. +48 574 960 620
+ili Clinic to marka gabinetów medycyny estetycznej i kosmetologii działająca w Polsce.
 
-Kontakt: kontakt@iliclinic.pl
+## Lokalizacje
+
+- **ili Clinic Studio Pruszków** — ul. Obrońców Pokoju 10/4, 05-800 Pruszków, woj. mazowieckie, tel. +48 660 176 464
+- **ili Clinic Ostrołęka** — ul. Fieldorfa Nila 13, 07-410 Ostrołęka, woj. mazowieckie, tel. +48 574 960 620
+
+## Profil działalności
+
+- medycyna estetyczna
+- kosmetologia twarzy i ciała
+- depilacja laserowa
+- trychologia
+- konsultacje zabiegowe
+
+## Rezerwacja i kontakt
+
+- strona: https://iliclinic.pl
+- e-mail: kontakt@iliclinic.pl
+- Booksy Pruszków: https://booksy.com/pl-pl/113463_ili-clinic-studio-beauty_salon-kosmetyczny_4404_pruszkow
 
 ## Oferta zabiegów
 
@@ -37,12 +52,15 @@ Kontakt: kontakt@iliclinic.pl
 - **Przekłuwanie uszu Blomdahl** — medyczny system, biżuteria hipoalergiczna
 
 ## Marki i technologie
-Allergan, Juvederm, Teoxane, Dermapen 4, MedEstelle, Xlase/AlexDual, Gold Needle RF, Alma Dye-VL, Booksy rezerwacje
+Allergan, Juvederm, Teoxane, Dermapen 4, MedEstelle, Xlase, AlexDual, Gold Needle RF, Alma Dye-VL
 
 ## Godziny otwarcia
 Poniedziałek – Piątek: 10:00–20:00
 Sobota: po wcześniejszym umówieniu
 Niedziela: zamknięte
 
-## Rezerwacja
-Online przez Booksy: https://booksy.com/pl-pl/113463_ili-clinic-studio-beauty_salon-kosmetyczny_4404_pruszkow
+## Obszar geograficzny
+
+- Pruszków
+- Ostrołęka
+- województwo mazowieckie

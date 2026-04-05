@@ -26,9 +26,8 @@ przygotowanie_do_zabiegu:
   - Unikaj intensywnego słońca przez 2 tygodnie przed zabiegiem
   - Nie wykonuj ablacyjnych zabiegów laserowych w ostatnich 2 tygodniach
 seo:
-  metaTitle: Stymulatory tkankowe - odmłodzenie skóry | Iliclinic
-  metaDescription: Stymulatory tkankowe - głęboka regeneracja i lifting bez
-    skalpela. Hydroksyapatyt wapnia, kwas polimlekowy.
+  metaTitle: "Stymulatory tkankowe | ili Clinic"
+  metaDescription: "Stymulatory tkankowe w ili Clinic wspierają odbudowę skóry, poprawę jędrności, napięcia i jakości tkanek bez przerysowanego efektu."
 ---
 
 ## Zabiegi stymulujące Tri-ExoGF™ MedEstelle

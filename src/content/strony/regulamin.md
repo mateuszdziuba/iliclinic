@@ -1,16 +1,19 @@
 ---
 title: "Regulamin"
-description: "Regulamin korzystania z serwisu internetowego Ili Clinic"
+description: "Regulamin korzystania z serwisu internetowego ili Clinic"
 location: global
+seo:
+  metaTitle: "Regulamin serwisu | ili Clinic"
+  metaDescription: "Regulamin serwisu ili Clinic: zasady korzystania ze strony, rezerwacji wizyt, odpowiedzialności, praw autorskich i linków zewnętrznych."
 ---
 
-# Regulamin serwisu internetowego Ili Clinic
+# Regulamin serwisu internetowego ili Clinic
 
 *Obowiązuje od: 1 marca 2025 r.*
 
 ## 1. Postanowienia ogólne
 
-**1.1.** Niniejszy Regulamin określa zasady korzystania z serwisu internetowego dostępnego pod adresem **iliclinic.pl** (dalej: „Serwis"), prowadzonego przez Ili Clinic z siedzibą przy ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków (dalej: „Usługodawca").
+**1.1.** Niniejszy Regulamin określa zasady korzystania z serwisu internetowego dostępnego pod adresem **iliclinic.pl** (dalej: „Serwis"), prowadzonego przez ili Clinic z siedzibą przy ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków (dalej: „Usługodawca").
 
 **1.2.** Korzystanie z Serwisu oznacza akceptację niniejszego Regulaminu w całości.
 
@@ -20,8 +23,8 @@ location: global
 
 - **Serwis** — strona internetowa dostępna pod adresem iliclinic.pl
 - **Użytkownik** — każda osoba fizyczna korzystająca z Serwisu
-- **Usługodawca** — Ili Clinic, ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków
-- **Usługi** — zabiegi medycyny estetycznej świadczone stacjonarnie w gabinetach Ili Clinic w Pruszkowie i Ostrołęce
+- **Usługodawca** — ili Clinic, ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków
+- **Usługi** — zabiegi medycyny estetycznej świadczone stacjonarnie w gabinetach ili Clinic w Pruszkowie i Ostrołęce
 
 ## 3. Usługi świadczone drogą elektroniczną
 
@@ -63,7 +66,7 @@ Serwis ma charakter informacyjny i marketingowy — nie jest sklepem internetowy
 
 ## 6. Prawa autorskie
 
-**6.1.** Wszelkie treści opublikowane w Serwisie — teksty, grafiki, zdjęcia, logotypy, układ strony — są własnością Ili Clinic lub zostały opublikowane za zgodą uprawnionych podmiotów i podlegają ochronie na podstawie ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych.
+**6.1.** Wszelkie treści opublikowane w Serwisie — teksty, grafiki, zdjęcia, logotypy, układ strony — są własnością ili Clinic lub zostały opublikowane za zgodą uprawnionych podmiotów i podlegają ochronie na podstawie ustawy z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych.
 
 **6.2.** Kopiowanie, reprodukowanie, rozpowszechnianie lub wykorzystywanie treści Serwisu w celach komercyjnych bez pisemnej zgody Usługodawcy jest zabronione.
 
@@ -95,4 +98,4 @@ Serwis może zawierać odnośniki do stron zewnętrznych (m.in. Booksy, ilishop.
 
 ---
 
-Ili Clinic · ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków · kontakt@iliclinic.pl
+ili Clinic · ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków · kontakt@iliclinic.pl

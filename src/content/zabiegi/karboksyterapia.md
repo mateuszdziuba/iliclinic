@@ -6,8 +6,8 @@ duration: "30-45 minut"
 category: "Medycyna Estetyczna"
 featured: false
 seo:
-  metaTitle: "Karboksyterapia - CO2 terapia | Iliclinic"
-  metaDescription: "Karboksyterapia - zabieg z dwutlenkiem węgla na cienie pod oczami, cellulit, blizny i rozstępy."
+  metaTitle: "Karboksyterapia CO2 | ili Clinic"
+  metaDescription: "Karboksyterapia w ili Clinic wspiera redukcję cieni pod oczami, cellulitu, blizn, rozstępów i wiotkości skóry."
 ---
 
 ## Czym jest karboksyterapia?

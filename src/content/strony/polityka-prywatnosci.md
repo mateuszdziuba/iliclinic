@@ -1,7 +1,10 @@
 ---
 title: "Polityka prywatności"
-description: "Informacje o przetwarzaniu danych osobowych i zasadach korzystania z plików cookie w Ili Clinic"
+description: "Informacje o przetwarzaniu danych osobowych i zasadach korzystania z plików cookie w ili Clinic"
 location: global
+seo:
+  metaTitle: "Polityka prywatności | ili Clinic"
+  metaDescription: "Polityka prywatności ili Clinic: zasady przetwarzania danych osobowych, plików cookie, kontakt oraz prawa użytkownika zgodnie z RODO."
 ---
 
 # Polityka prywatności
@@ -10,7 +13,7 @@ location: global
 
 ## 1. Administrator danych osobowych
 
-Administratorem Twoich danych osobowych jest **Ili Clinic** prowadząca gabinety przy:
+Administratorem Twoich danych osobowych jest **ili Clinic** prowadząca gabinety przy:
 - ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków
 - ul. Fieldorfa Nila 13, 07-410 Ostrołęka
 
@@ -108,4 +111,4 @@ W sprawach związanych z ochroną danych osobowych oraz w celu realizacji swoich
 **E-mail:** kontakt@iliclinic.pl  
 **Tel. Pruszków:** +48 660 176 464  
 **Tel. Ostrołęka:** +48 574 960 620  
-**Adres korespondencyjny:** Ili Clinic, ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków
+**Adres korespondencyjny:** ili Clinic, ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków

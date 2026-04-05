@@ -9,9 +9,8 @@ category: Medycyna Estetyczna
 duration: 60 minut
 featured: false
 seo:
-  metaTitle: Fala radiowa mikroigłowa Gold Needle RF | Iliclinic
-  metaDescription: Zaawansowany zabieg łączący mikronakłuwanie z falą radiową.
-    Intensywny lifting i odmłodzenie skóry.
+  metaTitle: "Gold Needle RF i fala radiowa mikroigłowa | ili Clinic"
+  metaDescription: "Fala radiowa mikroigłowa Gold Needle RF w ili Clinic pomaga ujędrnić skórę, poprawić owal twarzy i zmniejszyć blizny oraz rozszerzone pory."
 ---
 ## Gold Needle RF — fala radiowa z mikroigłami
 

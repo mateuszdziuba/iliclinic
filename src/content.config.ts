@@ -29,6 +29,10 @@ const strony = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     location: z.enum(['global', 'pruszkow', 'ostroleka']).default('global'),
+    seo: z.object({
+      metaTitle: z.string().optional(),
+      metaDescription: z.string().optional(),
+    }).optional(),
   }),
 });
 

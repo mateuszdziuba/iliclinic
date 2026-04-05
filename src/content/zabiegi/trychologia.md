@@ -10,17 +10,16 @@ duration: 45-60 minut
 featured: false
 image: /images/Problemy-skory-glowy-i-wlosow1.png
 seo:
-  metaTitle: Trychologia - zabiegi na włosy i skórę głowy | Iliclinic
-  metaDescription: Konsultacje trychologiczne i zabiegi stymulujące porost włosów.
-    Diagnostyka problemów ze skórą głowy.
+  metaTitle: "Trychologia i skóra głowy | ili Clinic"
+  metaDescription: "Konsultacje trychologiczne i terapie skóry głowy w ili Clinic. Diagnostyka wypadania włosów, łysienia i problemów trychologicznych."
 ---
-## Trychologia w Ili Clinic
+## Trychologia w ili Clinic
 
-Trychologia to specjalistyczna dziedzina medycyny estetycznej zajmująca się problemami skóry głowy i włosów. W Ili Clinic oferujemy kompleksową diagnostykę oraz indywidualnie dobrane terapie — od nadmiernego wypadania włosów, przez łysienie androgenowe i plackowate, po łojotokowe zapalenie skóry, łuszczycę i podrażnienia.
+Trychologia to specjalistyczna dziedzina medycyny estetycznej zajmująca się problemami skóry głowy i włosów. W ili Clinic oferujemy kompleksową diagnostykę oraz indywidualnie dobrane terapie — od nadmiernego wypadania włosów, przez łysienie androgenowe i plackowate, po łojotokowe zapalenie skóry, łuszczycę i podrażnienia.
 
 ## Stosowane metody
 
-Protokoły trychologiczne realizowane w Ili Clinic obejmują:
+Protokoły trychologiczne realizowane w ili Clinic obejmują:
 
 *   **Mezoterapię igłową skóry głowy** — koktajle stymulujące wzrost włosów
 *   **Karboksyterapię** — dotlenienie i poprawa mikrokrążenia skóry głowy

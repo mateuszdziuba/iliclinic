@@ -6,8 +6,8 @@ duration: "45 minut"
 category: "Medycyna Estetyczna"
 featured: false
 seo:
-  metaTitle: "Mezoterapia igłowa twarzy i ciała | Iliclinic"
-  metaDescription: "Mezoterapia igłowa - skuteczne nawilżenie i odmłodzenie skóry. Koktajle witaminowe, kwas hialuronowy, osocze."
+  metaTitle: "Mezoterapia igłowa twarzy i skóry | ili Clinic"
+  metaDescription: "Mezoterapia igłowa w ili Clinic poprawia nawilżenie, jędrność i kondycję skóry dzięki indywidualnie dobranym preparatom."
 ---
 
 ## Czym jest mezoterapia?

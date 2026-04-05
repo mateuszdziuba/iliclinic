@@ -6,8 +6,8 @@ duration: "60 minut"
 category: "Pielęgnacja Twarzy"
 featured: false
 seo:
-  metaTitle: "Oczyszczanie wodorowe AquaSure H2 | Iliclinic"
-  metaDescription: "Głębokie oczyszczanie skóry technologią wodorową. Redukcja porów, nawilżenie i rozświetlenie."
+  metaTitle: "Oczyszczanie wodorowe AquaSure H2 | ili Clinic"
+  metaDescription: "Oczyszczanie wodorowe w ili Clinic pomaga oczyścić pory, odświeżyć skórę, poprawić nawilżenie i przywrócić jej blask."
 ---
 
 ## Technologia AquaSure H2

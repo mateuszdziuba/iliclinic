@@ -10,9 +10,8 @@ duration: 60 minut
 featured: true
 image: /images/Problemy-skory-glowy-i-wlosow2-300x300.png
 seo:
-  metaTitle: Dermapen 4.0 - Mikronakłuwanie skóry | Iliclinic
-  metaDescription: Dermapen 4.0 - profesjonalne mikronakłuwanie dla redukcji
-    blizn, zmarszczek i rozstępów. Naturalna regeneracja skóry.
+  metaTitle: "Dermapen 4.0 i mikronakłuwanie skóry | ili Clinic"
+  metaDescription: "Dermapen 4.0 w ili Clinic wspiera redukcję blizn, zmarszczek, porów i rozstępów oraz poprawia napięcie i strukturę skóry."
 ---
 ## Czym jest Dermapen 4.0?
 

@@ -10,9 +10,8 @@ duration: 45-60 minut
 featured: false
 image: /images/IMG_5017-edited-scaled.jpg
 seo:
-  metaTitle: Termolifting Xlase - Lifting laserowy | Iliclinic
-  metaDescription: Niechirurgiczny lifting twarzy i ciała. Napięcie skóry bez
-    rekonwalescencji dzięki technologii Xlase.
+  metaTitle: "Termolifting Xlase | ili Clinic"
+  metaDescription: "Termolifting Xlase w ili Clinic to nieinwazyjny lifting skóry wspierający napięcie, wygładzenie i poprawę konturu bez rekonwalescencji."
 ---
 ## Czym jest Termolifting Xlase?
 

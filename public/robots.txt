@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iliclinic.pl/sitemap.xml
+Sitemap: https://iliclinic.pl/sitemap-index.xml

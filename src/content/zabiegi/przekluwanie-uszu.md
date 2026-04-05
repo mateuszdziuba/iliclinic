@@ -10,9 +10,8 @@ duration: 15 minut
 featured: false
 image: /images/efcccdfb0fe88e85c148250ceb022c12.jpg
 seo:
-  metaTitle: Przekłuwanie uszu Blomdahl | Iliclinic
-  metaDescription: Medyczne przekłuwanie uszu systemem Blomdahl. Bezpieczne dla
-    alergików, sterylne kolczyki.
+  metaTitle: "Przekłuwanie uszu Blomdahl | ili Clinic"
+  metaDescription: "Medyczne przekłuwanie uszu systemem Blomdahl w ili Clinic. Bezpieczna procedura dla dzieci i dorosłych z biżuterią hipoalergiczną."
 ---
 ## System Blomdahl
 

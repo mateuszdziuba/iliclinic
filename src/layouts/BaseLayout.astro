@@ -19,7 +19,7 @@ interface Props {
 
 const {
   title,
-  description = 'Ili Clinic — gabinet medycyny estetycznej w Pruszkowie i Ostrołęce. Botoks, kwas hialuronowy, depilacja laserowa, dermapen i więcej.',
+  description = 'ili Clinic — gabinety medycyny estetycznej w Pruszkowie i Ostrołęce. Botoks, kwas hialuronowy, depilacja laserowa, dermapen i więcej.',
   location,
   canonical,
   hideHeader = false,
@@ -31,8 +31,35 @@ const {
 const currentPath = Astro.url.pathname;
 const siteUrl = 'https://iliclinic.pl';
 const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
-const fullTitle = `${title} | Ili Clinic`;
+const fullTitle = /ili clinic/i.test(title) ? title : `${title} | ili Clinic`;
 const locationData = location ? locationsData[location] : null;
+const baseSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    "name": "ili Clinic",
+    "url": siteUrl,
+    "email": "kontakt@iliclinic.pl",
+    "telephone": "+48 660 176 464",
+    "sameAs": [
+      "https://www.facebook.com/ili.clinic",
+      "https://www.instagram.com/patricia.kosmetolog/"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    "name": "ili Clinic",
+    "url": siteUrl,
+    "inLanguage": "pl-PL",
+    "publisher": {
+      "@id": `${siteUrl}/#organization`
+    }
+  }
+];
+const pageSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 ---
 
 <!DOCTYPE html>
@@ -47,17 +74,19 @@ const locationData = location ? locationsData[location] : null;
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pl_PL" />
-  <meta property="og:site_name" content="Ili Clinic" />
+  <meta property="og:site_name" content="ili Clinic" />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:title" content={fullTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+  <meta property="og:image:alt" content={fullTitle} />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+  <meta name="twitter:image:alt" content={fullTitle} />
 
   <!-- Geo meta (local SEO) -->
   {locationData && (
@@ -73,9 +102,7 @@ const locationData = location ? locationsData[location] : null;
   <meta name="robots" content="index, follow" />
 
   <!-- JSON-LD Structured Data -->
-  {jsonLd && (
-    <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(jsonLd) ? jsonLd : [jsonLd])} />
-  )}
+  <script type="application/ld+json" set:html={JSON.stringify([...baseSchemas, ...pageSchemas])} />
 
   <!-- Cinematic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />

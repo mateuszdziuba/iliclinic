@@ -1,6 +1,19 @@
 {
   "pruszkow": {
     "name": "Pruszków",
+    "salonName": "ili Clinic Studio",
+    "seo": {
+      "homeTitle": "Medycyna estetyczna Pruszków | ili Clinic Studio",
+      "homeDescription": "ili Clinic Studio w Pruszkowie oferuje medycynę estetyczną, kosmetologię, depilację laserową i trychologię. Umów konsultację lub wizytę.",
+      "treatmentsTitle": "Zabiegi medycyny estetycznej Pruszków | ili Clinic Studio",
+      "treatmentsDescription": "Poznaj zabiegi ili Clinic Studio w Pruszkowie: botoks, kwas hialuronowy, mezoterapia, dermapen, depilacja laserowa, RF mikroigłowa i więcej.",
+      "contactTitle": "Kontakt i dojazd Pruszków | ili Clinic Studio",
+      "contactDescription": "Dane kontaktowe ili Clinic Studio w Pruszkowie: adres, telefon, godziny otwarcia, mapa dojazdu i szybka rezerwacja wizyty.",
+      "aboutTitle": "O nas | ili Clinic Studio Pruszków",
+      "aboutDescription": "Poznaj ili Clinic Studio w Pruszkowie, zespół specjalistów i podejście do medycyny estetycznej oparte na konsultacji, bezpieczeństwie i naturalnym efekcie.",
+      "pricingTitle": "Cennik zabiegów Pruszków | ili Clinic Studio",
+      "pricingDescription": "Aktualny cennik zabiegów ili Clinic Studio w Pruszkowie. Ceny usług pobierane na bieżąco z Booksy podczas wejścia na stronę."
+    },
     "locative": "Pruszkowie",
     "geo": { "lat": 52.1653, "lng": 20.7982 },
     "slug": "pruszkow",
@@ -11,7 +24,7 @@
     },
     "phone": "+48 660 176 464",
     "email": "kontakt@iliclinic.pl",
-    "googleMapsUrl": "https://maps.google.com/?q=Ili+Clinic+Pruszków",
+    "googleMapsUrl": "https://maps.google.com/?q=ili+Clinic+Studio+Pruszków",
     "openingHours": {
       "weekdays": "10:00 - 20:00",
       "saturday": "Po wcześniejszym umówieniu",
@@ -25,6 +38,19 @@
   },
   "ostroleka": {
     "name": "Ostrołęka",
+    "salonName": "ili Clinic",
+    "seo": {
+      "homeTitle": "Medycyna estetyczna Ostrołęka | ili Clinic",
+      "homeDescription": "ili Clinic w Ostrołęce oferuje medycynę estetyczną, kosmetologię i konsultacje dopasowane do potrzeb skóry. Poznaj ofertę i umów wizytę.",
+      "treatmentsTitle": "Zabiegi medycyny estetycznej Ostrołęka | ili Clinic",
+      "treatmentsDescription": "Sprawdź zabiegi ili Clinic w Ostrołęce: medycyna estetyczna, pielęgnacja twarzy, mezoterapia, modelowanie i terapie wspierające kondycję skóry.",
+      "contactTitle": "Kontakt i dojazd Ostrołęka | ili Clinic",
+      "contactDescription": "Skontaktuj się z ili Clinic w Ostrołęce. Zobacz adres, numer telefonu, godziny otwarcia i informacje potrzebne do umówienia wizyty.",
+      "aboutTitle": "O nas | ili Clinic Ostrołęka",
+      "aboutDescription": "Poznaj ili Clinic w Ostrołęce, naszą filozofię pracy, doświadczenie zespołu i podejście do zabiegów z naciskiem na bezpieczeństwo i naturalność.",
+      "pricingTitle": "Cennik zabiegów | ili Clinic Ostrołęka",
+      "pricingDescription": "Cennik zabiegów ili Clinic w Ostrołęce. Skontaktuj się z gabinetem, aby uzyskać aktualne informacje o usługach i dostępnych terminach."
+    },
     "locative": "Ostrołęce",
     "geo": { "lat": 53.0857, "lng": 21.5743 },
     "slug": "ostroleka",
@@ -35,7 +61,7 @@
     },
     "phone": "+48 574 960 620",
     "email": "kontakt@iliclinic.pl",
-    "googleMapsUrl": "https://maps.google.com/?q=Ili+Clinic+Ostrołęka",
+    "googleMapsUrl": "https://maps.google.com/?q=ili+Clinic+Ostrołęka",
     "openingHours": {
       "weekdays": "10:00 - 20:00",
       "saturday": "Po wcześniejszym umówieniu",

@@ -10,9 +10,8 @@ duration: 45-60 minut
 featured: true
 image: /images/kwas_hialuronowy.jpg
 seo:
-  metaTitle: Kwas hialuronowy - Wypełnianie zmarszczek | Iliclinic
-  metaDescription: Zabiegi z kwasem hialuronowym - powiększanie ust, modelowanie
-    twarzy, wypełnianie bruzd nosowo-wargowych.
+  metaTitle: "Kwas hialuronowy i modelowanie ust | ili Clinic"
+  metaDescription: "Kwas hialuronowy w ili Clinic: modelowanie ust, poprawa objętości, wygładzenie bruzd i harmonizacja rysów twarzy."
 ---
 ## Czym jest kwas hialuronowy?
 

@@ -12,6 +12,8 @@ export async function getStaticPaths() {
 
 const { location } = Astro.params;
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const locationSeo = (locationData as any).seo ?? {};
 const secondaryImage = {
   pruszkow: '/images/IMG_7809.jpg',
   ostroleka: '/images/hero-clinic.jpg',
@@ -40,9 +42,9 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   "@id": `${siteUrl}/${location}/#business`,
-  "name": `Ili Clinic ${locationData.name}`,
-  "alternateName": "Ili Clinic",
-  "description": `Ili Clinic w ${(locationData as any).locative} to gabinet medycyny estetycznej oferujący zabiegi botoksem, kwasem hialuronowym, depilacją laserową, dermapenem, falą radiową mikroigłową i trychologią.`,
+  "name": salonName,
+  "alternateName": "ili Clinic",
+  "description": `${salonName} w ${(locationData as any).locative} to gabinet medycyny estetycznej oferujący zabiegi botoksem, kwasem hialuronowym, depilacją laserową, dermapenem, falą radiową mikroigłową i trychologią.`,
   "url": `${siteUrl}/${location}`,
   "telephone": locationData.phone,
   "email": locationData.email,
@@ -68,6 +70,12 @@ const localBusinessSchema = {
   ],
   "priceRange": "$$",
   "image": `${siteUrl}/images/hero-clinic.jpg`,
+  "hasMap": locationData.googleMapsUrl,
+  "areaServed": {
+    "@type": "City",
+    "name": locationData.address.city
+  },
+  "keywords": "medycyna estetyczna, kosmetologia, depilacja laserowa, botoks, kwas hialuronowy, mezoterapia, trychologia",
   "sameAs": [
     locationData.social.facebook,
     locationData.social.instagram,
@@ -77,8 +85,8 @@ const localBusinessSchema = {
 ---
 
 <BaseLayout
-  title={`Ili Clinic ${locationData.name} — Medycyna Estetyczna`}
-  description={`Ili Clinic w ${(locationData as any).locative} — medycyna estetyczna, pielęgnacja twarzy i ciała. Botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF i więcej. Umów wizytę.`}
+  title={locationSeo.homeTitle ?? `${salonName} — Medycyna Estetyczna`}
+  description={locationSeo.homeDescription ?? `${salonName} w ${(locationData as any).locative} — medycyna estetyczna, pielęgnacja twarzy i ciała. Botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF i więcej. Umów wizytę.`}
   location={location as 'pruszkow' | 'ostroleka'}
   jsonLd={localBusinessSchema}
 >
@@ -89,7 +97,7 @@ const localBusinessSchema = {
       <div class="relative w-full h-[90vh] overflow-hidden rounded-[40px] md:rounded-[60px] shadow-2xl">
         <img
           src={heroImage[location as keyof typeof heroImage]}
-          alt={`Ili Clinic ${locationData.name}`}
+          alt={salonName}
           class="w-full h-full object-cover"
           loading="eager"
         />
@@ -99,7 +107,7 @@ const localBusinessSchema = {
         <div class="absolute inset-0 flex items-end pb-8 sm:pb-12 lg:pb-16 px-8 sm:px-10 md:px-16 lg:px-24">
           <div class="max-w-xl lg:max-w-2xl" data-hero-content>
             <span class="text-accent font-body tracking-[0.4em] uppercase text-[10px] mb-4 sm:mb-6 block font-medium">
-              Ekspercka Medycyna Estetyczna · {locationData.name}
+              Ekspercka Medycyna Estetyczna · {salonName}
             </span>
             <h1 class="text-white text-3xl sm:text-4xl md:text-5xl lg:text-7xl leading-[1.05] mb-4 sm:mb-6 font-heading font-light">
               Pielęgnujemy Twoje Naturalne Piękno
@@ -142,7 +150,7 @@ const localBusinessSchema = {
           <div class="relative z-10 overflow-hidden aspect-square rounded-full border-[12px] border-white shadow-[0_40px_80px_rgba(0,0,0,0.08)] group">
             <img
               src={secondaryImage[location as keyof typeof secondaryImage]}
-              alt="Gabinet Ili Clinic"
+              alt="Gabinet ili Clinic"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
           </div>

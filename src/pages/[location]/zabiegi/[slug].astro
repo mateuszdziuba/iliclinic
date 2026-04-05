@@ -21,6 +21,9 @@ export async function getStaticPaths() {
 
 const { treatment, location } = Astro.props;
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const metaTitle = treatment.data.seo?.metaTitle ?? `${treatment.data.title} ${locationData.name} | ${salonName}`;
+const metaDescription = treatment.data.seo?.metaDescription ?? `${treatment.data.title} w ${salonName}. ${treatment.data.description} Umów wizytę i skorzystaj z bezpłatnej konsultacji.`;
 
 const { Content } = await render(treatment);
 
@@ -48,7 +51,7 @@ const treatmentSchema = [
     "howPerformed": treatment.data.description,
     "performer": {
       "@type": "HealthAndBeautyBusiness",
-      "name": `Ili Clinic ${locationData.name}`,
+      "name": salonName,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": locationData.address.street,
@@ -73,8 +76,8 @@ const treatmentSchema = [
 ---
 
 <BaseLayout
-  title={`${treatment.data.title} — ${locationData.name} | Ili Clinic`}
-  description={`${treatment.data.title} w Ili Clinic ${locationData.name}. ${treatment.data.description} Umów wizytę — bezpłatna konsultacja.`}
+  title={metaTitle}
+  description={metaDescription}
   location={location as 'pruszkow' | 'ostroleka'}
   jsonLd={treatmentSchema}
 >
@@ -146,7 +149,7 @@ const treatmentSchema = [
             <!-- Floating location tag -->
             <div class="absolute bottom-6 left-6 z-20 bg-surface/90 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/10">
               <span class="font-body text-[9px] uppercase tracking-[0.2em] text-text-muted">
-                Ili Clinic · {locationData.name}
+                {salonName}
               </span>
             </div>
           </div>
@@ -187,7 +190,7 @@ const treatmentSchema = [
             <div class="absolute inset-0 bg-primary/20 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-[32px]"></div>
             <h3 class="font-heading text-xl sm:text-2xl text-surface mb-2 sm:mb-3 relative z-10 leading-tight font-light">Gotowa na<br />metamorfozę?</h3>
             <p class="font-body text-surface/50 text-xs sm:text-sm mb-4 sm:mb-7 relative z-10 font-light">
-              Bezpłatna konsultacja w {locationData.name}.
+              Bezpłatna konsultacja w {salonName}.
             </p>
             <div class="space-y-2 sm:space-y-2.5 relative z-10">
               <a

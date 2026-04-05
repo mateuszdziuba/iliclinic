@@ -10,13 +10,12 @@ duration: 60 minut
 featured: true
 image: /images/Projekt-bez-nazwy1-300x300.jpg
 seo:
-  metaTitle: Królewski Lift MedEstelle - Masaż liftingujący | Iliclinic
-  metaDescription: Autorski zabieg łączący manualny masaż liftingujący z
-    profesjonalnymi kosmetykami MedEstelle. Relaksacja i odmłodzenie.
+  metaTitle: "Królewski Lift MedEstelle | ili Clinic"
+  metaDescription: "Królewski Lift MedEstelle w ili Clinic to liftingujący rytuał dla twarzy łączący manualne techniki i zaawansowaną pielęgnację skóry."
 ---
 ## Czym jest Królewski Lift MedEstelle?
 
-Królewski Lift to autorski masaż twarzy Ili Clinic, łączący tradycyjne techniki Dalekiego Wschodu — w tym refleksologię — z nowoczesnym podejściem do anti-agingu. Terapeuta pracuje nad mięśniami powierzchniowymi i głębokimi twarzy, szyi oraz dekoltu, stosując precyzyjne sekwencje ruchów o działaniu liftingującym, stymulującym i relaksującym. Zabieg dostępny w wariancie **liftingująco-stymulującym** lub **liftingująco-relaksującym**.
+Królewski Lift to autorski masaż twarzy ili Clinic, łączący tradycyjne techniki Dalekiego Wschodu — w tym refleksologię — z nowoczesnym podejściem do anti-agingu. Terapeuta pracuje nad mięśniami powierzchniowymi i głębokimi twarzy, szyi oraz dekoltu, stosując precyzyjne sekwencje ruchów o działaniu liftingującym, stymulującym i relaksującym. Zabieg dostępny w wariancie **liftingująco-stymulującym** lub **liftingująco-relaksującym**.
 
 ## Efekty zabiegu
 

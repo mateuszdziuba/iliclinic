@@ -7,7 +7,10 @@ if (!page) return Astro.redirect('/');
 const { Content } = await render(page);
 ---
 
-<BaseLayout title={page.data.title} description={page.data.description}>
+<BaseLayout
+  title={page.data.seo?.metaTitle ?? page.data.title}
+  description={page.data.seo?.metaDescription ?? page.data.description}
+>
 
   <!-- Hero -->
   <div class="pt-44 pb-16 bg-surface border-b border-primary/10">

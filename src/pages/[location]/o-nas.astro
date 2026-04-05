@@ -11,11 +11,13 @@ export function getStaticPaths() {
 
 const { location } = Astro.params;
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const locationSeo = (locationData as any).seo ?? {};
 ---
 
 <BaseLayout
-  title={`O nas - Ili Clinic ${locationData.name}`}
-  description={`Poznaj gabinet Ili Clinic w ${locationData.name}. Zespół doświadczonych specjalistów medycyny estetycznej.`}
+  title={locationSeo.aboutTitle ?? `O nas - ${salonName}`}
+  description={locationSeo.aboutDescription ?? `Poznaj gabinet ${salonName} w ${locationData.name}. Zespół doświadczonych specjalistów medycyny estetycznej.`}
   location={location as 'pruszkow' | 'ostroleka'}
 >
 
@@ -31,7 +33,7 @@ const locationData = locations[location as keyof typeof locations];
             Klinika<br /><em class="not-italic text-primary">Zdrowej</em><br />Skóry
           </h1>
           <p class="font-body text-text-muted text-lg leading-relaxed max-w-sm mb-14 font-light">
-            Ili Clinic to miejsce, gdzie pasja do kosmetologii spotyka się z wiedzą medyczną.
+            ili Clinic to miejsce, gdzie pasja do kosmetologii spotyka się z wiedzą medyczną.
             Holistyczne podejście, naturalne efekty.
           </p>
           <div class="flex items-center gap-10">
@@ -52,7 +54,7 @@ const locationData = locations[location as keyof typeof locations];
           <div class="relative aspect-[4/5] overflow-hidden rounded-[40px] md:rounded-[60px] shadow-2xl group">
             <img
               src="/images/oferta.png"
-              alt="Wnętrze gabinetu Ili Clinic"
+              alt="Wnętrze gabinetu ili Clinic"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               loading="eager"
             />
@@ -61,7 +63,7 @@ const locationData = locations[location as keyof typeof locations];
           <!-- Floating tag -->
           <div class="absolute -bottom-5 left-8 bg-surface border border-primary/10 rounded-2xl px-7 py-4 shadow-lg">
             <div class="font-body text-[9px] uppercase tracking-[0.3em] text-text-muted mb-1">Nasza klinika</div>
-            <div class="font-heading text-xl text-text-main">{locationData.name}</div>
+            <div class="font-heading text-xl text-text-main">{salonName}</div>
           </div>
         </div>
 
@@ -92,7 +94,7 @@ const locationData = locations[location as keyof typeof locations];
 
           <div class="space-y-4 text-white/70 font-light leading-relaxed font-body text-sm">
             <p>
-              Założycielka Ili Clinic jest wykształconym <span class="text-white font-medium">kosmetologiem oraz
+              Założycielka ili Clinic jest wykształconym <span class="text-white font-medium">kosmetologiem oraz
               pielęgniarką</span>, co pozwala jej na holistyczne podejście do zdrowia skóry. Pierwsze kroki
               stawiała w renomowanych gabinetach i klinikach w Warszawie i okolicach.
             </p>
@@ -120,7 +122,7 @@ const locationData = locations[location as keyof typeof locations];
           <div class="aspect-[3/4] overflow-hidden rounded-[40px] md:rounded-[60px] shadow-2xl group">
             <img
               src="/images/Ili-3.jpg"
-              alt="Założycielka Ili Clinic"
+              alt="Założycielka ili Clinic"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               loading="lazy"
             />
@@ -141,7 +143,7 @@ const locationData = locations[location as keyof typeof locations];
           <div class="aspect-[4/3] overflow-hidden rounded-[40px] shadow-xl group">
             <img
               src="/images/pruszkow-1.jpeg"
-              alt="Gabinet zabiegowy Ili Clinic"
+              alt="Gabinet zabiegowy ili Clinic"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               loading="lazy"
             />

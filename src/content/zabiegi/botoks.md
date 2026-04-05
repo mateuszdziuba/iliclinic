@@ -10,15 +10,14 @@ duration: 30 minut
 featured: true
 image: /images/zdjecie_zabiegu_16_1.jpg
 seo:
-  metaTitle: Botoks - Zabieg usuwania zmarszczek | Iliclinic
-  metaDescription: Profesjonalne zabiegi z użyciem toksyny botulinowej. Redukcja
-    zmarszczek mimicznych, lifting brwi, leczenie bruksizmu.
+  metaTitle: "Botoks i toksyna botulinowa | ili Clinic"
+  metaDescription: "Botoks w ili Clinic: redukcja zmarszczek mimicznych, lifting brwi, leczenie bruksizmu i nadpotliwości po kwalifikacji zabiegowej."
 ---
 ## Czym jest zabieg botoksem?
 
 Toksyna botulinowa (popularnie nazywana botoksem) to jeden z najpopularniejszych zabiegów medycyny estetycznej na świecie. Preparat wstrzykiwany jest punktowo w mięśnie mimiczne, powodując ich czasowe rozluźnienie i wygładzenie zmarszczek.
 
-W Ili Clinic stawiamy na naturalne efekty - Twoja twarz zachowa pełną mimikę, a zmarszczki zostaną delikatnie wygładzone.
+W ili Clinic stawiamy na naturalne efekty - Twoja twarz zachowa pełną mimikę, a zmarszczki zostaną delikatnie wygładzone.
 
 ## Wskazania do zabiegu
 

@@ -11,10 +11,12 @@ export function getStaticPaths() {
 
 const { location } = Astro.params;
 const locationData = locations[location as keyof typeof locations];
+const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
+const locationSeo = (locationData as any).seo ?? {};
 const otherLocation = location === 'pruszkow' ? 'ostroleka' : 'pruszkow';
 const otherLocationData = locations[otherLocation as keyof typeof locations];
 
-const mapsQuery = encodeURIComponent(`Ili Clinic ${locationData.address.street} ${locationData.address.city}`);
+const mapsQuery = encodeURIComponent(`${salonName} ${locationData.address.street} ${locationData.address.city}`);
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&hl=pl`;
 
 const siteUrl = 'https://iliclinic.pl';
@@ -22,7 +24,8 @@ const contactSchema = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
   "@id": `${siteUrl}/${location}/#business`,
-  "name": `Ili Clinic ${locationData.name}`,
+  "name": salonName,
+  "description": `${salonName} w ${(locationData as any).locative}. Kontakt, mapa dojazdu, godziny otwarcia i dane rejestracji wizyt.`,
   "url": `${siteUrl}/${location}`,
   "telephone": locationData.phone,
   "email": locationData.email,
@@ -46,6 +49,16 @@ const contactSchema = {
       "closes": "20:00"
     }
   ],
+  "hasMap": locationData.googleMapsUrl,
+  "areaServed": {
+    "@type": "City",
+    "name": locationData.address.city
+  },
+  "sameAs": [
+    locationData.social.facebook,
+    locationData.social.instagram,
+    ...(location === 'pruszkow' ? [(locationData as any).booksy] : [])
+  ].filter(Boolean),
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": locationData.phone,
@@ -56,8 +69,8 @@ const contactSchema = {
 ---
 
 <BaseLayout
-  title={`Kontakt — Gabinet w ${(locationData as any).locative} | Ili Clinic`}
-  description={`Skontaktuj się z Ili Clinic w ${locationData.name}. Telefon: ${locationData.phone}. Adres: ${locationData.address.street}, ${locationData.address.city}. Godziny otwarcia: ${locationData.openingHours.weekdays}.`}
+  title={locationSeo.contactTitle ?? `Kontakt — Gabinet w ${(locationData as any).locative} | ${salonName}`}
+  description={locationSeo.contactDescription ?? `Skontaktuj się z ${salonName} w ${locationData.name}. Telefon: ${locationData.phone}. Adres: ${locationData.address.street}, ${locationData.address.city}. Godziny otwarcia: ${locationData.openingHours.weekdays}.`}
   location={location as 'pruszkow' | 'ostroleka'}
   jsonLd={contactSchema}
 >
@@ -177,7 +190,7 @@ const contactSchema = {
           <!-- Other location -->
           <div class="mt-8 p-8 border border-primary/10 rounded-3xl bg-surface-dim" data-scroll-fade>
             <p class="font-body text-[9px] uppercase tracking-[0.3em] text-text-muted mb-4">Drugi gabinet</p>
-            <h3 class="font-heading text-2xl text-text-main font-light mb-2">Ili Clinic {otherLocationData.name}</h3>
+            <h3 class="font-heading text-2xl text-text-main font-light mb-2">{(otherLocationData as any).salonName || `ili Clinic ${otherLocationData.name}`}</h3>
             <p class="font-body text-text-muted text-sm mb-6">
               {otherLocationData.address.street}, {otherLocationData.address.postalCode} {otherLocationData.address.city}
             </p>
@@ -205,7 +218,7 @@ const contactSchema = {
               allowfullscreen
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              title={`Mapa - Ili Clinic ${locationData.name}`}
+              title={`Mapa - ${salonName}`}
             ></iframe>
           </div>
 
