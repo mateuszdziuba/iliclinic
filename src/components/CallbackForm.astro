@@ -1,0 +1,206 @@
+---
+interface Props {
+  location: 'pruszkow' | 'ostroleka';
+  locationName: string;
+  title?: string;
+  description?: string;
+  tone?: 'surface' | 'primary';
+}
+
+const {
+  location,
+  locationName,
+  title = 'Zostaw numer, oddzwonimy',
+  description = 'Jeśli wolisz szybki telefon zamiast długiego formularza, zostaw kontakt. Oddzwonimy i pomożemy przejść do kolejnego kroku.',
+  tone = 'surface',
+} = Astro.props;
+
+const isPrimary = tone === 'primary';
+---
+
+<div class:list={[
+  'rounded-[32px] border p-8 lg:p-10',
+  isPrimary ? 'border-white/10 bg-primary text-white' : 'border-primary/10 bg-surface-dim text-text-main',
+]}>
+  <div class:list={[
+    'flex flex-col gap-2 border-b pb-6',
+    isPrimary ? 'border-white/10' : 'border-primary/10',
+  ]}>
+    <p class:list={[
+      'font-body text-[9px] uppercase tracking-[0.3em]',
+      isPrimary ? 'text-white/55' : 'text-primary',
+    ]}>Kontakt telefoniczny</p>
+    <h3 class="font-heading text-3xl font-light">{title}</h3>
+    <p class:list={[
+      'font-body text-sm leading-relaxed font-light',
+      isPrimary ? 'text-white/68' : 'text-text-muted',
+    ]}>
+      {description}
+    </p>
+  </div>
+
+  <form class="mt-8 space-y-4" data-callback-form>
+    <input type="hidden" name="location" value={location} />
+    <input type="hidden" name="locationName" value={locationName} />
+    <input type="hidden" name="inquiryType" value="callback" />
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      <label class="block">
+        <span class:list={[
+          'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
+          isPrimary ? 'text-white/55' : 'text-text-muted',
+        ]}>Imię</span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          required
+          class:list={[
+            'w-full rounded-2xl border px-4 py-3 font-body text-sm outline-none transition-colors',
+            isPrimary
+              ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
+              : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+          ]}
+          placeholder="Jak mamy się do Ciebie zwracać?"
+        />
+      </label>
+
+      <label class="block">
+        <span class:list={[
+          'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
+          isPrimary ? 'text-white/55' : 'text-text-muted',
+        ]}>Telefon</span>
+        <input
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          required
+          class:list={[
+            'w-full rounded-2xl border px-4 py-3 font-body text-sm outline-none transition-colors',
+            isPrimary
+              ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
+              : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+          ]}
+          placeholder="+48 000 000 000"
+        />
+      </label>
+    </div>
+
+    <label class="block">
+      <span class:list={[
+        'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
+        isPrimary ? 'text-white/55' : 'text-text-muted',
+      ]}>Najlepsza pora na telefon</span>
+      <textarea
+        name="message"
+        rows="3"
+        class:list={[
+          'w-full rounded-[24px] border px-4 py-3 font-body text-sm leading-relaxed outline-none transition-colors',
+          isPrimary
+            ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
+            : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+        ]}
+        placeholder="Opcjonalnie: np. dziś po 16:00."
+      ></textarea>
+    </label>
+
+    <button
+      type="submit"
+      class:list={[
+        'inline-flex items-center justify-center rounded-full px-6 py-3 font-body text-[10px] uppercase tracking-[0.22em] transition-colors',
+        isPrimary
+          ? 'bg-white text-black hover:bg-white/88'
+          : 'bg-primary text-surface hover:brightness-110',
+      ]}
+      data-callback-submit
+    >
+      Zostaw numer
+    </button>
+
+    <p class:list={[
+      'min-h-[1.5rem] font-body text-sm',
+      isPrimary ? 'text-white/68' : 'text-text-muted',
+    ]} data-callback-status aria-live="polite"></p>
+  </form>
+</div>
+
+<script is:inline>
+  function initCallbackForms() {
+    document.querySelectorAll('[data-callback-form]').forEach((formElement) => {
+      const form = formElement;
+      const status = form.querySelector('[data-callback-status]');
+      const submit = form.querySelector('[data-callback-submit]');
+
+      if (!status || !submit || form.dataset.callbackBound === 'true') return;
+      form.dataset.callbackBound = 'true';
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const payload = {
+          location: String(formData.get('location') || ''),
+          locationName: String(formData.get('locationName') || ''),
+          name: String(formData.get('name') || '').trim(),
+          phone: String(formData.get('phone') || '').trim(),
+          email: '',
+          message: String(formData.get('message') || '').trim(),
+          callbackRequested: true,
+          inquiryType: 'callback',
+          pageUrl: window.location.href,
+        };
+
+        submit.disabled = true;
+        status.textContent = 'Przygotowujemy zgłoszenie oddzwonienia...';
+
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json().catch(() => null);
+
+          if (response.ok) {
+            form.reset();
+            status.textContent = 'Numer został zapisany. Skontaktujemy się możliwie szybko.';
+            return;
+          }
+
+          if (result?.code === 'delivery_not_configured') {
+            const subject = encodeURIComponent(`Prośba o kontakt telefoniczny (${payload.locationName})`);
+            const body = encodeURIComponent(
+              [
+                `Lokalizacja: ${payload.locationName}`,
+                'Typ zgłoszenia: prośba o oddzwonienie',
+                `Imię i nazwisko: ${payload.name}`,
+                `Telefon: ${payload.phone}`,
+                '',
+                'Dodatkowe informacje:',
+                payload.message || 'brak',
+                '',
+                `Źródło: ${payload.pageUrl}`,
+              ].join('\n')
+            );
+
+            window.location.href = `mailto:kontakt@iliclinic.pl?subject=${subject}&body=${body}`;
+            status.textContent = 'Otworzyliśmy gotową wiadomość e-mail do wysłania.';
+            return;
+          }
+
+          status.textContent = result?.error || 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie.';
+        } catch {
+          status.textContent = 'Wystąpił problem z wysyłką. Spróbuj ponownie.';
+        } finally {
+          submit.disabled = false;
+        }
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCallbackForms);
+  initCallbackForms();
+</script>

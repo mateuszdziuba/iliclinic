@@ -4,6 +4,7 @@ import locations from '../../data/locations.json';
 import { getCollection } from 'astro:content';
 import BooksyIcon from '../../components/BooksyIcon.astro';
 import CmsImage from '../../components/CmsImage.astro';
+import CallbackForm from '../../components/CallbackForm.astro';
 
 export async function getStaticPaths() {
   return [
@@ -399,6 +400,17 @@ const localBusinessSchema = {
       </div>
     </section>
   )}
+
+  <section class="py-24 bg-surface border-t border-primary/5">
+    <div class="max-w-5xl mx-auto px-6" data-scroll-fade>
+      <CallbackForm
+        location={location as 'pruszkow' | 'ostroleka'}
+        locationName={locationData.name}
+        title="Wolisz szybki telefon?"
+        description="Zostaw numer, a oddzwonimy i pomożemy dobrać konsultację albo zabieg bez przechodzenia przez pełny formularz kontaktowy."
+      />
+    </div>
+  </section>
 
   <!-- ─── PARTNER BRANDS ────────────────────────────────────── -->
   {brands.length > 0 && (

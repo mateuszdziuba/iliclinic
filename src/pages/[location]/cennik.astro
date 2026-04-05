@@ -20,6 +20,7 @@ const booksyUrl = (locationData as any).booksy as string;
 interface ServiceVariant {
   duration?: number;
   price?: number | null;
+  label?: string;
 }
 interface BooksyService {
   name: string;
@@ -29,8 +30,17 @@ interface BooksyCategory {
   name: string;
   services: BooksyService[];
 }
+interface PricingRow {
+  name: string;
+  duration?: number;
+  price?: number | null;
+}
+interface PricingCategory {
+  name: string;
+  services: PricingRow[];
+}
 
-let categories: BooksyCategory[] = [];
+let categories: PricingCategory[] = [];
 try {
   const res = await fetch('https://pl.booksy.com/api/pl/2/customer_api/businesses/113463', {
     headers: { 'X-Api-Key': 'widget-efab2853-7166-492f-b78f-925d33698cd4' },
@@ -38,7 +48,31 @@ try {
   });
   if (res.ok) {
     const data = await res.json();
-    categories = data?.business?.service_categories ?? [];
+    categories = (data?.business?.service_categories ?? [])
+      .map((category: BooksyCategory) => ({
+        name: category.name,
+        services: (category.services ?? []).flatMap((service) => {
+          const variants = service.variants ?? [];
+
+          if (variants.length <= 1) {
+            const variant = variants[0];
+            return [{
+              name: service.name,
+              duration: variant?.duration,
+              price: variant?.price ?? null,
+            }];
+          }
+
+          return variants.map((variant) => ({
+            name: variant.label?.trim()
+              ? `${service.name} — ${variant.label.trim()}`
+              : service.name,
+            duration: variant.duration,
+            price: variant.price ?? null,
+          }));
+        }),
+      }))
+      .filter((category: PricingCategory) => category.services.length > 0);
   } else {
     console.warn('[cennik] Booksy returned', res.status);
   }
@@ -143,9 +177,8 @@ function pluralServices(n: number) {
                 <span class="category-count">{pluralServices(cat.services.length)}</span>
                 <div class="services-table">
                   {cat.services.map(s => {
-                    const v = s.variants?.[0];
-                    const duration = v?.duration ? `${v.duration} min` : '';
-                    const price = v?.price;
+                    const duration = s.duration ? `${s.duration} min` : '';
+                    const price = s.price;
                     return (
                       <div class="service-row">
                         <span class="service-name">{s.name}</span>

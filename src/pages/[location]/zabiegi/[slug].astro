@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import locations from '../../../data/locations.json';
 import { getCollection, render } from 'astro:content';
 import CmsImage from '../../../components/CmsImage.astro';
+import CallbackForm from '../../../components/CallbackForm.astro';
 
 export async function getStaticPaths() {
   const treatments = await getCollection('zabiegi');
@@ -336,6 +337,15 @@ const treatmentSchema = [
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </a>
+        </div>
+
+        <div class="lg:col-span-12" data-scroll-fade>
+          <CallbackForm
+            location={location as 'pruszkow' | 'ostroleka'}
+            locationName={locationData.name}
+            title="Chcesz, żebyśmy oddzwonili?"
+            description={`Zostaw numer, a wrócimy z krótką konsultacją dotyczącą zabiegu ${treatment.data.title}.`}
+          />
         </div>
 
       </div>
