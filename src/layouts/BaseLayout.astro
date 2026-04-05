@@ -12,6 +12,7 @@ interface Props {
   description?: string;
   location?: 'pruszkow' | 'ostroleka';
   canonical?: string;
+  robots?: string;
   hideHeader?: boolean;
   hideFooter?: boolean;
   hideCookieBanner?: boolean;
@@ -26,6 +27,7 @@ const {
   description = 'ili Clinic — gabinety medycyny estetycznej w Pruszkowie i Ostrołęce. Botoks, kwas hialuronowy, depilacja laserowa, dermapen i więcej.',
   location,
   canonical,
+  robots = 'index, follow',
   hideHeader = false,
   hideFooter = false,
   hideCookieBanner = false,
@@ -106,7 +108,7 @@ const pageSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   )}
 
   <!-- Robots -->
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content={robots} />
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify([...baseSchemas, ...pageSchemas])} />
