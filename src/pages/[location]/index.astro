@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import locations from '../../data/locations.json';
 import { getCollection } from 'astro:content';
+import CmsImage from '../../components/CmsImage.astro';
 
 export async function getStaticPaths() {
   return [
@@ -95,11 +96,14 @@ const localBusinessSchema = {
   <header class="relative min-h-screen flex items-center pt-8 px-4 md:px-6">
     <div class="container mx-auto max-w-7xl relative h-full w-full">
       <div class="relative w-full h-[90vh] overflow-hidden rounded-[40px] md:rounded-[60px] shadow-2xl">
-        <img
+        <CmsImage
           src={heroImage[location as keyof typeof heroImage]}
           alt={salonName}
           class="w-full h-full object-cover"
+          widths={[768, 1280, 1920]}
+          sizes="100vw"
           loading="eager"
+          fetchpriority="high"
         />
         <!-- gradient: primary-colored per location via CSS var -->
         <div class="absolute inset-0 hero-overlay"></div>
@@ -148,10 +152,12 @@ const localBusinessSchema = {
         <!-- Image + Stats overlay -->
         <div class="w-full lg:w-5/12 relative flex-shrink-0">
           <div class="relative z-10 overflow-hidden aspect-square rounded-full border-[12px] border-white shadow-[0_40px_80px_rgba(0,0,0,0.08)] group">
-            <img
+            <CmsImage
               src={secondaryImage[location as keyof typeof secondaryImage]}
               alt="Gabinet ili Clinic"
               class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              widths={[480, 720, 960]}
+              sizes="(min-width: 1024px) 42vw, 100vw"
             />
           </div>
 
@@ -212,10 +218,12 @@ const localBusinessSchema = {
         <!-- Step 01 -->
         <div class="group bg-white/5 backdrop-blur-sm p-8 lg:p-10 rounded-3xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500" data-scroll-fade>
           <div class="mb-10 relative overflow-hidden aspect-[4/5] rounded-2xl">
-            <img
+            <CmsImage
               src="/images/Ili-3.jpg"
               alt="Konsultacja"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <div class="absolute top-5 left-5 text-5xl font-heading text-white/25 font-light leading-none">01</div>
             <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
@@ -227,10 +235,12 @@ const localBusinessSchema = {
         <!-- Step 02 -->
         <div class="group bg-white/5 backdrop-blur-sm p-8 lg:p-10 rounded-3xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500 md:translate-y-10" data-scroll-fade>
           <div class="mb-10 relative overflow-hidden aspect-[4/5] rounded-2xl">
-            <img
+            <CmsImage
               src="/images/zdjecie_zabiegu_16_1.jpg"
               alt="Plan zabiegowy"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <div class="absolute top-5 left-5 text-5xl font-heading text-white/25 font-light leading-none">02</div>
             <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
@@ -242,10 +252,12 @@ const localBusinessSchema = {
         <!-- Step 03 -->
         <div class="group bg-white/5 backdrop-blur-sm p-8 lg:p-10 rounded-3xl border border-white/10 hover:bg-white/[0.08] transition-all duration-500 md:translate-y-20" data-scroll-fade>
           <div class="mb-10 relative overflow-hidden aspect-[4/5] rounded-2xl">
-            <img
+            <CmsImage
               src="/images/kwas_hialuronowy.jpg"
               alt="Opieka pozabiegowa"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+              widths={[320, 480, 640]}
+              sizes="(min-width: 768px) 33vw, 100vw"
             />
             <div class="absolute top-5 left-5 text-5xl font-heading text-white/25 font-light leading-none">03</div>
             <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>

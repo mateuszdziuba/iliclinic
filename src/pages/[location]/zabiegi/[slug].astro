@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import locations from '../../../data/locations.json';
 import { getCollection, render } from 'astro:content';
+import CmsImage from '../../../components/CmsImage.astro';
 
 export async function getStaticPaths() {
   const treatments = await getCollection('zabiegi');
@@ -140,11 +141,14 @@ const treatmentSchema = [
           <div class="relative h-[40vh] lg:h-[65vh] overflow-hidden rounded-[32px] lg:rounded-[48px]" data-hero-image>
             <div class="absolute inset-0 bg-gradient-to-t from-[#8B6F47]/30 via-[#8B6F47]/10 to-transparent z-10 pointer-events-none"></div>
             <div class="absolute inset-0 bg-[#C4A882]/8 mix-blend-multiply z-10 pointer-events-none"></div>
-            <img
+            <CmsImage
               src={treatment.data.image}
               alt={treatment.data.title}
               class="w-full h-full object-cover"
+              widths={[640, 960, 1280]}
+              sizes="(min-width: 1024px) 50vw, 100vw"
               loading="eager"
+              fetchpriority="high"
             />
             <!-- Floating location tag -->
             <div class="absolute bottom-6 left-6 z-20 bg-surface/90 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/10">
@@ -365,10 +369,12 @@ const treatmentSchema = [
                 <div class="flex items-center gap-6 flex-1">
                   {related.data.image && (
                     <div class="w-16 h-16 rounded-2xl overflow-hidden shrink-0 hidden sm:block">
-                      <img
+                      <CmsImage
                         src={related.data.image}
                         alt={related.data.title}
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        widths={[64, 128]}
+                        sizes="64px"
                         loading="lazy"
                       />
                     </div>

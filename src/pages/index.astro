@@ -1,10 +1,8 @@
 ---
-import { Image } from 'astro:assets';
-import { getImage } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import locations from '../data/locations.json';
 import settings from '../data/settings.json';
-import logoWhite from '../assets/logo-white.png';
 import heroClinic from '../assets/hero-clinic.jpg';
 import heroOstroleka from '../assets/IMG_7809.jpg';
 
@@ -62,13 +60,14 @@ const panelPosters = {
 
     <!-- Logo centered at top -->
     <div class="absolute top-12 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 pointer-events-none sm:top-7">
-      <Image
-        src={logoWhite}
+      <img
+        src="/images/logo-white.png"
         alt="ili Clinic"
         class="h-9 sm:h-11 w-auto drop-shadow-lg"
-        width={174}
-        height={56}
+        width="174"
+        height="56"
         loading="eager"
+        decoding="async"
       />
     </div>
 
@@ -92,10 +91,10 @@ const panelPosters = {
             class="absolute inset-0 h-full w-full object-cover transition-transform duration-[1.4s] ease-out scale-[1.06] group-hover:scale-100"
             widths={[750, 1080, 1440]}
             sizes="(min-width: 640px) 50vw, 100vw"
-            formats={['avif', 'webp']}
             quality={72}
             loading="eager"
             fetchpriority={i === 0 ? 'high' : 'auto'}
+            format="webp"
           />
 
           <!-- Hover video -->
