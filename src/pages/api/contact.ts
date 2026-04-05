@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import nodemailer from 'nodemailer';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -21,6 +22,51 @@ function jsonResponse(body: Record<string, unknown>, status = 200) {
       'Content-Type': 'application/json',
     },
   });
+}
+
+function getSmtpConfig(env: ImportMetaEnv) {
+  const host = String(env.SMTP_HOST || 'host725744.hostido.net.pl').trim();
+  const port = Number(env.SMTP_PORT || 587);
+  const user = String(env.SMTP_USER || '').trim();
+  const pass = String(env.SMTP_PASS || '').trim();
+  const from = String(env.SMTP_FROM || user).trim();
+  const to = String(env.CONTACT_TO_EMAIL || from).trim();
+
+  if (!host || !port || !user || !pass || !from || !to) {
+    return null;
+  }
+
+  return {
+    host,
+    port,
+    user,
+    pass,
+    from,
+    to,
+    secure: port === 465,
+  };
+}
+
+function buildMailSubject(payload: ContactPayload) {
+  return payload.inquiryType === 'callback'
+    ? `Prośba o kontakt telefoniczny (${payload.locationName})`
+    : `Nowa wiadomość ze strony ili Clinic (${payload.locationName})`;
+}
+
+function buildMailText(payload: ContactPayload) {
+  return [
+    `Lokalizacja: ${payload.locationName || payload.location || 'nie podano'}`,
+    `Typ zgłoszenia: ${payload.inquiryType === 'callback' ? 'prośba o oddzwonienie' : 'wiadomość kontaktowa'}`,
+    `Imię i nazwisko: ${payload.name}`,
+    `Telefon: ${payload.phone}`,
+    `E-mail: ${payload.email || 'nie podano'}`,
+    '',
+    payload.inquiryType === 'callback' ? 'Dodatkowe informacje:' : 'Wiadomość:',
+    payload.message || 'brak',
+    '',
+    `Źródło: ${payload.pageUrl || 'nie podano'}`,
+    `Wysłano: ${new Date().toISOString()}`,
+  ].join('\n');
 }
 
 function normalizePayload(input: unknown): ContactPayload | null {
@@ -64,9 +110,9 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const webhookUrl = import.meta.env.CONTACT_FORM_WEBHOOK_URL;
+  const smtp = getSmtpConfig(import.meta.env);
 
-  if (!webhookUrl) {
+  if (!smtp) {
     return jsonResponse(
       {
         ok: false,
@@ -77,24 +123,29 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const webhookResponse = await fetch(webhookUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      ...payload,
-      recipientEmail: 'kontakt@iliclinic.pl',
-      submittedAt: new Date().toISOString(),
-      source: 'website-contact-form',
-    }),
-  }).catch(() => null);
+  try {
+    const transport = nodemailer.createTransport({
+      host: smtp.host,
+      port: smtp.port,
+      secure: smtp.secure,
+      auth: {
+        user: smtp.user,
+        pass: smtp.pass,
+      },
+    });
 
-  if (!webhookResponse?.ok) {
+    await transport.sendMail({
+      from: smtp.from,
+      to: smtp.to,
+      replyTo: payload.email || undefined,
+      subject: buildMailSubject(payload),
+      text: buildMailText(payload),
+    });
+  } catch {
     return jsonResponse(
       {
         ok: false,
-        error: 'Nie udało się przekazać formularza do systemu kontaktowego.',
+        error: 'Nie udało się wysłać formularza. Spróbuj ponownie lub skontaktuj się telefonicznie.',
       },
       502
     );

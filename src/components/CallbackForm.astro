@@ -20,20 +20,20 @@ const isPrimary = tone === 'primary';
 
 <div class:list={[
   'rounded-[32px] border p-8 lg:p-10',
-  isPrimary ? 'border-white/10 bg-primary text-white' : 'border-primary/10 bg-surface-dim text-text-main',
+  isPrimary ? 'border-white/10 bg-primary text-white' : 'border-white/10 bg-primary text-white',
 ]}>
   <div class:list={[
     'flex flex-col gap-2 border-b pb-6',
-    isPrimary ? 'border-white/10' : 'border-primary/10',
+    isPrimary ? 'border-white/10' : 'border-white/10',
   ]}>
     <p class:list={[
       'font-body text-[9px] uppercase tracking-[0.3em]',
-      isPrimary ? 'text-white/55' : 'text-primary',
+      isPrimary ? 'text-white/55' : 'text-white/55',
     ]}>Kontakt telefoniczny</p>
     <h3 class="font-heading text-3xl font-light">{title}</h3>
     <p class:list={[
       'font-body text-sm leading-relaxed font-light',
-      isPrimary ? 'text-white/68' : 'text-text-muted',
+      isPrimary ? 'text-white/68' : 'text-white/68',
     ]}>
       {description}
     </p>
@@ -48,7 +48,7 @@ const isPrimary = tone === 'primary';
       <label class="block">
         <span class:list={[
           'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
-          isPrimary ? 'text-white/55' : 'text-text-muted',
+          isPrimary ? 'text-white/55' : 'text-white/55',
         ]}>Imię</span>
         <input
           type="text"
@@ -59,7 +59,7 @@ const isPrimary = tone === 'primary';
             'w-full rounded-2xl border px-4 py-3 font-body text-sm outline-none transition-colors',
             isPrimary
               ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
-              : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+              : 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30',
           ]}
           placeholder="Jak mamy się do Ciebie zwracać?"
         />
@@ -68,7 +68,7 @@ const isPrimary = tone === 'primary';
       <label class="block">
         <span class:list={[
           'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
-          isPrimary ? 'text-white/55' : 'text-text-muted',
+          isPrimary ? 'text-white/55' : 'text-white/55',
         ]}>Telefon</span>
         <input
           type="tel"
@@ -79,7 +79,7 @@ const isPrimary = tone === 'primary';
             'w-full rounded-2xl border px-4 py-3 font-body text-sm outline-none transition-colors',
             isPrimary
               ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
-              : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+              : 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30',
           ]}
           placeholder="+48 000 000 000"
         />
@@ -89,7 +89,7 @@ const isPrimary = tone === 'primary';
     <label class="block">
       <span class:list={[
         'mb-2 block font-body text-[10px] uppercase tracking-[0.18em]',
-        isPrimary ? 'text-white/55' : 'text-text-muted',
+        isPrimary ? 'text-white/55' : 'text-white/55',
       ]}>Najlepsza pora na telefon</span>
       <textarea
         name="message"
@@ -98,7 +98,7 @@ const isPrimary = tone === 'primary';
           'w-full rounded-[24px] border px-4 py-3 font-body text-sm leading-relaxed outline-none transition-colors',
           isPrimary
             ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
-            : 'border-primary/12 bg-surface text-text-main placeholder:text-text-muted/55 focus:border-primary',
+            : 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30',
         ]}
         placeholder="Opcjonalnie: np. dziś po 16:00."
       ></textarea>
@@ -110,7 +110,7 @@ const isPrimary = tone === 'primary';
         'inline-flex items-center justify-center rounded-full px-6 py-3 font-body text-[10px] uppercase tracking-[0.22em] transition-colors',
         isPrimary
           ? 'bg-white text-black hover:bg-white/88'
-          : 'bg-primary text-surface hover:brightness-110',
+          : 'bg-white text-black hover:bg-white/88',
       ]}
       data-callback-submit
     >
@@ -119,7 +119,7 @@ const isPrimary = tone === 'primary';
 
     <p class:list={[
       'min-h-[1.5rem] font-body text-sm',
-      isPrimary ? 'text-white/68' : 'text-text-muted',
+      isPrimary ? 'text-white/68' : 'text-white/68',
     ]} data-callback-status aria-live="polite"></p>
   </form>
 </div>
