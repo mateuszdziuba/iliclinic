@@ -121,14 +121,14 @@ const panelPosters = {
           <div class="relative h-full flex flex-col justify-between p-8 sm:p-10 md:p-14 lg:p-16">
 
             <!-- Top: decorative number -->
-            <div class="self-start mt-14 sm:mt-16">
-              <span class="font-heading text-white/10 text-8xl sm:text-[10rem] font-light leading-none select-none">
+            <div class="absolute right-8 top-1/2 -translate-y-1/2 sm:static sm:self-start sm:mt-16 sm:translate-y-0 pointer-events-none">
+              <span class="font-heading text-white/6 sm:text-white/10 text-7xl sm:text-[10rem] font-light leading-none select-none">
                 0{i + 1}
               </span>
             </div>
 
             <!-- Bottom: city info -->
-            <div class="translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+            <div class="mt-auto translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
               <p class="font-body text-white/40 text-[8px] sm:text-[9px] uppercase tracking-[0.28em] sm:tracking-[0.45em] mb-4">
                 {location.salonName || 'ili Clinic'}
               </p>
@@ -142,8 +142,8 @@ const panelPosters = {
               </p>
 
               <!-- CTA row -->
-              <div class="flex items-center justify-between gap-2 sm:gap-4 w-full max-w-[10.25rem] sm:max-w-none">
-                <span class="flex-1 min-w-0 font-body text-white/70 group-hover:text-white text-[7px] sm:text-[9px] uppercase tracking-[0.14em] sm:tracking-[0.25em] leading-tight transition-colors duration-300">
+              <div class="location-cta flex items-center justify-between gap-2 sm:gap-4 w-full max-w-[11.75rem] sm:max-w-none">
+                <span class="flex-1 min-w-0 font-body text-white/70 group-hover:text-white text-[7px] sm:text-[9px] uppercase tracking-[0.12em] sm:tracking-[0.25em] leading-tight transition-colors duration-300">
                   Wejdź do gabinetu
                 </span>
                 <div class="w-8 h-8 shrink-0 rounded-full border border-white/30 flex items-center justify-center
@@ -203,6 +203,7 @@ const panelPosters = {
       left: 40%;
     }
   }
+
 </style>
 
 <script>
