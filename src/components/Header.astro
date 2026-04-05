@@ -157,37 +157,83 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
 </header>
 
 <script>
+  declare global {
+    interface Window {
+      __iliHeaderMenuCleanup?: () => void;
+    }
+  }
+
   function initMobileMenu() {
+    window.__iliHeaderMenuCleanup?.();
+
+    const header = document.getElementById('cinematic-nav');
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = menuBtn?.querySelector('.menu-icon');
     const closeIcon = menuBtn?.querySelector('.close-icon');
 
-    if (!menuBtn || !mobileMenu || menuBtn.dataset.menuBound === 'true') return;
+    if (!header || !menuBtn || !mobileMenu) {
+      window.__iliHeaderMenuCleanup = undefined;
+      return;
+    }
 
-    const syncMenuState = (open) => {
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    const syncMenuState = (open: boolean) => {
       mobileMenu.classList.toggle('hidden', !open);
       menuIcon?.classList.toggle('hidden', open);
       closeIcon?.classList.toggle('hidden', !open);
       menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     };
 
+    const isOpen = () => !mobileMenu.classList.contains('hidden');
+    const closeMenu = () => syncMenuState(false);
+
     syncMenuState(false);
 
-    menuBtn.addEventListener('click', () => {
-      const open = mobileMenu.classList.contains('hidden');
-      syncMenuState(open);
-    });
+    menuBtn.addEventListener(
+      'click',
+      () => {
+        syncMenuState(!isOpen());
+      },
+      { signal }
+    );
 
     mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => syncMenuState(false));
+      link.addEventListener('click', closeMenu, { signal });
     });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') syncMenuState(false);
-    });
+    document.addEventListener(
+      'click',
+      (event) => {
+        const target = event.target;
+        if (!(target instanceof Node) || !isOpen()) return;
+        if (header.contains(target)) return;
+        closeMenu();
+      },
+      { signal }
+    );
 
-    menuBtn.dataset.menuBound = 'true';
+    document.addEventListener(
+      'keydown',
+      (event) => {
+        if (event.key === 'Escape') closeMenu();
+      },
+      { signal }
+    );
+
+    window.addEventListener(
+      'resize',
+      () => {
+        if (window.innerWidth >= 768) closeMenu();
+      },
+      { signal }
+    );
+
+    document.addEventListener('astro:before-swap', closeMenu, { signal });
+
+    window.__iliHeaderMenuCleanup = () => controller.abort();
   }
 
   document.addEventListener('astro:page-load', initMobileMenu);
