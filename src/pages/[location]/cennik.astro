@@ -86,9 +86,9 @@ function pluralServices(n: number) {
   {categories.length > 0 ? (
     <>
       <!-- ─── FLOATING CATEGORY NAV ────────────────────────────── -->
-      <div id="category-nav-wrapper" class="fixed bottom-6 left-0 right-0 z-40 px-6 pointer-events-none">
-        <div class="max-w-4xl mx-auto">
-          <div class="bg-white/85 backdrop-blur-lg border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-[32px] px-5 py-3 w-full pointer-events-auto">
+      <div id="category-nav-wrapper" class="fixed bottom-0 left-0 right-0 z-40 px-0 pointer-events-none transition-opacity duration-200 ease-out md:bottom-6 md:px-6">
+        <div class="max-w-none mx-auto md:max-w-4xl">
+          <div class="bg-white/80 backdrop-blur-xl border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-t-[28px] rounded-b-none px-3 py-3 w-full pointer-events-auto md:bg-white/85 md:backdrop-blur-lg md:rounded-[32px] md:px-5">
             <div class="category-nav-row">
               <button
                 type="button"
@@ -126,7 +126,7 @@ function pluralServices(n: number) {
       </div>
 
       <!-- ─── PRICE LIST ────────────────────────────────────────── -->
-      <section class="pb-48 bg-surface">
+      <section id="price-list-area" class="pb-48 bg-surface">
         <div class="max-w-7xl mx-auto px-6 pt-12 space-y-0">
           {categories.map((cat, i) => {
             const id = getCatId(cat.name, i);
@@ -181,7 +181,7 @@ function pluralServices(n: number) {
   )}
 
   <!-- ─── BOTTOM CTA ────────────────────────────────────────── -->
-  <section class="py-20 bg-surface-dim border-t border-primary/10" data-scroll-fade>
+  <section id="cennik-consultation" class="py-20 bg-surface-dim border-t border-primary/10" data-scroll-fade>
     <div class="max-w-3xl mx-auto px-6 text-center">
       <span class="font-body text-[10px] uppercase tracking-[0.4em] text-primary mb-6 block font-medium">Rezerwacja</span>
       <h2 class="font-heading text-3xl sm:text-5xl text-text-main font-light mb-6 leading-tight">
@@ -240,7 +240,8 @@ function pluralServices(n: number) {
     border: 1px solid rgb(var(--color-primary) / 0.2);
     border-radius: 9999px;
     color: rgb(var(--color-text-muted));
-    background: transparent;
+    background: rgb(255 255 255 / 0.42);
+    backdrop-filter: blur(10px);
     transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, opacity 0.18s ease;
     flex-shrink: 0;
   }
@@ -251,7 +252,7 @@ function pluralServices(n: number) {
   .category-nav-arrow:hover:not(:disabled) {
     border-color: rgb(var(--color-primary));
     color: rgb(var(--color-text-main));
-    background: rgb(var(--color-surface) / 0.6);
+    background: rgb(255 255 255 / 0.68);
   }
   .category-nav-arrow:disabled {
     opacity: 0.38;
@@ -417,6 +418,15 @@ function pluralServices(n: number) {
       nav.scrollBy({ left: amount * direction, behavior: 'smooth' });
     };
 
+    const setNavVisible = (visible: boolean) => {
+      const wrapper = document.getElementById('category-nav-wrapper');
+      if (!wrapper) return;
+      wrapper.classList.toggle('opacity-0', !visible);
+      wrapper.classList.toggle('translate-y-6', !visible);
+      wrapper.classList.toggle('opacity-100', visible);
+      wrapper.classList.toggle('translate-y-0', visible);
+    };
+
     // Pill click → smooth scroll
     pills.forEach(pill => {
       pill.addEventListener('click', () => {
@@ -462,6 +472,31 @@ function pluralServices(n: number) {
 
     sections.forEach(s => observer.observe(s));
     syncNavButtons();
+
+    const priceListArea = document.getElementById('price-list-area');
+    const consultationSection = document.getElementById('cennik-consultation');
+    let priceListVisible = true;
+    let consultationVisible = false;
+
+    const syncNavVisibility = () => {
+      setNavVisible(priceListVisible && !consultationVisible);
+    };
+
+    if (priceListArea) {
+      const visibilityObserver = new IntersectionObserver(([entry]) => {
+        priceListVisible = entry.isIntersecting;
+        syncNavVisibility();
+      }, { threshold: 0, rootMargin: '-8% 0px 0px 0px' });
+      visibilityObserver.observe(priceListArea);
+    }
+
+    if (consultationSection) {
+      const consultationObserver = new IntersectionObserver(([entry]) => {
+        consultationVisible = entry.isIntersecting;
+        syncNavVisibility();
+      }, { threshold: 0, rootMargin: '0px' });
+      consultationObserver.observe(consultationSection);
+    }
   }
 
   document.addEventListener('astro:page-load', initCennik);

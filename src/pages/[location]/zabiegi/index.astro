@@ -63,9 +63,9 @@ const treatmentsData = treatments.map(t => ({
   </section>
 
   <!-- ─── FILTERS ────────────────────────────────────────────── -->
-  <div id="filter-bar" class="fixed bottom-6 left-0 right-0 z-40 px-6 py-3 flex flex-col-reverse items-center gap-2 pointer-events-none">
+  <div id="filter-bar" class="fixed bottom-0 left-0 right-0 z-40 px-0 py-0 flex flex-col-reverse items-center gap-2 pointer-events-none transition-opacity duration-200 ease-out md:bottom-6 md:px-6 md:py-3">
     <!-- Pill container -->
-    <div class="bg-white/85 backdrop-blur-lg border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-[32px] px-5 py-3 flex flex-col gap-2.5 w-full max-w-4xl pointer-events-auto">
+    <div class="bg-white/85 backdrop-blur-lg border border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.10)] rounded-t-[28px] rounded-b-none px-4 py-3 flex flex-col gap-2.5 w-full max-w-none pointer-events-auto md:rounded-[32px] md:max-w-4xl md:px-5">
       <!-- Row 1: Search -->
       <div class="flex items-center gap-3">
       <!-- Search icon -->
@@ -83,31 +83,53 @@ const treatmentsData = treatments.map(t => ({
       <!-- Divider -->
       <span class="h-px w-full bg-primary/10"></span>
       <!-- Row 2: Category filter buttons -->
-      <div class="flex items-center gap-1.5 flex-wrap" id="filter-buttons">
+      <div class="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-1.5 md:grid-cols-1">
         <button
-          data-category="all"
-          class="filter-btn active px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all bg-primary text-surface border border-primary whitespace-nowrap shrink-0"
+          type="button"
+          id="filter-buttons-prev"
+          class="filter-nav-arrow md:hidden"
+          aria-label="Przewiń filtry w lewo"
         >
-          Wszystkie
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
         </button>
-        {sortedCategories.map(category => (
+        <div class="flex items-center gap-1.5 overflow-x-auto scrollbar-hide flex-nowrap md:flex-wrap md:overflow-visible" id="filter-buttons">
           <button
-            data-category={category}
-            class="filter-btn px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all border border-primary/20 text-text-muted hover:border-primary hover:text-text-main whitespace-nowrap shrink-0"
+            data-category="all"
+            class="filter-btn active px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all bg-primary text-surface border border-primary whitespace-nowrap shrink-0"
           >
-            {category}
+            Wszystkie
           </button>
-        ))}
+          {sortedCategories.map(category => (
+            <button
+              data-category={category}
+              class="filter-btn px-3 py-1 text-[8px] font-body tracking-[0.1em] uppercase rounded-full transition-all border border-primary/20 text-text-muted hover:border-primary hover:text-text-main whitespace-nowrap shrink-0"
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+        <button
+          type="button"
+          id="filter-buttons-next"
+          class="filter-nav-arrow md:hidden"
+          aria-label="Przewiń filtry w prawo"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </button>
       </div>
     </div>
     <!-- Results count (above pill due to flex-col-reverse) -->
-    <p id="results-count" class="font-body text-[8px] uppercase tracking-widest text-text-muted/50 pointer-events-auto">
+    <p id="results-count" class="hidden md:block font-body text-[8px] uppercase tracking-widest text-text-muted/50 pointer-events-auto">
       <span id="count">{treatments.length}</span> zabiegów
     </p>
   </div>
 
   <!-- ─── GRID ───────────────────────────────────────────────── -->
-  <section class="py-12 pb-28 bg-surface min-h-[50vh]">
+  <section id="treatments-area" class="py-12 pb-28 bg-surface min-h-[50vh]">
     <div class="max-w-7xl mx-auto px-6">
       <div id="treatments-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -202,7 +224,7 @@ const treatmentsData = treatments.map(t => ({
   </section>
 
   <!-- ─── CTA ───────────────────────────────────────────────── -->
-  <section class="py-32 bg-surface-dim border-t border-primary/5">
+  <section id="zabiegi-consultation" class="py-32 bg-surface-dim border-t border-primary/5">
     <div class="max-w-4xl mx-auto px-6 text-center" data-scroll-fade>
       <span class="text-primary font-body tracking-[0.4em] uppercase text-[10px] mb-8 block font-medium">Bezpłatna konsultacja</span>
       <h2 class="font-heading text-4xl lg:text-5xl text-text-main mb-6 font-light">
@@ -241,6 +263,40 @@ const treatmentsData = treatments.map(t => ({
   .treatment-card[data-card-ready='0'] {
     opacity: 0.01;
     transform: translate3d(0, 18px, 0);
+  }
+
+  .filter-nav-arrow {
+    width: 1.75rem;
+    height: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(var(--color-primary) / 0.2);
+    border-radius: 9999px;
+    color: rgb(var(--color-text-muted));
+    background: rgb(255 255 255 / 0.42);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+    flex-shrink: 0;
+  }
+  .filter-nav-arrow svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+  .filter-nav-arrow:hover:not(:disabled) {
+    border-color: rgb(var(--color-primary));
+    color: rgb(var(--color-text-main));
+    background: rgb(255 255 255 / 0.68);
+  }
+  .filter-nav-arrow:disabled {
+    opacity: 0.38;
+    cursor: default;
+  }
+
+  @media (min-width: 768px) {
+    .filter-nav-arrow {
+      display: none;
+    }
   }
 </style>
 
@@ -291,6 +347,9 @@ const treatmentsData = treatments.map(t => ({
   scheduleCardAnimations();
 
   // ── Filter logic ──
+  const filterButtonsTrack = document.getElementById('filter-buttons');
+  const filterPrevButton = document.getElementById('filter-buttons-prev') as HTMLButtonElement | null;
+  const filterNextButton = document.getElementById('filter-buttons-next') as HTMLButtonElement | null;
   const searchInput = document.getElementById('search-input') as HTMLInputElement;
   const filterButtons = document.querySelectorAll('.filter-btn');
   const treatmentCards = document.querySelectorAll('.treatment-card');
@@ -298,10 +357,32 @@ const treatmentsData = treatments.map(t => ({
   const noResultsElement = document.getElementById('no-results');
   const treatmentsGrid = document.getElementById('treatments-grid');
   const resetButton = document.getElementById('reset-filters');
-  const filterBar = document.getElementById('filter-bar');
 
   let activeCategory = 'all';
   let searchQuery = '';
+
+  function syncFilterButtonsNav() {
+    if (!filterButtonsTrack) return;
+    const maxScroll = filterButtonsTrack.scrollWidth - filterButtonsTrack.clientWidth;
+    const current = Math.round(filterButtonsTrack.scrollLeft);
+    if (filterPrevButton) filterPrevButton.disabled = current <= 0;
+    if (filterNextButton) filterNextButton.disabled = current >= Math.max(0, maxScroll - 1);
+  }
+
+  function scrollFilterButtons(direction: 1 | -1) {
+    if (!filterButtonsTrack) return;
+    const amount = Math.max(filterButtonsTrack.clientWidth * 0.7, 180);
+    filterButtonsTrack.scrollBy({ left: amount * direction, behavior: 'smooth' });
+  }
+
+  function setFilterBarVisible(visible: boolean) {
+    const filterBar = document.getElementById('filter-bar');
+    if (!filterBar) return;
+    filterBar.classList.toggle('opacity-0', !visible);
+    filterBar.classList.toggle('translate-y-6', !visible);
+    filterBar.classList.toggle('opacity-100', visible);
+    filterBar.classList.toggle('translate-y-0', visible);
+  }
 
   function filterTreatments() {
     let visibleCount = 0;
@@ -354,6 +435,37 @@ const treatmentsData = treatments.map(t => ({
     }
     filterTreatments();
   });
+
+  filterPrevButton?.addEventListener('click', () => scrollFilterButtons(-1));
+  filterNextButton?.addEventListener('click', () => scrollFilterButtons(1));
+  filterButtonsTrack?.addEventListener('scroll', syncFilterButtonsNav, { passive: true });
+  window.addEventListener('resize', syncFilterButtonsNav);
+  syncFilterButtonsNav();
+
+  const treatmentsArea = document.getElementById('treatments-area');
+  const consultationSection = document.getElementById('zabiegi-consultation');
+  let treatmentsAreaVisible = true;
+  let consultationVisible = false;
+
+  const syncFilterBarVisibility = () => {
+    setFilterBarVisible(treatmentsAreaVisible && !consultationVisible);
+  };
+
+  if (treatmentsArea) {
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      treatmentsAreaVisible = entry.isIntersecting;
+      syncFilterBarVisibility();
+    }, { threshold: 0, rootMargin: '-8% 0px 0px 0px' });
+    visibilityObserver.observe(treatmentsArea);
+  }
+
+  if (consultationSection) {
+    const consultationObserver = new IntersectionObserver(([entry]) => {
+      consultationVisible = entry.isIntersecting;
+      syncFilterBarVisibility();
+    }, { threshold: 0, rootMargin: '0px' });
+    consultationObserver.observe(consultationSection);
+  }
 
   // Filter bar is fixed at bottom — no scroll shadow toggle needed
 </script>
