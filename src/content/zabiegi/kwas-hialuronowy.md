@@ -8,7 +8,7 @@ locations:
 category: Medycyna Estetyczna
 duration: 45-60 minut
 featured: true
-image: /images/kwas_hialuronowy.jpg
+image: /images/hyaluronic-acid-treatment.jpg
 seo:
   metaTitle: "Kwas hialuronowy i modelowanie ust | ili Clinic"
   metaDescription: "Kwas hialuronowy w ili Clinic: modelowanie ust, poprawa objętości, wygładzenie bruzd i harmonizacja rysów twarzy."

@@ -8,7 +8,7 @@ locations:
 category: Inne
 duration: 15 minut
 featured: false
-image: /images/efcccdfb0fe88e85c148250ceb022c12.jpg
+image: /images/ear-piercing-treatment.jpg
 seo:
   metaTitle: "Przekłuwanie uszu Blomdahl | ili Clinic"
   metaDescription: "Medyczne przekłuwanie uszu systemem Blomdahl w ili Clinic. Bezpieczna procedura dla dzieci i dorosłych z biżuterią hipoalergiczną."

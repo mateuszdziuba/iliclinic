@@ -8,7 +8,7 @@ locations:
 category: Pielęgnacja Twarzy
 duration: 60 minut
 featured: true
-image: /images/Projekt-bez-nazwy1-300x300.jpg
+image: /images/royal-lift-treatment.jpg
 seo:
   metaTitle: "Królewski Lift MedEstelle | ili Clinic"
   metaDescription: "Królewski Lift MedEstelle w ili Clinic to liftingujący rytuał dla twarzy łączący manualne techniki i zaawansowaną pielęgnację skóry."

@@ -8,7 +8,7 @@ locations:
 category: Hi-Tech / Laser
 duration: 45-60 minut
 featured: false
-image: /images/IMG_5017-edited-scaled.jpg
+image: /images/skin-tightening-treatment.jpg
 seo:
   metaTitle: "Termolifting Xlase | ili Clinic"
   metaDescription: "Termolifting Xlase w ili Clinic to nieinwazyjny lifting skóry wspierający napięcie, wygładzenie i poprawę konturu bez rekonwalescencji."

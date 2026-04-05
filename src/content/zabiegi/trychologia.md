@@ -8,7 +8,7 @@ locations:
 category: Włosy
 duration: 45-60 minut
 featured: false
-image: /images/Problemy-skory-glowy-i-wlosow1.png
+image: /images/trichology-treatment.png
 seo:
   metaTitle: "Trychologia i skóra głowy | ili Clinic"
   metaDescription: "Konsultacje trychologiczne i terapie skóry głowy w ili Clinic. Diagnostyka wypadania włosów, łysienia i problemów trychologicznych."

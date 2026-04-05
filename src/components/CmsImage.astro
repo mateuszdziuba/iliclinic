@@ -9,6 +9,7 @@ interface Props {
   widths?: number[];
   sizes?: string;
   quality?: number;
+  priority?: boolean;
   loading?: 'eager' | 'lazy';
   fetchpriority?: 'high' | 'auto' | 'low';
 }
@@ -19,7 +20,8 @@ const {
   class: className,
   widths,
   sizes,
-  quality = 72,
+  quality = 64,
+  priority = false,
   loading = 'lazy',
   fetchpriority = 'auto',
 } = Astro.props;
@@ -35,8 +37,9 @@ const imageAsset = resolveCmsImage(src);
     widths={widths}
     sizes={sizes}
     quality={quality}
-    loading={loading}
-    fetchpriority={fetchpriority}
+    priority={priority}
+    loading={priority ? undefined : loading}
+    fetchpriority={priority ? undefined : fetchpriority}
     format="webp"
   />
 ) : (
@@ -44,8 +47,8 @@ const imageAsset = resolveCmsImage(src);
     src={src}
     alt={alt}
     class={className}
-    loading={loading}
-    fetchpriority={fetchpriority}
-    decoding="async"
+    loading={priority ? 'eager' : loading}
+    fetchpriority={priority ? 'high' : fetchpriority}
+    decoding={priority ? 'sync' : 'async'}
   />
 )}

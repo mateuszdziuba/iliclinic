@@ -8,7 +8,7 @@ locations:
 category: Medycyna Estetyczna
 duration: 60 minut
 featured: true
-image: /images/Problemy-skory-glowy-i-wlosow2-300x300.png
+image: /images/dermapen-treatment.png
 seo:
   metaTitle: "Dermapen 4.0 i mikronakłuwanie skóry | ili Clinic"
   metaDescription: "Dermapen 4.0 w ili Clinic wspiera redukcję blizn, zmarszczek, porów i rozstępów oraz poprawia napięcie i strukturę skóry."

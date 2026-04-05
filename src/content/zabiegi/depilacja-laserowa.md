@@ -8,7 +8,7 @@ locations:
 category: Hi-Tech / Laser
 duration: 15-60 minut
 featured: true
-image: /images/006d56a1-144d-496c-9438-8f498887e170.jpg
+image: /images/laser-hair-removal-treatment.jpg
 seo:
   metaTitle: "Depilacja laserowa AlexDual Xlase | ili Clinic"
   metaDescription: "Depilacja laserowa twarzy i ciała w ili Clinic. Trwała redukcja owłosienia z użyciem AlexDual Xlase dla różnych fototypów skóry."

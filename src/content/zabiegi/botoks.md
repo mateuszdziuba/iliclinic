@@ -8,7 +8,7 @@ locations:
 category: Medycyna Estetyczna
 duration: 30 minut
 featured: true
-image: /images/zdjecie_zabiegu_16_1.jpg
+image: /images/botox-treatment.jpg
 seo:
   metaTitle: "Botoks i toksyna botulinowa | ili Clinic"
   metaDescription: "Botoks w ili Clinic: redukcja zmarszczek mimicznych, lifting brwi, leczenie bruksizmu i nadpotliwości po kwalifikacji zabiegowej."
