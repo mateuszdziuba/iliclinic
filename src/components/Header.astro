@@ -55,6 +55,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
               href={link.href}
               target={link.external ? '_blank' : undefined}
               rel={link.external ? 'noopener' : undefined}
+              data-astro-prefetch={link.label === 'Cennik' ? 'load' : undefined}
               class="font-body text-[9px] tracking-[0.18em] uppercase text-text-main/60 hover:text-primary transition-colors"
             >
               {link.label}
@@ -127,6 +128,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
             href={link.href}
             target={link.external ? '_blank' : undefined}
             rel={link.external ? 'noopener' : undefined}
+            data-astro-prefetch={link.label === 'Cennik' ? 'load' : undefined}
             class="font-heading text-2xl"
           >
             {link.label}

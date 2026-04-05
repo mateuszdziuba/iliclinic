@@ -119,6 +119,7 @@ const treatmentsData = treatments.map(t => ({
             data-description={treatment.description.toLowerCase()}
             data-category={treatment.category}
             data-card-index={i}
+            data-card-ready="0"
           >
             <!-- Image -->
             <div class="relative aspect-[4/3] overflow-hidden bg-surface rounded-t-3xl">
@@ -236,94 +237,58 @@ const treatmentsData = treatments.map(t => ({
   /* Safety: elements start visible so they're never stuck invisible if GSAP fails */
   [data-hero-label],[data-hero-title],[data-hero-desc],
   [data-scroll-fade], .treatment-card { opacity: 1; }
+
+  .treatment-card[data-card-ready='0'] {
+    opacity: 0.01;
+    transform: translate3d(0, 18px, 0);
+  }
 </style>
 
 <script>
   import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-  gsap.registerPlugin(ScrollTrigger);
+  let cardAnimationContext: gsap.Context | undefined;
+  let animationFrame = 0;
 
-  let animationContext: gsap.Context | undefined;
-  let initFrame = 0;
+  function initCardAnimations() {
+    cardAnimationContext?.revert();
 
-  function revealElement(target: Element, options: { duration?: number; delay?: number; start?: string } = {}) {
-    const el = target as HTMLElement;
-    const hasAuthoredTransform = /translate-|rotate-|scale-|skew-/.test(el.className);
-    const rect = el.getBoundingClientRect();
-    const inView = rect.top < window.innerHeight && rect.bottom > 0;
-    const fromVars = hasAuthoredTransform ? { opacity: 0.01 } : { opacity: 0.01, y: 24 };
-    const toVars = {
-      opacity: 1,
-      ...(hasAuthoredTransform ? {} : { y: 0 }),
-      duration: options.duration ?? 0.5,
-      delay: options.delay ?? 0,
-      ease: 'power2.out',
-      clearProps: hasAuthoredTransform ? 'opacity' : 'opacity,transform',
-    };
+    cardAnimationContext = gsap.context(() => {
+      const cards = Array.from(document.querySelectorAll<HTMLElement>('.treatment-card'));
+      if (!cards.length) return;
 
-    if (inView) {
-      gsap.fromTo(el, fromVars, toVars);
-      return;
-    }
-
-    gsap.set(el, fromVars);
-    gsap.to(el, {
-      ...toVars,
-      scrollTrigger: {
-        trigger: el,
-        start: options.start ?? 'top 92%',
-        once: true,
-      },
-    });
-  }
-
-  function initAnimations() {
-    animationContext?.revert();
-
-    const safetyTimeout = window.setTimeout(() => {
-      document.querySelectorAll('[data-hero-label],[data-hero-title],[data-hero-desc],[data-scroll-fade],.treatment-card').forEach(el => {
-        const node = el as HTMLElement;
-        node.style.opacity = '1';
-        node.style.transform = '';
+      cards.forEach(card => {
+        card.dataset.cardReady = '0';
       });
-    }, 2000);
 
-    animationContext = gsap.context(() => {
-      // Hero entrance
-      gsap.fromTo('[data-hero-label]', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', delay: 0.05, clearProps: 'opacity,transform' });
-      gsap.fromTo('[data-hero-title]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out', delay: 0.1, clearProps: 'opacity,transform' });
-      gsap.fromTo('[data-hero-desc]',  { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: 0.18,
-        clearProps: 'opacity,transform',
-        onComplete: () => clearTimeout(safetyTimeout) });
-
-      const cards = Array.from(document.querySelectorAll('.treatment-card'));
-      gsap.fromTo(cards,
-        { opacity: 0.01, y: 18 },
+      gsap.fromTo(
+        cards,
+        { autoAlpha: 0, y: 18 },
         {
-          opacity: 1,
+          autoAlpha: 1,
           y: 0,
-          duration: 0.42,
-          ease: 'power2.out',
-          stagger: 0.035,
-          delay: 0.22,
+          duration: 0.48,
+          ease: 'power3.out',
+          stagger: 0.05,
+          delay: 0.08,
           clearProps: 'opacity,transform',
+          onStart: () => {
+            cards.forEach(card => {
+              card.dataset.cardReady = '1';
+            });
+          },
         }
       );
-
-      document.querySelectorAll('[data-scroll-fade]').forEach(el => {
-        revealElement(el, { duration: 0.55, start: 'top 92%' });
-      });
     });
-  } // end initAnimations
-
-  function scheduleAnimations() {
-    cancelAnimationFrame(initFrame);
-    initFrame = requestAnimationFrame(initAnimations);
   }
 
-  document.addEventListener('astro:page-load', scheduleAnimations);
-  scheduleAnimations();
+  function scheduleCardAnimations() {
+    cancelAnimationFrame(animationFrame);
+    animationFrame = requestAnimationFrame(initCardAnimations);
+  }
+
+  document.addEventListener('astro:page-load', scheduleCardAnimations);
+  scheduleCardAnimations();
 
   // ── Filter logic ──
   const searchInput = document.getElementById('search-input') as HTMLInputElement;

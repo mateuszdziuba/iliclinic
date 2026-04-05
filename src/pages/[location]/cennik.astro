@@ -10,7 +10,7 @@ if (!locationData || location !== 'pruszkow') {
   return Astro.redirect('/');
 }
 
-Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
+Astro.response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=60, stale-while-revalidate=300');
 const booksyUrl = (locationData as any).booksy as string;
 
 // ── Fetch Booksy pricing on request ─────────────────────────────
