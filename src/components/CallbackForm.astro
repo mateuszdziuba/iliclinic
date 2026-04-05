@@ -124,7 +124,9 @@ const isPrimary = tone === 'primary';
   </form>
 </div>
 
-<script is:inline>
+<script>
+  import { actions } from 'astro:actions';
+
   function initCallbackForms() {
     document.querySelectorAll('[data-callback-form]').forEach((formElement) => {
       const form = formElement;
@@ -138,60 +140,21 @@ const isPrimary = tone === 'primary';
         event.preventDefault();
 
         const formData = new FormData(form);
-        const payload = {
-          location: String(formData.get('location') || ''),
-          locationName: String(formData.get('locationName') || ''),
-          name: String(formData.get('name') || '').trim(),
-          phone: String(formData.get('phone') || '').trim(),
-          email: '',
-          message: String(formData.get('message') || '').trim(),
-          callbackRequested: true,
-          inquiryType: 'callback',
-          pageUrl: window.location.href,
-        };
+        formData.set('pageUrl', window.location.href);
 
         submit.disabled = true;
         status.textContent = 'Przygotowujemy zgłoszenie oddzwonienia...';
 
         try {
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
+          const { error } = await actions.contact(formData);
 
-          const result = await response.json().catch(() => null);
-
-          if (response.ok) {
+          if (!error) {
             form.reset();
             status.textContent = 'Numer został zapisany. Skontaktujemy się możliwie szybko.';
             return;
           }
 
-          if (result?.code === 'delivery_not_configured') {
-            const subject = encodeURIComponent(`Prośba o kontakt telefoniczny (${payload.locationName})`);
-            const body = encodeURIComponent(
-              [
-                `Lokalizacja: ${payload.locationName}`,
-                'Typ zgłoszenia: prośba o oddzwonienie',
-                `Imię i nazwisko: ${payload.name}`,
-                `Telefon: ${payload.phone}`,
-                '',
-                'Dodatkowe informacje:',
-                payload.message || 'brak',
-                '',
-                `Źródło: ${payload.pageUrl}`,
-              ].join('\n')
-            );
-
-            window.location.href = `mailto:kontakt@iliclinic.pl?subject=${subject}&body=${body}`;
-            status.textContent = 'Otworzyliśmy gotową wiadomość e-mail do wysłania.';
-            return;
-          }
-
-          status.textContent = result?.error || 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie.';
+          status.textContent = error.message || 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie.';
         } catch {
           status.textContent = 'Wystąpił problem z wysyłką. Spróbuj ponownie.';
         } finally {

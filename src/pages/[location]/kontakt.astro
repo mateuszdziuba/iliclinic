@@ -321,6 +321,7 @@ const contactSchema = {
 <script>
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { actions } from 'astro:actions';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -364,33 +365,15 @@ const contactSchema = {
 
         const formData = new FormData(form);
         const inquiryType = String(formData.get('inquiryType') || 'message');
-        const payload = {
-          location: String(formData.get('location') || ''),
-          locationName: String(formData.get('locationName') || ''),
-          name: String(formData.get('name') || '').trim(),
-          phone: String(formData.get('phone') || '').trim(),
-          email: String(formData.get('email') || '').trim(),
-          message: String(formData.get('message') || '').trim(),
-          callbackRequested: inquiryType === 'callback',
-          inquiryType,
-          pageUrl: window.location.href,
-        };
+        formData.set('pageUrl', window.location.href);
 
         submit.disabled = true;
         status.textContent = inquiryType === 'callback' ? 'Przygotowujemy zgłoszenie oddzwonienia...' : 'Przygotowujemy wiadomość...';
 
         try {
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
+          const { error } = await actions.contact(formData);
 
-          const result = await response.json().catch(() => null);
-
-          if (response.ok) {
+          if (!error) {
             form.reset();
             status.textContent = inquiryType === 'callback'
               ? 'Numer został zapisany. Skontaktujemy się możliwie szybko.'
@@ -398,33 +381,7 @@ const contactSchema = {
             return;
           }
 
-          if (result?.code === 'delivery_not_configured') {
-            const subject = encodeURIComponent(
-              inquiryType === 'callback'
-                ? `Prośba o kontakt telefoniczny (${payload.locationName})`
-                : `Nowa wiadomość ze strony ili Clinic (${payload.locationName})`
-            );
-            const body = encodeURIComponent(
-              [
-                `Lokalizacja: ${payload.locationName}`,
-                `Typ zgłoszenia: ${inquiryType === 'callback' ? 'prośba o oddzwonienie' : 'wiadomość kontaktowa'}`,
-                `Imię i nazwisko: ${payload.name}`,
-                `Telefon: ${payload.phone}`,
-                `E-mail: ${payload.email || 'nie podano'}`,
-                '',
-                inquiryType === 'callback' ? 'Dodatkowe informacje:' : 'Wiadomość:',
-                payload.message || 'brak',
-                '',
-                `Źródło: ${payload.pageUrl}`,
-              ].join('\n')
-            );
-
-            window.location.href = `mailto:kontakt@iliclinic.pl?subject=${subject}&body=${body}`;
-            status.textContent = 'Otworzyliśmy gotową wiadomość e-mail do wysłania.';
-            return;
-          }
-
-          status.textContent = result?.error || 'Nie udało się wysłać formularza. Spróbuj ponownie lub zadzwoń do gabinetu.';
+          status.textContent = error.message || 'Nie udało się wysłać formularza. Spróbuj ponownie lub zadzwoń do gabinetu.';
         } catch {
           status.textContent = 'Wystąpił problem z wysyłką. Spróbuj ponownie lub skontaktuj się telefonicznie.';
         } finally {
