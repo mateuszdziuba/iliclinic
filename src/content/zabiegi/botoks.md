@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Medycyna Estetyczna
-price_pruszkow: 500
-price_ostroleka: 500
 duration: 30 minut
 featured: true
 image: /images/zdjecie_zabiegu_16_1.jpg

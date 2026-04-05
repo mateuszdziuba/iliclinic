@@ -2,8 +2,6 @@
 title: "Mezoterapia Igłowa"
 description: "Dostarczanie aktywnych składników bezpośrednio do skóry poprzez mikrowstrzyknięcia. Nawilżenie, odmłodzenie, regeneracja."
 locations: ['pruszkow', 'ostroleka']
-price_pruszkow: 400
-price_ostroleka: 400
 duration: "45 minut"
 category: "Medycyna Estetyczna"
 featured: false

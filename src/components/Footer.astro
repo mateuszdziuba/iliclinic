@@ -24,13 +24,21 @@ const allLocations = Object.values(locations);
           Miejsce, w którym profesjonalizm medyczny łączy się z wizją nowoczesnego piękna.
         </p>
         {currentLocationData?.social && (
-          <div class="flex gap-6">
-            <a href={currentLocationData.social.facebook} target="_blank" rel="noopener"
-               class="text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body">
+          <div class="flex gap-5">
+            <a href={currentLocationData.social.instagram} target="_blank" rel="noopener"
+               class="flex items-center gap-2 text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body group">
+              <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"/>
+              </svg>
               Instagram
             </a>
-            <a href={currentLocationData.social.instagram} target="_blank" rel="noopener"
-               class="text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body">
+            <a href={currentLocationData.social.facebook} target="_blank" rel="noopener"
+               class="flex items-center gap-2 text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body group">
+              <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
               Facebook
             </a>
           </div>
@@ -44,6 +52,9 @@ const allLocations = Object.values(locations);
           <ul class="space-y-4">
             <li><a href={location ? `/${location}/o-nas` : '#'} class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">O nas</a></li>
             <li><a href={location ? `/${location}/zabiegi` : '#'} class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">Zabiegi</a></li>
+            {location === 'pruszkow' && (
+              <li><a href={`/${location}/cennik`} class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">Cennik</a></li>
+            )}
             <li><a href={location ? `/${location}/kontakt` : '#'} class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">Kontakt</a></li>
             {(currentLocationData as any)?.booksy && (
               <li>

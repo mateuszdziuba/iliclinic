@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Hi-Tech / Laser
-price_pruszkow: 150
-price_ostroleka: 150
 duration: 15-60 minut
 featured: true
 image: /images/006d56a1-144d-496c-9438-8f498887e170.jpg
@@ -18,32 +16,33 @@ seo:
 ---
 ## Depilacja laserowa AlexDual Xlase
 
-W Ili Clinic wykonujemy depilację laserową przy użyciu nowoczesnego urządzenia AlexDual Xlase. Laser skutecznie usuwa włosy na każdym obszarze ciała, zapewniając trwałe efekty.
+AlexDual Xlase to urządzenie laserowe z podwójną długością fali (808 nm / 760 nm), łączące właściwości lasera aleksandrytowego i diodowego. Szafirowa końcówka chłodząca zapewnia bezbolesny, szybki i skuteczny zabieg, bezpieczny dla wszystkich fototypów skóry — od jasnej i delikatnej po ciemną.
 
-## Zalety metody
+## Jak działa?
 
-*   **Trwałość** - znaczna redukcja owłosienia po serii zabiegów
-*   **Bezpieczeństwo** - odpowiedni dla różnych typów skóry
-*   **Komfort** - system chłodzenia minimalizuje dyskomfort
-*   **Precyzja** - selektywne działanie na mieszki włosowe
+Laser selektywnie oddziałuje na melaninę w mieszku włosowym, nie uszkadzając otaczającej skóry. Podwójna długość fali pozwala skutecznie dotrzeć do włosów o różnej grubości i głębokości osadzenia. Efektem jest trwała redukcja owłosienia, a przy okazji poprawa napięcia skóry i korekta drobnych zmian naczyniowych.
 
 ## Obszary zabiegowe
 
-*   Twarz (wąsik, broda, policzki)
+*   Twarz: wąsik, broda, policzki, linia włosów
 *   Pachy
-*   Bikini
-*   Nogi
-*   Ręce
-*   Plecy
-*   Klatka piersiowa
+*   Bikini płytkie i głębokie
+*   Nogi — łydki, uda, całe nogi
+*   Plecy i klatka piersiowa
+*   Ramiona i przedramiona
 
-## Przebieg zabiegu
+## Efekty
 
-1.  Konsultacja i test skórny
-2.  Przygotowanie obszaru
-3.  Aplikacja impulsu laserowego
-4.  Chłodzenie i pielęgnacja
+Długotrwała redukcja owłosienia. Zalecana seria 4–8 zabiegów w odstępach dostosowanych do obszaru i fazy wzrostu włosa.
 
-## Ile zabiegów potrzeba?
+## Przeciwwskazania
 
-Dla optymalnych efektów zalecana jest seria 6-8 zabiegów w odstępach 4-6 tygodni, w zależności od obszaru.
+*   Ciąża i karmienie piersią
+*   Leki fotouczulające, retinol
+*   Aktywna opryszczka, infekcje skórne
+*   Intensywna opalenizna lub samoopalacz
+*   Padaczka, niestabilna cukrzyca, nowotwory skóry, skłonność do keloidów
+
+## Przygotowanie
+
+Kilka tygodni przed zabiegiem stosuj kremy z filtrem SPF. Unikaj słońca i opalania. Bezpośrednio przed zabiegiem ogól włosy (nie wyrywaj). Skóra musi być czysta, bez kosmetyków.

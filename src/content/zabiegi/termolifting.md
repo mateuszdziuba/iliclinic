@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Hi-Tech / Laser
-price_pruszkow: 600
-price_ostroleka: 600
 duration: 45-60 minut
 featured: false
 image: /images/IMG_5017-edited-scaled.jpg
@@ -18,27 +16,30 @@ seo:
 ---
 ## Czym jest Termolifting Xlase?
 
-Termolifting Xlase to nieinwazyjny zabieg liftingujący wykorzystujący kontrolowaną energię cieplną. Laser stymuluje produkcję kolagenu w głębokich warstwach skóry, co prowadzi do jej napięcia i odmłodzenia.
-
-## Zalety zabiegu
-
-*   **Bez rekonwalescencji** - powrót do codziennych aktywności od razu
-*   **Bezbolesność** - komfortowy zabieg
-*   **Naturalny efekt** - stopniowa poprawa jakości skóry
-*   **Uniwersalność** - możliwość zastosowania na twarzy i ciele
-
-## Wskazania
-
-*   Wiotkość skóry twarzy i szyi
-*   Opadająca linia żuchwy
-*   Zmarszczki i drobne linie
-*   Luźna skóra ramion
-*   Cellulit
+Termolifting Xlase to nieinwazyjny zabieg liftingujący wykorzystujący energię lasera aleksandrytowego i diodowego do kontrolowanego podgrzania skóry. Zabieg działa na dwa sposoby: powoduje **natychmiastowy skurcz kolagenu** (efekt liftingujący widoczny od razu) oraz inicjuje **długotrwałą produkcję nowego kolagenu i elastyny** — proces trwający około trzech miesięcy od zabiegu.
 
 ## Efekty
 
-Efekty widoczne już po pierwszym zabiegu, narastające przez kolejne tygodnie wraz z produkcją nowego kolagenu. Pełne rezultaty po 2-3 miesiącach.
+*   Natychmiastowe napięcie skóry widoczne już po pierwszej sesji
+*   Poprawa blasku i młodego wyglądu
+*   Długotrwała poprawa elastyczności i nawilżenia dzięki regeneracji kolagenu
+*   Możliwość stosowania na twarzy, szyi, dekolcie, dłoniach i ciele
 
-## Seria zabiegów
+## Wskazania
 
-Zalecana seria 3-4 zabiegów w odstępach miesięcznych dla optymalnych efektów.
+*   Wiotkość i utrata jędrności skóry
+*   Zaburzenia owalu twarzy
+*   Zmarszczki i linie
+*   Nierównomierny koloryt i przebarwienia
+
+## Rekonwalescencja
+
+Minimalny downtime — pacjent wraca do codziennych aktywności natychmiast. Przejściowe zaczerwienienie ustępuje w ciągu 15 minut do 2 godzin.
+
+## Przeciwwskazania
+
+*   Świeża opalenizna lub samoopalacz
+*   Ciąża i karmienie piersią
+*   Aktywne nowotwory, rozległe znamiona
+*   Leki fotouczulające, retinol, zioła fotouczulające
+*   Epilepsja, aktywne infekcje wirusowe, bakteryjne, grzybicze

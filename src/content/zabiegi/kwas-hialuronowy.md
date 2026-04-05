@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Medycyna Estetyczna
-price_pruszkow: 800
-price_ostroleka: 800
 duration: 45-60 minut
 featured: true
 image: /images/kwas_hialuronowy.jpg

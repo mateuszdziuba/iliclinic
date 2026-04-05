@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Włosy
-price_pruszkow: 200
-price_ostroleka: 200
 duration: 45-60 minut
 featured: false
 image: /images/Problemy-skory-glowy-i-wlosow1.png
@@ -18,26 +16,30 @@ seo:
 ---
 ## Trychologia w Ili Clinic
 
-Trychologia to dziedzina zajmująca się problemami skóry głowy i włosów. W Ili Clinic oferujemy kompleksową diagnostykę i zabiegi stymulujące.
+Trychologia to specjalistyczna dziedzina medycyny estetycznej zajmująca się problemami skóry głowy i włosów. W Ili Clinic oferujemy kompleksową diagnostykę oraz indywidualnie dobrane terapie — od nadmiernego wypadania włosów, przez łysienie androgenowe i plackowate, po łojotokowe zapalenie skóry, łuszczycę i podrażnienia.
 
-## Wskazania
+## Stosowane metody
 
-*   Nadmierne wypadanie włosów
-*   Łysienie androgenowe
-*   Łupież i problemy skóry głowy
-*   Osłabione, cienkie włosy
-*   Łysienie plackowate
+Protokoły trychologiczne realizowane w Ili Clinic obejmują:
 
-## Oferowane zabiegi
+*   **Mezoterapię igłową skóry głowy** — koktajle stymulujące wzrost włosów
+*   **Karboksyterapię** — dotlenienie i poprawa mikrokrążenia skóry głowy
+*   **Infuzje tlenowe** — intensywna regeneracja
+*   **Stymulację czynnikami wzrostu** — preparat Dr. Cyj (600 zł)
+*   **Terapię przeciw wypadaniu włosów i łysieniu** (500 zł za sesję)
 
-*   **Konsultacja trychologiczna** - diagnostyka z trichoskopem
-*   **Mezoterapia igłowa** - koktajle stymulujące wzrost
-*   **Osocze bogatopłytkowe PRP** - własne czynniki wzrostu
-*   **Karboksyterapia** - dotlenienie skóry głowy
+## Przebieg konsultacji trychologicznej
 
-## Przebieg konsultacji
+1.  Wywiad zdrowotny i ocena problemu
+2.  Badanie skóry głowy trichoskopem
+3.  Analiza wyników badań krwi
+4.  Ustalenie indywidualnego planu terapii
+5.  Zalecenia pielęgnacyjne
 
-1.  Wywiad dotyczący problemu
-2.  Badanie trichoskopem
-3.  Ustalenie planu leczenia
-4.  Zalecenia pielęgnacyjne
+## Przygotowanie do wizyty
+
+*   Nie myć włosów przez 24 godziny przed wizytą
+*   Unikać produktów do stylizacji
+*   Odczekać minimum 7 dni po farbowaniu
+*   Przynieść listę suplementów i leków
+*   Dostarczyć aktualne wyniki badań krwi

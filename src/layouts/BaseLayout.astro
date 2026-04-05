@@ -4,6 +4,7 @@ import Footer from '../components/Footer.astro';
 import CookieBanner from '../components/CookieBanner.astro';
 import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
+import locationsData from '../data/locations.json';
 
 interface Props {
   title: string;
@@ -12,18 +13,26 @@ interface Props {
   canonical?: string;
   hideHeader?: boolean;
   hideFooter?: boolean;
+  jsonLd?: object | object[];
+  ogImage?: string;
 }
 
 const {
   title,
-  description = 'Iliclinic - Gabinet Medycyny Estetycznej w Pruszkowie i Ostrołęce',
+  description = 'Ili Clinic — gabinet medycyny estetycznej w Pruszkowie i Ostrołęce. Botoks, kwas hialuronowy, depilacja laserowa, dermapen i więcej.',
   location,
   canonical,
   hideHeader = false,
   hideFooter = false,
+  jsonLd,
+  ogImage = '/images/hero-clinic.jpg',
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+const siteUrl = 'https://iliclinic.pl';
+const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
+const fullTitle = `${title} | Ili Clinic`;
+const locationData = location ? locationsData[location] : null;
 ---
 
 <!DOCTYPE html>
@@ -31,8 +40,42 @@ const currentPath = Astro.url.pathname;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{fullTitle}</title>
   <meta name="description" content={description} />
-  {canonical && <link rel="canonical" href={canonical} />}
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:site_name" content="Ili Clinic" />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={fullTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
+  <!-- Geo meta (local SEO) -->
+  {locationData && (
+    <>
+      <meta name="geo.region" content="PL" />
+      <meta name="geo.placename" content={(locationData as any).address?.city} />
+      <meta name="geo.position" content={`${(locationData as any).geo?.lat};${(locationData as any).geo?.lng}`} />
+      <meta name="ICBM" content={`${(locationData as any).geo?.lat}, ${(locationData as any).geo?.lng}`} />
+    </>
+  )}
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- JSON-LD Structured Data -->
+  {jsonLd && (
+    <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(jsonLd) ? jsonLd : [jsonLd])} />
+  )}
 
   <!-- Cinematic Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,7 +83,6 @@ const currentPath = Astro.url.pathname;
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>{title} | Iliclinic</title>
   <ClientRouter />
 </head>
 <body class="min-h-screen flex flex-col font-body selection:bg-accent/20 selection:text-primary">

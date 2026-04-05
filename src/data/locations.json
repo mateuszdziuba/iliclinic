@@ -1,6 +1,8 @@
 {
   "pruszkow": {
     "name": "Pruszków",
+    "locative": "Pruszkowie",
+    "geo": { "lat": 52.1653, "lng": 20.7982 },
     "slug": "pruszkow",
     "address": {
       "street": "ul. Obrońców Pokoju 10/Lokal 4",
@@ -23,6 +25,8 @@
   },
   "ostroleka": {
     "name": "Ostrołęka",
+    "locative": "Ostrołęce",
+    "geo": { "lat": 53.0857, "lng": 21.5743 },
     "slug": "ostroleka",
     "address": {
       "street": "ul. Fieldorfa Nila 13",

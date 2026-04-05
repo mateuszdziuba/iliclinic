@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Medycyna Estetyczna
-price_pruszkow: 1200
-price_ostroleka: 1200
 duration: 45 minut
 featured: false
 wskazania:
@@ -17,31 +15,49 @@ wskazania:
   - Zmarszczki i bruzdy
   - Dłonie z widocznymi żyłami
 przeciwwskazania:
-  - Hydroksyapatyt wapnia (Radiesse) - natychmiastowy efekt + stymulacja kolagenu
-  - Kwas polimlekowy (Sculptra) - stopniowa przebudowa tkanek
-  - Polikaprolakton (Ellanse) - długotrwała stymulacja
+  - Ciąża i karmienie piersią
+  - Aktywne infekcje skórne w obszarze zabiegu
+  - Aktywny nowotwór
+  - Leki rozrzedzające krew
+  - Choroby autoimmunologiczne w fazie zaostrzenia
 przygotowanie_do_zabiegu:
-  - Hydroksyapatyt wapnia (Radiesse) - natychmiastowy efekt + stymulacja kolagenu
-  - Kwas polimlekowy (Sculptra) - stopniowa przebudowa tkanek
-  - Polikaprolakton (Ellanse) - długotrwała stymulacja
+  - Unikaj retinolu i kwasów na 5 dni przed zabiegiem
+  - Poinformuj o przyjmowanych lekach i suplementach
+  - Unikaj intensywnego słońca przez 2 tygodnie przed zabiegiem
+  - Nie wykonuj ablacyjnych zabiegów laserowych w ostatnich 2 tygodniach
 seo:
   metaTitle: Stymulatory tkankowe - odmłodzenie skóry | Iliclinic
   metaDescription: Stymulatory tkankowe - głęboka regeneracja i lifting bez
     skalpela. Hydroksyapatyt wapnia, kwas polimlekowy.
 ---
 
-## Czym są stymulatory tkankowe?
+## Zabiegi stymulujące Tri-ExoGF™ MedEstelle
 
-Stymulatory tkankowe to preparaty wstrzykiwane w głębokie warstwy skóry, które pobudzają naturalne procesy regeneracyjne. Stymulują produkcję kolagenu, elastyny i kwasu hialuronowego.
+Tri-ExoGF™ to zaawansowany zabieg biostymulacyjny łączący mikro- i nanonakłuwanie z innowacyjnymi ampułkami egzosomalnymi. Trójstymulujące działanie opiera się na trzech aktywnych komponentach, które synergicznie pobudzają skórę do głębokiej regeneracji.
 
-## Rodzaje stymulatorów
+## Jak działa?
 
-## Wskazania
+**Egzosomy z Centellą Azjatycką** — biologicznie aktywne nanonosniki stymulujące samoregenrację skóry, działanie rehydratujące i rewitalizujące.
+
+**Biologiczne czynniki wzrostu (EGF, FGF)** — stymulują syntezę kolagenu, elastyny i kwasu hialuronowego poprzez aktywację fibroblastów.
+
+**Peptydowy Energizer** — poprawia przepływ energii ATP w komórkach i wzmacnia osłabioną skórę poprzez transdyferencjację fibroblastów.
 
 ## Efekty
 
-Stopniowe odmłodzenie przez 6-24 miesięcy. Skóra staje się gęstsza, jędrniejsza, bardziej sprężysta.
+*   Przebudowa skóry i odnowa komórkowa
+*   Redukcja zmarszczek i poprawa elastyczności
+*   Większa gęstość skóry i nawilżenie
+*   Poprawa owalu i konturów twarzy
+*   Rozświetlenie i jednolity koloryt
 
-## Ile zabiegów?
+## Warianty zabiegu
 
-W zależności od preparatu i wskazań: 1-3 sesje w odstępach 4-8 tygodni.
+*   **Face Therapy** — twarz, szyja, dekolt (700 zł)
+*   **Eye Focus Therapy** — okolice oczu z mini facial (550 zł)
+*   **Face Nano Glow** — jednorazowy zabieg z natychmiastowym efektem (700 zł)
+*   **Vascu-LiftGF** — dla skóry naczyniowej (690 zł)
+
+## Protokół leczenia
+
+Seria 4 zabiegów w odstępach 10–14 dni. Protokół personalizowany w zależności od kondycji skóry.

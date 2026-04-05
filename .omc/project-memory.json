@@ -123,38 +123,62 @@
   "hotPaths": [
     {
       "path": "src/pages/[location]/index.astro",
-      "accessCount": 10,
-      "lastAccessed": 1775333095174,
+      "accessCount": 13,
+      "lastAccessed": 1775375876309,
       "type": "file"
     },
     {
       "path": "src/layouts/BaseLayout.astro",
-      "accessCount": 8,
-      "lastAccessed": 1775333126658,
+      "accessCount": 13,
+      "lastAccessed": 1775375987569,
       "type": "file"
     },
     {
-      "path": "src/components/Header.astro",
-      "accessCount": 5,
-      "lastAccessed": 1775332576823,
+      "path": "src/pages/[location]/zabiegi/[slug].astro",
+      "accessCount": 10,
+      "lastAccessed": 1775375887978,
       "type": "file"
     },
     {
       "path": "src/pages/[location]/zabiegi/index.astro",
-      "accessCount": 5,
-      "lastAccessed": 1775332604451,
+      "accessCount": 9,
+      "lastAccessed": 1775375970910,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Header.astro",
+      "accessCount": 7,
+      "lastAccessed": 1775375656755,
       "type": "file"
     },
     {
       "path": "src/components/Footer.astro",
-      "accessCount": 4,
-      "lastAccessed": 1775332792584,
+      "accessCount": 7,
+      "lastAccessed": 1775375745495,
+      "type": "file"
+    },
+    {
+      "path": "src/data/locations.json",
+      "accessCount": 7,
+      "lastAccessed": 1775375831011,
       "type": "file"
     },
     {
       "path": "src/pages/[location]/kontakt.astro",
-      "accessCount": 4,
-      "lastAccessed": 1775332829770,
+      "accessCount": 7,
+      "lastAccessed": 1775375896008,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/[location]/cennik.astro",
+      "accessCount": 7,
+      "lastAccessed": 1775376406825,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/stymulatory-tkankowe.md",
+      "accessCount": 5,
+      "lastAccessed": 1775375615247,
       "type": "file"
     },
     {
@@ -164,21 +188,63 @@
       "type": "file"
     },
     {
-      "path": "src/pages/[location]/zabiegi/[slug].astro",
+      "path": "astro.config.mjs",
+      "accessCount": 4,
+      "lastAccessed": 1775376342553,
+      "type": "file"
+    },
+    {
+      "path": "src/content.config.ts",
       "accessCount": 3,
-      "lastAccessed": 1775332610170,
+      "lastAccessed": 1775375338139,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/depilacja-laserowa.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375473978,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/krolewski-lift.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375495238,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/fala-radiowa-mikroiglowa.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375514280,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/termolifting.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375529328,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/lipoliza.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375544233,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/trychologia.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375560899,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/dermapen.md",
+      "accessCount": 3,
+      "lastAccessed": 1775375609711,
       "type": "file"
     },
     {
       "path": "src/content/strony/polityka-prywatnosci.md",
       "accessCount": 2,
       "lastAccessed": 1775331915686,
-      "type": "file"
-    },
-    {
-      "path": "src/data/locations.json",
-      "accessCount": 2,
-      "lastAccessed": 1775331980588,
       "type": "file"
     },
     {
@@ -200,15 +266,21 @@
       "type": "file"
     },
     {
-      "path": "package.json",
-      "accessCount": 1,
-      "lastAccessed": 1775331218863,
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1775374944461,
+      "type": "directory"
+    },
+    {
+      "path": "src/content/zabiegi/botoks.md",
+      "accessCount": 2,
+      "lastAccessed": 1775375338925,
       "type": "file"
     },
     {
-      "path": "src/content.config.ts",
-      "accessCount": 1,
-      "lastAccessed": 1775331303196,
+      "path": "package.json",
+      "accessCount": 2,
+      "lastAccessed": 1775376289986,
       "type": "file"
     },
     {
@@ -222,6 +294,54 @@
       "accessCount": 1,
       "lastAccessed": 1775331870819,
       "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/karboksyterapia.md",
+      "accessCount": 1,
+      "lastAccessed": 1775375341992,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/kwas-hialuronowy.md",
+      "accessCount": 1,
+      "lastAccessed": 1775375343171,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/mezoterapia.md",
+      "accessCount": 1,
+      "lastAccessed": 1775375344352,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/oczyszczanie-wodorowe.md",
+      "accessCount": 1,
+      "lastAccessed": 1775375344667,
+      "type": "file"
+    },
+    {
+      "path": "src/content/zabiegi/przekluwanie-uszu.md",
+      "accessCount": 1,
+      "lastAccessed": 1775375345688,
+      "type": "file"
+    },
+    {
+      "path": "public/llms.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775375953631,
+      "type": "file"
+    },
+    {
+      "path": "public/robots.txt",
+      "accessCount": 1,
+      "lastAccessed": 1775375954431,
+      "type": "file"
+    },
+    {
+      "path": "src/pages",
+      "accessCount": 1,
+      "lastAccessed": 1775376108897,
+      "type": "directory"
     }
   ],
   "userDirectives": []

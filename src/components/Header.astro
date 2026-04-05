@@ -13,6 +13,7 @@ const basePath = location ? `/${location}` : '';
 const navLinks = [
   { label: 'O nas', href: `${basePath}/o-nas` },
   { label: 'Zabiegi', href: `${basePath}/zabiegi` },
+  ...(location === 'pruszkow' ? [{ label: 'Cennik', href: `${basePath}/cennik` }] : []),
   { label: 'Sklep', href: 'https://ilishop.pl', external: true },
   { label: 'Kontakt', href: `${basePath}/kontakt` },
 ];

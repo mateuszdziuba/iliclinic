@@ -34,12 +34,53 @@ const featuredTreatments = allTreatments
 // Get partner brands
 const allBrands = await getCollection('marki');
 const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
+
+const siteUrl = 'https://iliclinic.pl';
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "@id": `${siteUrl}/${location}/#business`,
+  "name": `Ili Clinic ${locationData.name}`,
+  "alternateName": "Ili Clinic",
+  "description": `Ili Clinic w ${(locationData as any).locative} to gabinet medycyny estetycznej oferujący zabiegi botoksem, kwasem hialuronowym, depilacją laserową, dermapenem, falą radiową mikroigłową i trychologią.`,
+  "url": `${siteUrl}/${location}`,
+  "telephone": locationData.phone,
+  "email": locationData.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": locationData.address.street,
+    "addressLocality": locationData.address.city,
+    "postalCode": locationData.address.postalCode,
+    "addressCountry": "PL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": (locationData as any).geo?.lat,
+    "longitude": (locationData as any).geo?.lng
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "10:00",
+      "closes": "20:00"
+    }
+  ],
+  "priceRange": "$$",
+  "image": `${siteUrl}/images/hero-clinic.jpg`,
+  "sameAs": [
+    locationData.social.facebook,
+    locationData.social.instagram,
+    ...(location === 'pruszkow' ? [(locationData as any).booksy] : [])
+  ].filter(Boolean)
+};
 ---
 
 <BaseLayout
-  title={`Ili Clinic ${locationData.name} - Holistyczna Klinika Skóry`}
-  description={`Ili Clinic ${locationData.name} - Skóra, zdrowie, relaks. Holistyczne podejście do dbania o zdrowie, ciało i duszę w ${locationData.address.city}.`}
+  title={`Ili Clinic ${locationData.name} — Medycyna Estetyczna`}
+  description={`Ili Clinic w ${(locationData as any).locative} — medycyna estetyczna, pielęgnacja twarzy i ciała. Botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF i więcej. Umów wizytę.`}
   location={location as 'pruszkow' | 'ostroleka'}
+  jsonLd={localBusinessSchema}
 >
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->

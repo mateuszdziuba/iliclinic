@@ -16,12 +16,50 @@ const otherLocationData = locations[otherLocation as keyof typeof locations];
 
 const mapsQuery = encodeURIComponent(`Ili Clinic ${locationData.address.street} ${locationData.address.city}`);
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&hl=pl`;
+
+const siteUrl = 'https://iliclinic.pl';
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "@id": `${siteUrl}/${location}/#business`,
+  "name": `Ili Clinic ${locationData.name}`,
+  "url": `${siteUrl}/${location}`,
+  "telephone": locationData.phone,
+  "email": locationData.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": locationData.address.street,
+    "addressLocality": locationData.address.city,
+    "postalCode": locationData.address.postalCode,
+    "addressCountry": "PL"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": (locationData as any).geo?.lat,
+    "longitude": (locationData as any).geo?.lng
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "10:00",
+      "closes": "20:00"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": locationData.phone,
+    "contactType": "customer service",
+    "availableLanguage": "Polish"
+  }
+};
 ---
 
 <BaseLayout
-  title={`Kontakt - Ili Clinic ${locationData.name}`}
-  description={`Skontaktuj się z Ili Clinic w ${locationData.name}. Telefon: ${locationData.phone}. Adres: ${locationData.address.street}, ${locationData.address.city}.`}
+  title={`Kontakt — Gabinet w ${(locationData as any).locative} | Ili Clinic`}
+  description={`Skontaktuj się z Ili Clinic w ${locationData.name}. Telefon: ${locationData.phone}. Adres: ${locationData.address.street}, ${locationData.address.city}. Godziny otwarcia: ${locationData.openingHours.weekdays}.`}
   location={location as 'pruszkow' | 'ostroleka'}
+  jsonLd={contactSchema}
 >
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->
@@ -29,7 +67,7 @@ const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&h
     <div class="max-w-7xl mx-auto px-6">
       <span class="text-primary font-body tracking-[0.4em] uppercase text-[10px] mb-8 block font-medium" data-hero-label>Kontakt</span>
       <h1 class="font-heading text-3xl sm:text-5xl lg:text-7xl text-text-main leading-[0.95] tracking-[-0.02em] mb-6" data-hero-title>
-        Gabinet<br /><em class="not-italic text-primary">w {locationData.name}</em>
+        Gabinet<br /><em class="not-italic text-primary">w {(locationData as any).locative ?? locationData.name}</em>
       </h1>
       <p class="font-body text-text-muted text-lg leading-relaxed max-w-md font-light mt-8" data-hero-desc>
         Umów wizytę telefonicznie lub odwiedź nas osobiście.

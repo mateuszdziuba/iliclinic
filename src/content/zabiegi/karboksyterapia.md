@@ -2,8 +2,6 @@
 title: "Karboksyterapia"
 description: "Terapia dwutlenkiem węgla dla poprawy krążenia. Cienie pod oczami, cellulit, blizny, rozstępy."
 locations: ['pruszkow', 'ostroleka']
-price_pruszkow: 200
-price_ostroleka: 200
 duration: "30-45 minut"
 category: "Medycyna Estetyczna"
 featured: false

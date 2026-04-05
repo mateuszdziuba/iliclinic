@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Inne
-price_pruszkow: 100
-price_ostroleka: 100
 duration: 15 minut
 featured: false
 image: /images/efcccdfb0fe88e85c148250ceb022c12.jpg

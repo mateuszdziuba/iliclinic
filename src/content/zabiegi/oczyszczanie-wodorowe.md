@@ -2,8 +2,6 @@
 title: "Oczyszczanie Wodorowe AquaSure H2"
 description: "Głębokie oczyszczanie i nawilżenie skóry przy użyciu aktywnego wodoru. Redukcja porów i nawilżenie."
 locations: ['pruszkow', 'ostroleka']
-price_pruszkow: 250
-price_ostroleka: 250
 duration: "60 minut"
 category: "Pielęgnacja Twarzy"
 featured: false

@@ -1,7 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:iliclinic.pl)",
+      "Bash(curl -s https://pl.booksy.com/api/pl/2/customer_api/businesses/113463/services -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4' -H 'Accept: application/json')",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s https://pl.booksy.com/api/pl/2/customer_api/businesses/113463/staff_members -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4' -H 'Accept: application/json')",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, ensure_ascii=False, indent=2\\)\\)\")",
+      "Bash(curl -s https://pl.booksy.com/widget/v2/businesses/113463/services -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4' -H 'Accept: application/json')",
+      "Bash(wait)",
+      "Bash(curl -s 'https://pl.booksy.com/api/pl/2/customer_api/businesses/113463?with=services' -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4')",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)\\)\")",
+      "Bash(curl -s 'https://pl.booksy.com/api/pl/2/customer_api/staff_members/210598/services?business_id=113463' -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4')",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d, ensure_ascii=False, indent=2\\)[:500]\\)\")",
+      "Bash(curl -s https://pl.booksy.com/api/pl/2/customer_api/businesses/113463/service_groups -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4')",
+      "Bash(curl -s -o /dev/null -w '%{http_code}' https://pl.booksy.com/api/pl/2/customer_api/businesses/113463/__TRACKED_VAR__ -H 'X-Api-Key: widget-efab2853-7166-492f-b78f-925d33698cd4')"
     ]
   }
 }

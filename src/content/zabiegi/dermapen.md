@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Medycyna Estetyczna
-price_pruszkow: 500
-price_ostroleka: 500
 duration: 60 minut
 featured: true
 image: /images/Problemy-skory-glowy-i-wlosow2-300x300.png
@@ -18,29 +16,29 @@ seo:
 ---
 ## Czym jest Dermapen 4.0?
 
-Dermapen 4.0 to najnowsza generacja urządzenia do frakcyjnego mikronakłuwania skóry. Zabieg polega na kontrolowanym nakłuwaniu skóry bardzo cienkimi igłami, co pobudza naturalne procesy regeneracyjne i produkcję kolagenu.
+Dermapen 4.0 to w pełni cyfrowe, automatyczne urządzenie do frakcyjnego mikronakłuwania skóry. Głowica z **opatentowanym wkładem 16 igieł** generuje do **1 920 nakłuć na sekundę** — o 47,9% więcej niż Dermapen 3. Precyzja głębokości regulowana jest co 0,1 mm, co pozwala na indywidualne dostosowanie protokołu do grubości skóry i potrzeb pacjenta.
+
+## Jak działa?
+
+Urządzenie płynnie przesuwa się po skórze, tworząc miliony pionowych, frakcyjnych kanałów, które ułatwiają wnikanie składników aktywnych w głębsze warstwy. Kontrolowane mikrourazy uruchamiają naturalny proces naprawczy — organizm intensywnie produkuje kolagen i elastynę, wyrównując teksturę i gęstość skóry.
 
 ## Wskazania
 
-*   **Blizny potrądzikowe** - wyrównanie tekstury skóry
-*   **Zmarszczki** - stymulacja produkcji kolagenu
-*   **Rozstępy** - poprawa wyglądu rozstępów
-*   **Przebarwienia** - wyrównanie kolorytu
-*   **Pory** - zmniejszenie widoczności porów
+*   Blizny potrądzikowe i atroficzne
+*   Zmarszczki i linie mimiczne
+*   Przebarwienia i nierównomierny koloryt
+*   Rozszerzone pory
+*   Rozstępy
+*   Wiotkość skóry twarzy, szyi, dekoltu, rąk
 
-## Przebieg zabiegu
+## Obszary zabiegowe
 
-1.  Oczyszczenie i znieczulenie skóry
-2.  Aplikacja serum aktywnego
-3.  Zabieg mikronakłuwania
-4.  Maska kojąca
-
-## Efekty
-
-Pełne efekty widoczne po serii 3-6 zabiegów wykonywanych co 4-6 tygodni. Skóra staje się gładsza, jędrniejsza i bardziej promienna.
+Twarz, szyja, dekolt, dłonie, biust, pośladki, plecy i tkanka bliznowata.
 
 ## Rekonwalescencja
 
-*   Zaczerwienienie przez 24-48h
-*   Unikanie słońca przez tydzień
-*   Stosowanie SPF 50+
+Zaczerwienienie przez 24–48 godzin, szybki powrót do codziennych aktywności. Wymagana ochrona SPF 50+ przez kilka tygodni.
+
+## Przeciwwskazania
+
+Aktywny nowotwór, niekontrolowana cukrzyca, miejscowy stan zapalny, leki rozrzedzające krew, ciąża i karmienie piersią.

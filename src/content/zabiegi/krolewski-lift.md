@@ -6,8 +6,6 @@ locations:
   - pruszkow
   - ostroleka
 category: Pielęgnacja Twarzy
-price_pruszkow: 350
-price_ostroleka: 350
 duration: 60 minut
 featured: true
 image: /images/Projekt-bez-nazwy1-300x300.jpg
@@ -16,49 +14,34 @@ seo:
   metaDescription: Autorski zabieg łączący manualny masaż liftingujący z
     profesjonalnymi kosmetykami MedEstelle. Relaksacja i odmłodzenie.
 ---
-## Czym jest Królewski Lift?
+## Czym jest Królewski Lift MedEstelle?
 
-Królewski Lift MedEstelle to autorski zabieg Ili Clinic łączący zaawansowane techniki masażu manualnego z profesjonalnymi kosmetykami marki MedEstelle. To doskonałe połączenie relaksu i skutecznego działania anti-aging.
+Królewski Lift to autorski masaż twarzy Ili Clinic, łączący tradycyjne techniki Dalekiego Wschodu — w tym refleksologię — z nowoczesnym podejściem do anti-agingu. Terapeuta pracuje nad mięśniami powierzchniowymi i głębokimi twarzy, szyi oraz dekoltu, stosując precyzyjne sekwencje ruchów o działaniu liftingującym, stymulującym i relaksującym. Zabieg dostępny w wariancie **liftingująco-stymulującym** lub **liftingująco-relaksującym**.
 
 ## Efekty zabiegu
 
-*   **Lifting** - natychmiastowe napięcie skóry
-    
-*   **Relaksacja** - głębokie odprężenie mięśni twarzy
-    
-*   **Nawilżenie** - intensywna pielęgnacja
-    
-*   **Poprawa owalu** - wymodelowana linia żuchwy
-    
-*   **Redukcja napięć** - rozluźnienie mięśni mimicznych
-    
+*   Poprawa owalu twarzy i spłycenie zmarszczek
+*   Skóra napięta, jasna i wypoczęta
+*   Rozluźnienie mięśni mimicznych
+*   Zwiększone ukrwienie i dotlenienie tkanek
+*   Zmniejszenie obrzęków
+*   Działanie detoksykujące
 
-## Dla kogo?
+## Wskazania
 
-Zabieg idealny dla osób:
+*   Wygładzenie i ujędrnienie skóry
+*   Poprawa krążenia krwi i limfy
+*   Zmniejszenie napięcia mięśni twarzy
+*   Widoczne zmęczenie skóry, opuchlizna
 
-*   Szukających natychmiastowego efektu lifting
-    
-*   Potrzebujących głębokiej relaksacji
-    
-*   Z pierwszymi oznakami starzenia
-    
-*   Przed ważnym wydarzeniem
-    
+## Przeciwwskazania
 
-## Przebieg zabiegu
-
-1.  Demakijaż i oczyszczenie
-    
-2.  Peeling enzymatyczny
-    
-3.  Masaż liftingujący techniką kobido
-    
-4.  Maska algowa
-    
-5.  Serum i krem finalizujący
-    
+*   Ciąża (I trymestr), nowotwory
+*   Keloidy, aktywne rany i wysypki skórne
+*   Aktywna opryszczka
+*   Implanty podskórne w obszarze zabiegu
+*   Niedawne zabiegi chirurgiczne w okolicy twarzy
 
 ## Jak często?
 
-Dla utrzymania efektów zalecamy zabieg raz w miesiącu.
+Jednorazowo dla relaksu i efektu glow, lub seria cotygodniowych sesji dla długotrwałych efektów liftingujących. Dostępna wersja premium z maską liftingującą lub rozświetlającą.

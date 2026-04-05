@@ -41,8 +41,8 @@ const treatmentsData = treatments.map(t => ({
 ---
 
 <BaseLayout
-  title={`Zabiegi - Ili Clinic ${locationData.name}`}
-  description={`Oferta zabiegów medycyny estetycznej w Ili Clinic ${locationData.name}. Botoks, kwas hialuronowy, laser, mezoterapia i więcej.`}
+  title={`Zabiegi — Medycyna Estetyczna w ${(locationData as any).locative} | Ili Clinic`}
+  description={`Zabiegi medycyny estetycznej w Ili Clinic ${locationData.name}: botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF, lipoliza, mezoterapia, trychologia. Bezpłatna konsultacja.`}
   location={location as 'pruszkow' | 'ostroleka'}
 >
 

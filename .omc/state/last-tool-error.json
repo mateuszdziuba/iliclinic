@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"pnpm build 2>&1 | grep cennik && echo \\\"---\\\" && grep -l \\\"locative\\\" /Users/mati/Mine/iliclinic/src/pages/[location]/kontakt.astro && grep \\\"price_pruszkow\\\\|price_ostroleka\\\" /Users/mati...",
+  "error": "Exit code 1\n10:01:41   ├─ /pruszkow/cennik/index.html (+2ms) \n---\n(eval):1: no matches found: /Users/mati/Mine/iliclinic/src/pages/[location]/kontakt.astro",
+  "timestamp": "2026-04-05T08:01:41.340Z",
+  "retry_count": 1
+}

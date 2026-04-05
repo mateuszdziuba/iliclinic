@@ -8,8 +8,6 @@ const zabiegi = defineCollection({
     title: z.string(),
     description: z.string(),
     locations: z.array(z.enum(['pruszkow', 'ostroleka'])),
-    price_pruszkow: z.number().optional(),
-    price_ostroleka: z.number().optional(),
     duration: z.string().optional(),
     category: z.string().optional(),
     featured: z.boolean().default(false),
