@@ -20,15 +20,17 @@ const mapsQuery = encodeURIComponent(`${salonName} ${locationData.address.street
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${mapsQuery}&output=embed&hl=pl`;
 
 const siteUrl = 'https://iliclinic.pl';
+const pageUrl = `${siteUrl}/${location}/kontakt`;
 const contactSchema = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
-  "@id": `${siteUrl}/${location}/#business`,
+  "@id": `${pageUrl}#contact`,
   "name": salonName,
   "description": `${salonName} w ${(locationData as any).locative}. Kontakt, mapa dojazdu, godziny otwarcia i dane rejestracji wizyt.`,
-  "url": `${siteUrl}/${location}`,
+  "url": pageUrl,
   "telephone": locationData.phone,
   "email": locationData.email,
+  "image": `${siteUrl}/${location === 'pruszkow' ? 'images/pruszkow-clinic-hero.jpg' : 'images/ostroleka-clinic-hero.jpg'}`,
   "address": {
     "@type": "PostalAddress",
     "streetAddress": locationData.address.street,
@@ -54,6 +56,7 @@ const contactSchema = {
     "@type": "City",
     "name": locationData.address.city
   },
+  "mainEntityOfPage": pageUrl,
   "sameAs": [
     locationData.social.facebook,
     locationData.social.instagram,

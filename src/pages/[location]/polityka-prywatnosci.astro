@@ -1,0 +1,14 @@
+---
+import LegalPage from '../../components/LegalPage.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { location: 'pruszkow' } },
+    { params: { location: 'ostroleka' } },
+  ];
+}
+
+const { location } = Astro.params;
+---
+
+<LegalPage slug="polityka-prywatnosci" location={location as 'pruszkow' | 'ostroleka'} />

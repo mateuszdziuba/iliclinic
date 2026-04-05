@@ -49,14 +49,15 @@ const allBrands = await getCollection('marki');
 const brands = allBrands.sort((a, b) => a.data.order - b.data.order);
 
 const siteUrl = 'https://iliclinic.pl';
+const pageUrl = `${siteUrl}/${location}`;
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
-  "@id": `${siteUrl}/${location}/#business`,
+  "@id": `${pageUrl}/#business`,
   "name": salonName,
   "alternateName": "ili Clinic",
   "description": `${salonName} w ${(locationData as any).locative} to gabinet medycyny estetycznej oferujący zabiegi botoksem, kwasem hialuronowym, depilacją laserową, dermapenem, falą radiową mikroigłową i trychologią.`,
-  "url": `${siteUrl}/${location}`,
+  "url": pageUrl,
   "telephone": locationData.phone,
   "email": locationData.email,
   "address": {

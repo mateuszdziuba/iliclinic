@@ -13,7 +13,7 @@
     <p class="font-body text-[11px] text-text-muted leading-relaxed flex-1 font-light">
       Używamy plików cookie (Google Analytics) do analizy ruchu na stronie.
       Możesz zaakceptować wszystkie lub wybrać tylko niezbędne.
-      <a href="/polityka-prywatnosci" class="text-primary underline underline-offset-2 hover:opacity-70 transition-opacity whitespace-nowrap ml-0.5">Polityka prywatności</a>
+      <a id="cookie-policy-link" href="/polityka-prywatnosci" class="text-primary underline underline-offset-2 hover:opacity-70 transition-opacity whitespace-nowrap ml-0.5">Polityka prywatności</a>
     </p>
     <div class="flex items-center gap-2 shrink-0">
       <button
@@ -65,6 +65,17 @@
   }
 
   function initBanner() {
+    const policyLink = document.getElementById('cookie-policy-link') as HTMLAnchorElement | null;
+    const savedLocation = localStorage.getItem('ili-location');
+    const htmlLocation = document.documentElement.getAttribute('data-location');
+    const location = savedLocation === 'pruszkow' || savedLocation === 'ostroleka'
+      ? savedLocation
+      : htmlLocation;
+
+    if (policyLink && (location === 'pruszkow' || location === 'ostroleka')) {
+      policyLink.href = `/${location}/polityka-prywatnosci`;
+    }
+
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'accepted') {
       loadGTM();

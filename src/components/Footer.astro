@@ -12,6 +12,8 @@ const currentLocationData = location ? locations[location as keyof typeof locati
 const otherLocation = location === 'pruszkow' ? 'ostroleka' : 'pruszkow';
 const otherLocationData = locations[otherLocation as keyof typeof locations];
 const allLocations = Object.values(locations);
+const privacyHref = location ? `/${location}/polityka-prywatnosci` : '/polityka-prywatnosci';
+const termsHref = location ? `/${location}/regulamin` : '/regulamin';
 ---
 
 <footer class="bg-primary text-white py-24 px-6">
@@ -115,8 +117,8 @@ const allLocations = Object.values(locations);
     <div class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-[9px] tracking-[0.2em] font-body text-white/30 uppercase">
       <p>© {new Date().getFullYear()} ili Clinic. Wszelkie prawa zastrzeżone.</p>
       <div class="flex gap-8">
-        <a href="/polityka-prywatnosci" class="hover:text-white/60 transition-colors">Polityka Prywatności</a>
-        <a href="/regulamin" class="hover:text-white/60 transition-colors">Regulamin</a>
+        <a href={privacyHref} class="hover:text-white/60 transition-colors">Polityka Prywatności</a>
+        <a href={termsHref} class="hover:text-white/60 transition-colors">Regulamin</a>
       </div>
     </div>
 

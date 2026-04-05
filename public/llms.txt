@@ -1,66 +1,41 @@
 # ili Clinic
 
-ili Clinic to marka gabinetów medycyny estetycznej i kosmetologii działająca w Polsce.
+> ili Clinic to sieć gabinetów medycyny estetycznej i kosmetologii w Pruszkowie i Ostrołęce. Najważniejsze podstrony lokalizacji, kontaktu, zabiegów i dokumentów prawnych są dostępne poniżej.
+
+Gabinet w Pruszkowie działa jako ili Clinic Studio przy ul. Obrońców Pokoju 10/Lokal 4, 05-800 Pruszków, tel. +48 660 176 464.
+
+Gabinet w Ostrołęce działa jako ili Clinic przy ul. Fieldorfa Nila 13, 07-410 Ostrołęka, tel. +48 574 960 620.
+
+Specjalizacje: medycyna estetyczna, kosmetologia twarzy i ciała, depilacja laserowa, trychologia, konsultacje zabiegowe.
+
+Rezerwacja online: Booksy dla Pruszkowa jest dostępne pod adresem https://booksy.com/pl-pl/113463_ili-clinic-studio-beauty_salon-kosmetyczny_4404_pruszkow
 
 ## Lokalizacje
 
-- **ili Clinic Studio Pruszków** — ul. Obrońców Pokoju 10/4, 05-800 Pruszków, woj. mazowieckie, tel. +48 660 176 464
-- **ili Clinic Ostrołęka** — ul. Fieldorfa Nila 13, 07-410 Ostrołęka, woj. mazowieckie, tel. +48 574 960 620
+- [Strona główna](https://iliclinic.pl/): wybór lokalizacji i wejście do gabinetów.
+- [Pruszków](https://iliclinic.pl/pruszkow): strona lokalizacji ili Clinic Studio w Pruszkowie.
+- [Ostrołęka](https://iliclinic.pl/ostroleka): strona lokalizacji ili Clinic w Ostrołęce.
+- [Kontakt Pruszków](https://iliclinic.pl/pruszkow/kontakt): adres, telefon, godziny otwarcia, mapa i rezerwacja.
+- [Kontakt Ostrołęka](https://iliclinic.pl/ostroleka/kontakt): adres, telefon, godziny otwarcia i mapa.
 
-## Profil działalności
+## Zabiegi
 
-- medycyna estetyczna
-- kosmetologia twarzy i ciała
-- depilacja laserowa
-- trychologia
-- konsultacje zabiegowe
+- [Zabiegi Pruszków](https://iliclinic.pl/pruszkow/zabiegi): pełna lista zabiegów dostępnych w Pruszkowie.
+- [Zabiegi Ostrołęka](https://iliclinic.pl/ostroleka/zabiegi): pełna lista zabiegów dostępnych w Ostrołęce.
+- [Botoks](https://iliclinic.pl/pruszkow/zabiegi/botoks): toksyna botulinowa, redukcja zmarszczek, bruksizm, nadpotliwość.
+- [Kwas hialuronowy](https://iliclinic.pl/pruszkow/zabiegi/kwas-hialuronowy): modelowanie ust, bruzd i konturów twarzy.
+- [Mezoterapia](https://iliclinic.pl/pruszkow/zabiegi/mezoterapia): nawilżenie i stymulacja skóry.
+- [Depilacja laserowa](https://iliclinic.pl/pruszkow/zabiegi/depilacja-laserowa): laser aleksandrytowo-diodowy AlexDual Xlase.
+- [Trychologia](https://iliclinic.pl/pruszkow/zabiegi/trychologia): diagnostyka i terapie skóry głowy oraz włosów.
 
-## Rezerwacja i kontakt
+## Dokumenty i zasady
 
-- strona: https://iliclinic.pl
-- e-mail: kontakt@iliclinic.pl
-- Booksy Pruszków: https://booksy.com/pl-pl/113463_ili-clinic-studio-beauty_salon-kosmetyczny_4404_pruszkow
+- [Polityka prywatności Pruszków](https://iliclinic.pl/pruszkow/polityka-prywatnosci): dokument prawny w kontekście lokalizacji Pruszków.
+- [Polityka prywatności Ostrołęka](https://iliclinic.pl/ostroleka/polityka-prywatnosci): dokument prawny w kontekście lokalizacji Ostrołęka.
+- [Regulamin Pruszków](https://iliclinic.pl/pruszkow/regulamin): regulamin w kontekście lokalizacji Pruszków.
+- [Regulamin Ostrołęka](https://iliclinic.pl/ostroleka/regulamin): regulamin w kontekście lokalizacji Ostrołęka.
 
-## Oferta zabiegów
+## Optional
 
-### Medycyna Estetyczna
-- **Toksyna botulinowa (Botoks)** — redukcja zmarszczek mimicznych, lifting brwi, bruksizm, nadpotliwość
-- **Kwas hialuronowy** — modelowanie ust, wypełnianie bruzd, konturowanie twarzy i policzków
-- **Mezoterapia igłowa** — NCTF 135HA, Aquashine, Jalupro, nawilżenie i odmłodzenie skóry
-- **Stymulatory tkankowe / Tri-ExoGF™** — egzosomalna biostymulacja, czynniki wzrostu EGF/FGF
-- **Lipoliza iniekcyjna** — redukcja lokalnej tkanki tłuszczowej (podbródek, boczki, uda)
-- **Karboksyterapia** — cienie pod oczami, cellulit, blizny, rozstępy
-
-### Hi-Tech / Laser
-- **Depilacja laserowa AlexDual Xlase** — laser aleksandrytowo-diodowy 808/760 nm, wszystkie fototypy skóry
-- **Fala radiowa mikroigłowa Gold Needle RF** — mikronakłuwanie + RF, lifting i przebudowa skóry
-- **Termolifting Xlase** — nieinwazyjny lifting laserowy, natychmiastowe napięcie skóry
-- **Zamykanie naczynek Alma Dye-VL** — fotoodnowa, usuwanie zmian naczyniowych i przebarwień
-
-### Pielęgnacja Twarzy
-- **Królewski Lift MedEstelle** — autorski masaż liftingujący łączący techniki Dalekiego Wschodu
-- **Dermapen 4.0** — frakcyjne mikronakłuwanie, redukcja blizn, zmarszczek i rozstępów
-- **Oczyszczanie wodorowe AquaSure H2** — głębokie oczyszczanie i nawilżenie
-- **Zabiegi Cosmo S-Peel MedEstelle** — peelingi dla pigmentacji, trądziku, cery naczynkowej
-
-### Trychologia
-- **Konsultacja trychologiczna** — diagnostyka z trichoskopem, wypadanie włosów, łysienie
-- **Mezoterapia skóry głowy** — stymulacja wzrostu włosów
-- **Zabiegi na skórę głowy** — Dr. Cyj, terapia przeciw łysieniu
-
-### Inne
-- **Przekłuwanie uszu Blomdahl** — medyczny system, biżuteria hipoalergiczna
-
-## Marki i technologie
-Allergan, Juvederm, Teoxane, Dermapen 4, MedEstelle, Xlase, AlexDual, Gold Needle RF, Alma Dye-VL
-
-## Godziny otwarcia
-Poniedziałek – Piątek: 10:00–20:00
-Sobota: po wcześniejszym umówieniu
-Niedziela: zamknięte
-
-## Obszar geograficzny
-
-- Pruszków
-- Ostrołęka
-- województwo mazowieckie
+- [Polityka prywatności](https://iliclinic.pl/polityka-prywatnosci): wersja ogólna dokumentu.
+- [Regulamin](https://iliclinic.pl/regulamin): wersja ogólna dokumentu.
