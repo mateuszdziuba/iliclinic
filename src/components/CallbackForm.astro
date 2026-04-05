@@ -74,6 +74,8 @@ const isPrimary = tone === 'primary';
           type="tel"
           name="phone"
           autocomplete="tel"
+          inputmode="numeric"
+          maxlength="15"
           required
           class:list={[
             'w-full rounded-2xl border px-4 py-3 font-body text-sm outline-none transition-colors',
@@ -81,7 +83,8 @@ const isPrimary = tone === 'primary';
               ? 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30'
               : 'border-white/12 bg-white/8 text-white placeholder:text-white/35 focus:border-white/30',
           ]}
-          placeholder="+48 000 000 000"
+          placeholder="+48 500 600 700"
+          pattern="^(\+48 )?\d{3} \d{3} \d{3}$"
         />
       </label>
     </div>
@@ -127,17 +130,77 @@ const isPrimary = tone === 'primary';
 <script>
   import { actions } from 'astro:actions';
 
+  const PHONE_MAX_LENGTH = 15;
+  const POLISH_PHONE_PATTERN = /^(\+48 )?\d{3} \d{3} \d{3}$/;
+
+  function formatPolishPhoneInput(value) {
+    const raw = String(value || '').replace(/[^\d+]/g, '');
+    const hasInternationalPrefix = raw.startsWith('+48');
+    const digits = raw.replace(/\D/g, '');
+    const useCountryCode = hasInternationalPrefix || (digits.startsWith('48') && digits.length > 9);
+    const trimmedDigits = useCountryCode ? digits.slice(0, 11) : digits.slice(0, 9);
+    const localDigits = useCountryCode ? trimmedDigits.slice(2) : trimmedDigits;
+
+    const groups = [];
+    for (let index = 0; index < localDigits.length; index += 3) {
+      groups.push(localDigits.slice(index, index + 3));
+    }
+
+    const prefix = useCountryCode ? '+48' : '';
+    const formatted = [prefix, ...groups].filter(Boolean).join(' ').trim();
+    return formatted.slice(0, PHONE_MAX_LENGTH);
+  }
+
+  function validateFormFields(form, status) {
+    const nameInput = form.querySelector('input[name="name"]');
+    const phoneInput = form.querySelector('input[name="phone"]');
+
+    if (!nameInput || !phoneInput) return true;
+
+    const name = String(nameInput.value || '').trim();
+    const phone = formatPolishPhoneInput(String(phoneInput.value || ''));
+    phoneInput.value = phone;
+
+    if (name.length < 2) {
+      status.textContent = 'Podaj imię i nazwisko.';
+      nameInput.focus();
+      return false;
+    }
+
+    if (!POLISH_PHONE_PATTERN.test(phone)) {
+      status.textContent = 'Podaj poprawny polski numer telefonu, np. 500 600 700 lub +48 500 600 700.';
+      phoneInput.focus();
+      return false;
+    }
+
+    status.textContent = '';
+    return true;
+  }
+
   function initCallbackForms() {
     document.querySelectorAll('[data-callback-form]').forEach((formElement) => {
       const form = formElement;
       const status = form.querySelector('[data-callback-status]');
       const submit = form.querySelector('[data-callback-submit]');
+      const phoneInput = form.querySelector('input[name="phone"]');
 
       if (!status || !submit || form.dataset.callbackBound === 'true') return;
       form.dataset.callbackBound = 'true';
 
+      phoneInput?.addEventListener('input', () => {
+        phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
+
+      phoneInput?.addEventListener('blur', () => {
+        phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
+
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
+
+        if (!validateFormFields(form, status)) {
+          return;
+        }
 
         const formData = new FormData(form);
         formData.set('pageUrl', window.location.href);
@@ -150,7 +213,7 @@ const isPrimary = tone === 'primary';
 
           if (!error) {
             form.reset();
-            status.textContent = 'Numer został zapisany. Skontaktujemy się możliwie szybko.';
+            status.textContent = 'Numer został zapisany. Oddzwonimy możliwie szybko.';
             return;
           }
 

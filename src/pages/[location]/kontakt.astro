@@ -223,9 +223,12 @@ const contactSchema = {
                     type="tel"
                     name="phone"
                     autocomplete="tel"
+                    inputmode="numeric"
+                    maxlength="15"
                     required
                     class="w-full rounded-2xl border border-primary/12 bg-surface px-4 py-3 font-body text-sm text-text-main outline-none transition-colors placeholder:text-text-muted/55 focus:border-primary"
-                    placeholder="+48 000 000 000"
+                    placeholder="+48 500 600 700"
+                    pattern="^(\+48 )?\d{3} \d{3} \d{3}$"
                   />
                 </label>
               </div>
@@ -236,6 +239,7 @@ const contactSchema = {
                   type="email"
                   name="email"
                   autocomplete="email"
+                  inputmode="email"
                   class="w-full rounded-2xl border border-primary/12 bg-surface px-4 py-3 font-body text-sm text-text-main outline-none transition-colors placeholder:text-text-muted/55 focus:border-primary"
                   placeholder="Opcjonalnie, jeśli mamy odpisać mailowo"
                 />
@@ -324,6 +328,73 @@ const contactSchema = {
   import { actions } from 'astro:actions';
 
   gsap.registerPlugin(ScrollTrigger);
+  const PHONE_MAX_LENGTH = 15;
+  const POLISH_PHONE_PATTERN = /^(\+48 )?\d{3} \d{3} \d{3}$/;
+
+  function formatPolishPhoneInput(value: string) {
+    const raw = String(value || '').replace(/[^\d+]/g, '');
+    const hasInternationalPrefix = raw.startsWith('+48');
+    const digits = raw.replace(/\D/g, '');
+    const useCountryCode = hasInternationalPrefix || (digits.startsWith('48') && digits.length > 9);
+    const trimmedDigits = useCountryCode ? digits.slice(0, 11) : digits.slice(0, 9);
+    const localDigits = useCountryCode ? trimmedDigits.slice(2) : trimmedDigits;
+
+    const groups: string[] = [];
+    for (let index = 0; index < localDigits.length; index += 3) {
+      groups.push(localDigits.slice(index, index + 3));
+    }
+
+    const prefix = useCountryCode ? '+48' : '';
+    const formatted = [prefix, ...groups].filter(Boolean).join(' ').trim();
+    return formatted.slice(0, PHONE_MAX_LENGTH);
+  }
+
+  function isValidPolishPhone(value: string) {
+    return POLISH_PHONE_PATTERN.test(formatPolishPhoneInput(value));
+  }
+
+  function isValidEmail(value: string) {
+    return !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  }
+
+  function validateContactForm(form: HTMLFormElement, status: HTMLParagraphElement, inquiryType: string) {
+    const nameInput = form.querySelector('input[name="name"]') as HTMLInputElement | null;
+    const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement | null;
+    const emailInput = form.querySelector('input[name="email"]') as HTMLInputElement | null;
+    const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
+
+    if (!nameInput || !phoneInput) return true;
+
+    const name = nameInput.value.trim();
+    phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+
+    if (name.length < 2) {
+      status.textContent = 'Podaj imię i nazwisko.';
+      nameInput.focus();
+      return false;
+    }
+
+    if (!isValidPolishPhone(phoneInput.value)) {
+      status.textContent = 'Podaj poprawny polski numer telefonu, np. 500 600 700 lub +48 500 600 700.';
+      phoneInput.focus();
+      return false;
+    }
+
+    if (emailInput && !isValidEmail(emailInput.value)) {
+      status.textContent = 'Podaj poprawny adres e-mail.';
+      emailInput.focus();
+      return false;
+    }
+
+    if (inquiryType === 'message' && messageInput && messageInput.value.trim().length < 10) {
+      status.textContent = 'Wpisz krótką wiadomość, abyśmy wiedzieli, jak pomóc.';
+      messageInput.focus();
+      return false;
+    }
+
+    status.textContent = '';
+    return true;
+  }
 
   function initAnimations() {
     const safetyTimeout = setTimeout(() => {
@@ -356,15 +427,29 @@ const contactSchema = {
       const form = formElement as HTMLFormElement;
       const status = form.querySelector('[data-contact-status]') as HTMLParagraphElement | null;
       const submit = form.querySelector('[data-contact-submit]') as HTMLButtonElement | null;
+      const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement | null;
 
       if (!status || !submit || form.dataset.contactBound === 'true') return;
       form.dataset.contactBound = 'true';
+
+      phoneInput?.addEventListener('input', () => {
+        phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
+
+      phoneInput?.addEventListener('blur', () => {
+        phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
 
       form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const formData = new FormData(form);
         const inquiryType = String(formData.get('inquiryType') || 'message');
+
+        if (!validateContactForm(form, status, inquiryType)) {
+          return;
+        }
+
         formData.set('pageUrl', window.location.href);
 
         submit.disabled = true;

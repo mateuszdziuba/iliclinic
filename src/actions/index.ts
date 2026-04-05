@@ -1,12 +1,34 @@
 import { ActionError, defineAction } from 'astro:actions';
 import { z } from 'astro/zod';
-import { sendContactEmail, type ContactPayload } from '../lib/contact';
+import {
+  normalizeEmail,
+  normalizePolishPhone,
+  sendContactEmail,
+  sendTelegramNotification,
+  type ContactPayload,
+} from '../lib/contact';
 
 const optionalTrimmedString = z
   .string()
   .transform((value) => value.trim())
   .optional()
   .default('');
+
+const optionalEmailString = optionalTrimmedString.transform((value) => normalizeEmail(value));
+const polishPhoneString = z
+  .string()
+  .trim()
+  .transform((value, ctx) => {
+    const normalized = normalizePolishPhone(value);
+    if (!normalized) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Podaj poprawny polski numer telefonu.',
+      });
+      return z.NEVER;
+    }
+    return normalized;
+  });
 
 export const server = {
   contact: defineAction({
@@ -15,8 +37,8 @@ export const server = {
       location: optionalTrimmedString,
       locationName: optionalTrimmedString,
       name: z.string().trim().min(2, 'Podaj imię i nazwisko.'),
-      phone: z.string().trim().min(7, 'Podaj poprawny numer telefonu.'),
-      email: optionalTrimmedString.refine(
+      phone: polishPhoneString,
+      email: optionalEmailString.refine(
         (value) => !value || z.string().email().safeParse(value).success,
         'Podaj poprawny adres e-mail.'
       ),
@@ -46,6 +68,7 @@ export const server = {
 
       try {
         await sendContactEmail(import.meta.env as Record<string, string | undefined>, payload);
+        await sendTelegramNotification(import.meta.env as Record<string, string | undefined>, payload);
       } catch (error) {
         if (error instanceof Error && error.message.startsWith('delivery_not_configured')) {
           console.error('[contact-action] Missing SMTP env keys:', error.message.replace('delivery_not_configured:', ''));
