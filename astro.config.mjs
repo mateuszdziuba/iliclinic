@@ -10,6 +10,9 @@ export default defineConfig({
   site: 'https://iliclinic.pl',
   adapter: vercel(),
   integrations: [sitemap()],
+  prefetch: {
+    prefetchAll: false,
+  },
   fonts: [
     {
       provider: fontProviders.google(),

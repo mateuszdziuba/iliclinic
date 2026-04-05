@@ -8,11 +8,10 @@ import {
   type ContactPayload,
 } from '../lib/contact';
 
-const optionalTrimmedString = z
-  .string()
-  .transform((value) => value.trim())
-  .optional()
-  .default('');
+const optionalTrimmedString = z.preprocess(
+  (value) => (typeof value === 'string' ? value : ''),
+  z.string().transform((value) => value.trim())
+);
 
 const optionalEmailString = optionalTrimmedString.transform((value) => normalizeEmail(value));
 const polishPhoneString = z

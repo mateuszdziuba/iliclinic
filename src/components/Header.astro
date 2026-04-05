@@ -34,7 +34,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
   <div class="px-7 py-3.5">
     <div class="flex items-center justify-between">
       <!-- Logo -->
-      <a href={validLocation ? `/${location}` : '/'} class="flex items-center gap-3 group">
+      <a href={validLocation ? `/${location}` : '/'} data-astro-reload class="flex items-center gap-3 group">
         <img
           src="/images/logo-black.png"
           alt="ili Clinic"
@@ -73,6 +73,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
         {validLocation && otherLocationData && (
           <a
             href={`/${otherLocation}`}
+            data-astro-reload
             class="hidden md:block font-body text-[9px] uppercase tracking-widest opacity-40 hover:opacity-80 transition-opacity"
           >
             {otherLocationData.name}
@@ -122,6 +123,7 @@ const validLocation = location === 'pruszkow' || location === 'ostroleka';
         {otherLocationData && (
           <a
             href={`/${otherLocation}`}
+            data-astro-reload
             class="self-start inline-flex items-center gap-2 bg-surface-dim border border-primary/20 text-text-muted px-4 py-2 rounded-full font-body text-[9px] tracking-[0.15em] uppercase hover:border-primary hover:text-text-main transition-all"
           >
             <span class="w-1.5 h-1.5 rounded-full bg-primary/40 shrink-0"></span>

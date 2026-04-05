@@ -96,7 +96,7 @@ const termsHref = location ? `/${location}/regulamin` : '/regulamin';
                   </a>
                 </li>
                 <li class="pt-2">
-                  <a href={`/${otherLocation}`} class="text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body">
+                  <a href={`/${otherLocation}`} data-astro-reload class="text-accent hover:text-white transition-colors text-[9px] uppercase tracking-[0.2em] font-body">
                     Gabinet {otherLocationData.name} →
                   </a>
                 </li>
@@ -104,7 +104,7 @@ const termsHref = location ? `/${location}/regulamin` : '/regulamin';
             ) : (
               allLocations.map(loc => (
                 <li>
-                  <a href={`/${loc.slug}`} class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">{loc.name}</a>
+                  <a href={`/${loc.slug}`} data-astro-reload class="text-white/60 hover:text-white transition-colors text-sm font-light font-body">{loc.name}</a>
                 </li>
               ))
             )}
