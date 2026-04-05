@@ -45,9 +45,10 @@ export const server = {
       };
 
       try {
-        await sendContactEmail(import.meta.env, payload);
+        await sendContactEmail(import.meta.env as Record<string, string | undefined>, payload);
       } catch (error) {
-        if (error instanceof Error && error.message === 'delivery_not_configured') {
+        if (error instanceof Error && error.message.startsWith('delivery_not_configured')) {
+          console.error('[contact-action] Missing SMTP env keys:', error.message.replace('delivery_not_configured:', ''));
           throw new ActionError({
             code: 'INTERNAL_SERVER_ERROR',
             message: 'Wysyłka automatyczna nie jest jeszcze skonfigurowana.',

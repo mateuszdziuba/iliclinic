@@ -22,13 +22,20 @@ type SmtpConfig = {
   secure: boolean;
 };
 
-export function getSmtpConfig(env: ImportMetaEnv): SmtpConfig | null {
-  const host = String(env.SMTP_HOST || 'host725744.hostido.net.pl').trim();
-  const port = Number(env.SMTP_PORT || 587);
-  const user = String(env.SMTP_USER || '').trim();
-  const pass = String(env.SMTP_PASS || '').trim();
-  const from = String(env.SMTP_FROM || user).trim();
-  const to = String(env.CONTACT_TO_EMAIL || from).trim();
+type EnvSource = Record<string, string | undefined>;
+
+function readEnv(key: string, env?: EnvSource) {
+  const runtimeValue = typeof process !== 'undefined' ? process.env[key] : undefined;
+  return runtimeValue ?? env?.[key];
+}
+
+export function getSmtpConfig(env?: EnvSource): SmtpConfig | null {
+  const host = String(readEnv('SMTP_HOST', env) || 'host725744.hostido.net.pl').trim();
+  const port = Number(readEnv('SMTP_PORT', env) || 587);
+  const user = String(readEnv('SMTP_USER', env) || '').trim();
+  const pass = String(readEnv('SMTP_PASS', env) || '').trim();
+  const from = String(readEnv('SMTP_FROM', env) || user).trim();
+  const to = String(readEnv('CONTACT_TO_EMAIL', env) || from).trim();
 
   if (!host || !port || !user || !pass || !from || !to) {
     return null;
@@ -67,11 +74,17 @@ export function buildMailText(payload: ContactPayload) {
   ].join('\n');
 }
 
-export async function sendContactEmail(env: ImportMetaEnv, payload: ContactPayload) {
+export function getMissingSmtpKeys(env?: EnvSource) {
+  const requiredKeys = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'SMTP_FROM', 'CONTACT_TO_EMAIL'];
+  return requiredKeys.filter((key) => !String(readEnv(key, env) || '').trim());
+}
+
+export async function sendContactEmail(env: EnvSource | undefined, payload: ContactPayload) {
   const smtp = getSmtpConfig(env);
 
   if (!smtp) {
-    throw new Error('delivery_not_configured');
+    const missingKeys = getMissingSmtpKeys(env);
+    throw new Error(`delivery_not_configured:${missingKeys.join(',')}`);
   }
 
   const transport = nodemailer.createTransport({
