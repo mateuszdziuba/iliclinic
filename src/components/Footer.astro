@@ -1,5 +1,6 @@
 ---
 import locations from '../data/locations.json';
+import BooksyIcon from './BooksyIcon.astro';
 
 interface Props {
   location?: 'pruszkow' | 'ostroleka';
@@ -67,8 +68,9 @@ const allLocations = Object.values(locations);
             {(currentLocationData as any)?.booksy && (
               <li>
                 <a href={(currentLocationData as any).booksy} target="_blank" rel="noopener"
-                   class="text-accent hover:text-white transition-colors text-sm font-light font-body">
-                  Umów wizytę ↗
+                   class="inline-flex items-center gap-2 text-accent hover:text-white transition-colors text-sm font-light font-body">
+                  <span>Umów wizytę</span>
+                  <BooksyIcon class="w-4 h-4" />
                 </a>
               </li>
             )}

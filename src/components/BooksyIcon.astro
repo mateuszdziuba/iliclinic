@@ -1,0 +1,13 @@
+---
+import { CalendarDays } from 'lucide-astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'w-4 h-4' } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center justify-center text-current', className]} aria-hidden="true">
+  <CalendarDays class="w-[70%] h-[70%] stroke-[2.1]" />
+</span>

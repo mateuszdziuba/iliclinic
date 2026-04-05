@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import locations from '../../data/locations.json';
 import { getCollection } from 'astro:content';
+import BooksyIcon from '../../components/BooksyIcon.astro';
 import CmsImage from '../../components/CmsImage.astro';
 
 export async function getStaticPaths() {
@@ -134,9 +135,10 @@ const localBusinessSchema = {
                   href={(locationData as any).booksy}
                   target="_blank"
                   rel="noopener"
-                  class="inline-block border border-white/50 text-white bg-white/10 px-6 sm:px-10 py-3 sm:py-4 text-xs tracking-[0.2em] uppercase font-body font-medium hover:bg-white/20 transition-all active:scale-95 duration-150 rounded-full"
+                  class="inline-flex items-center gap-2 border border-white/50 text-white bg-white/10 px-6 sm:px-10 py-3 sm:py-4 text-xs tracking-[0.2em] uppercase font-body font-medium hover:bg-white/20 transition-all active:scale-95 duration-150 rounded-full"
                 >
-                  Booksy ↗
+                  <span>Booksy</span>
+                  <BooksyIcon class="w-4 h-4" />
                 </a>
               )}
             </div>

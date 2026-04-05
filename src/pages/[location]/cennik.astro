@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import locations from '../../data/locations.json';
+import BooksyIcon from '../../components/BooksyIcon.astro';
 
 export const prerender = false;
 
@@ -176,7 +177,8 @@ function pluralServices(n: number) {
           rel="noopener"
           class="inline-flex items-center gap-2 bg-primary text-surface px-8 py-3 rounded-full font-body text-[10px] tracking-widest uppercase hover:brightness-110 transition-all"
         >
-          Otwórz Booksy →
+          <span>Otwórz Booksy</span>
+          <BooksyIcon class="w-4 h-4" />
         </a>
       </div>
     </section>
@@ -199,7 +201,8 @@ function pluralServices(n: number) {
           rel="noopener"
           class="inline-flex items-center justify-center gap-2 bg-primary text-surface px-10 py-4 rounded-full font-body text-[10px] tracking-widest uppercase hover:brightness-110 transition-all active:scale-95 w-full sm:w-auto"
         >
-          Zarezerwuj przez Booksy
+          <span>Zarezerwuj przez Booksy</span>
+          <BooksyIcon class="w-4 h-4" />
         </a>
         <a
           href={`tel:${locationData.phone.replace(/\s/g, '')}`}
