@@ -21,9 +21,18 @@ const secondaryImage = {
   ostroleka: '/images/pruszkow-clinic-hero.jpg',
 } as const;
 const heroImage = {
-  pruszkow: '/images/pruszkow-clinic-hero.jpg',
-  ostroleka: '/images/ostroleka-clinic-hero.jpg',
+  pruszkow: {
+    src: '/images/pruszkow-clinic-hero.jpg',
+    widths: [480, 768, 1024, 1280, 1440],
+    quality: 58,
+  },
+  ostroleka: {
+    src: '/images/ostroleka-clinic-hero.jpg',
+    widths: [480, 768, 1024, 1280, 1440],
+    quality: 50,
+  },
 } as const;
+const currentHeroImage = heroImage[location as keyof typeof heroImage];
 
 if (!locationData) {
   return Astro.redirect('/');
@@ -71,7 +80,7 @@ const localBusinessSchema = {
     }
   ],
   "priceRange": "$$",
-  "image": `${siteUrl}/images/pruszkow-clinic-hero.jpg`,
+  "image": `${siteUrl}${currentHeroImage.src}`,
   "hasMap": locationData.googleMapsUrl,
   "areaServed": {
     "@type": "City",
@@ -90,6 +99,7 @@ const localBusinessSchema = {
   title={locationSeo.homeTitle ?? `${salonName} — Medycyna Estetyczna`}
   description={locationSeo.homeDescription ?? `${salonName} w ${(locationData as any).locative} — medycyna estetyczna, pielęgnacja twarzy i ciała. Botoks, kwas hialuronowy, depilacja laserowa, dermapen, Gold Needle RF i więcej. Umów wizytę.`}
   location={location as 'pruszkow' | 'ostroleka'}
+  ogImage={currentHeroImage.src}
   jsonLd={localBusinessSchema}
   enableClientRouter={false}
   enableSmoothScroll={false}
@@ -100,12 +110,12 @@ const localBusinessSchema = {
     <div class="container mx-auto max-w-7xl relative h-full w-full">
       <div class="relative w-full h-[90vh] overflow-hidden rounded-[40px] md:rounded-[60px] shadow-2xl">
         <CmsImage
-          src={heroImage[location as keyof typeof heroImage]}
+          src={currentHeroImage.src}
           alt={salonName}
           class="w-full h-full object-cover"
-          widths={[640, 960, 1280, 1600]}
+          widths={currentHeroImage.widths}
           sizes="100vw"
-          quality={58}
+          quality={currentHeroImage.quality}
           priority={true}
         />
         <!-- gradient: primary-colored per location via CSS var -->
