@@ -63,6 +63,7 @@ const isPrimary = tone === 'primary';
           ]}
           placeholder="Jak mamy się do Ciebie zwracać?"
         />
+        <p class="mt-2 min-h-[1.25rem] font-body text-xs text-white/72" data-field-error="name" aria-live="polite"></p>
       </label>
 
       <label class="block">
@@ -86,6 +87,7 @@ const isPrimary = tone === 'primary';
           placeholder="+48 500 600 700"
           pattern="^(\+48 )?\d{3} \d{3} \d{3}$"
         />
+        <p class="mt-2 min-h-[1.25rem] font-body text-xs text-white/72" data-field-error="phone" aria-live="polite"></p>
       </label>
     </div>
 
@@ -110,7 +112,7 @@ const isPrimary = tone === 'primary';
     <button
       type="submit"
       class:list={[
-        'inline-flex items-center justify-center rounded-full px-6 py-3 font-body text-[10px] uppercase tracking-[0.22em] transition-colors',
+        'inline-flex cursor-pointer items-center justify-center rounded-full px-6 py-3 font-body text-[10px] uppercase tracking-[0.22em] transition-colors',
         isPrimary
           ? 'bg-white text-black hover:bg-white/88'
           : 'bg-white text-black hover:bg-white/88',
@@ -151,24 +153,49 @@ const isPrimary = tone === 'primary';
     return formatted.slice(0, PHONE_MAX_LENGTH);
   }
 
+  function getFieldErrorElement(form, fieldName) {
+    return form.querySelector(`[data-field-error="${fieldName}"]`);
+  }
+
+  function setFieldError(form, fieldName, message) {
+    const field = form.querySelector(`[name="${fieldName}"]`);
+    const error = getFieldErrorElement(form, fieldName);
+    if (field) field.setAttribute('aria-invalid', 'true');
+    if (error) error.textContent = message;
+  }
+
+  function clearFieldError(form, fieldName) {
+    const field = form.querySelector(`[name="${fieldName}"]`);
+    const error = getFieldErrorElement(form, fieldName);
+    if (field) field.removeAttribute('aria-invalid');
+    if (error) error.textContent = '';
+  }
+
+  function clearFieldErrors(form) {
+    ['name', 'phone'].forEach((fieldName) => clearFieldError(form, fieldName));
+  }
+
   function validateFormFields(form, status) {
     const nameInput = form.querySelector('input[name="name"]');
     const phoneInput = form.querySelector('input[name="phone"]');
 
     if (!nameInput || !phoneInput) return true;
+    clearFieldErrors(form);
 
     const name = String(nameInput.value || '').trim();
     const phone = formatPolishPhoneInput(String(phoneInput.value || ''));
     phoneInput.value = phone;
 
     if (name.length < 2) {
-      status.textContent = 'Podaj imię i nazwisko.';
+      setFieldError(form, 'name', 'Podaj imię i nazwisko.');
+      status.textContent = '';
       nameInput.focus();
       return false;
     }
 
     if (!POLISH_PHONE_PATTERN.test(phone)) {
-      status.textContent = 'Podaj poprawny polski numer telefonu, np. 500 600 700 lub +48 500 600 700.';
+      setFieldError(form, 'phone', 'Podaj poprawny numer, np. 500 600 700.');
+      status.textContent = '';
       phoneInput.focus();
       return false;
     }
@@ -189,10 +216,15 @@ const isPrimary = tone === 'primary';
 
       phoneInput?.addEventListener('input', () => {
         phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+        clearFieldError(form, 'phone');
       });
 
       phoneInput?.addEventListener('blur', () => {
         phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
+
+      form.querySelector('input[name="name"]')?.addEventListener('input', () => {
+        clearFieldError(form, 'name');
       });
 
       form.addEventListener('submit', async (event) => {

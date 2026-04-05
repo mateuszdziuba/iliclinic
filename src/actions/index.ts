@@ -30,22 +30,33 @@ const polishPhoneString = z
     return normalized;
   });
 
+const contactInputSchema = z.object({
+  location: optionalTrimmedString,
+  locationName: optionalTrimmedString,
+  name: z.string().trim().min(2, 'Podaj imię i nazwisko.'),
+  phone: polishPhoneString,
+  email: optionalEmailString,
+  message: optionalTrimmedString,
+  inquiryType: z.enum(['message', 'callback']).default('message'),
+  pageUrl: optionalTrimmedString,
+}).superRefine((input, ctx) => {
+  if (
+    input.inquiryType === 'message'
+    && input.email
+    && !z.string().email().safeParse(input.email).success
+  ) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['email'],
+      message: 'Podaj poprawny adres e-mail.',
+    });
+  }
+});
+
 export const server = {
   contact: defineAction({
     accept: 'form',
-    input: z.object({
-      location: optionalTrimmedString,
-      locationName: optionalTrimmedString,
-      name: z.string().trim().min(2, 'Podaj imię i nazwisko.'),
-      phone: polishPhoneString,
-      email: optionalEmailString.refine(
-        (value) => !value || z.string().email().safeParse(value).success,
-        'Podaj poprawny adres e-mail.'
-      ),
-      message: optionalTrimmedString,
-      inquiryType: z.enum(['message', 'callback']).default('message'),
-      pageUrl: optionalTrimmedString,
-    }),
+    input: contactInputSchema,
     handler: async (input) => {
       if (input.inquiryType === 'message' && input.message.length < 10) {
         throw new ActionError({

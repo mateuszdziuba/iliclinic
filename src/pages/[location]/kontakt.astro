@@ -215,6 +215,7 @@ const contactSchema = {
                     class="w-full rounded-2xl border border-primary/12 bg-surface px-4 py-3 font-body text-sm text-text-main outline-none transition-colors placeholder:text-text-muted/55 focus:border-primary"
                     placeholder="Jak mamy się do Ciebie zwracać?"
                   />
+                  <p class="mt-2 min-h-[1.25rem] font-body text-xs text-primary" data-field-error="name" aria-live="polite"></p>
                 </label>
 
                 <label class="block">
@@ -230,6 +231,7 @@ const contactSchema = {
                     placeholder="+48 500 600 700"
                     pattern="^(\+48 )?\d{3} \d{3} \d{3}$"
                   />
+                  <p class="mt-2 min-h-[1.25rem] font-body text-xs text-primary" data-field-error="phone" aria-live="polite"></p>
                 </label>
               </div>
 
@@ -243,6 +245,7 @@ const contactSchema = {
                   class="w-full rounded-2xl border border-primary/12 bg-surface px-4 py-3 font-body text-sm text-text-main outline-none transition-colors placeholder:text-text-muted/55 focus:border-primary"
                   placeholder="Opcjonalnie, jeśli mamy odpisać mailowo"
                 />
+                <p class="mt-2 min-h-[1.25rem] font-body text-xs text-primary" data-field-error="email" aria-live="polite"></p>
               </label>
 
               <label class="block">
@@ -254,12 +257,13 @@ const contactSchema = {
                   class="w-full rounded-[24px] border border-primary/12 bg-surface px-4 py-3 font-body text-sm leading-relaxed text-text-main outline-none transition-colors placeholder:text-text-muted/55 focus:border-primary"
                   placeholder="Opisz krótko, czego dotyczy wiadomość albo jaki zabieg Cię interesuje."
                 ></textarea>
+                <p class="mt-2 min-h-[1.25rem] font-body text-xs text-primary" data-field-error="message" aria-live="polite"></p>
               </label>
 
               <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <button
                   type="submit"
-                  class="inline-flex items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 font-body text-xs uppercase tracking-widest text-surface transition-all duration-300 hover:brightness-110"
+                  class="inline-flex cursor-pointer items-center justify-center gap-3 rounded-full bg-primary px-8 py-4 font-body text-xs uppercase tracking-widest text-surface transition-all duration-300 hover:brightness-110"
                   data-contact-submit
                 >
                   Wyślij wiadomość
@@ -357,6 +361,28 @@ const contactSchema = {
     return !value || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
   }
 
+  function getFieldErrorElement(form: HTMLFormElement, fieldName: string) {
+    return form.querySelector(`[data-field-error="${fieldName}"]`) as HTMLParagraphElement | null;
+  }
+
+  function setFieldError(form: HTMLFormElement, fieldName: string, message: string) {
+    const field = form.querySelector(`[name="${fieldName}"]`) as HTMLInputElement | HTMLTextAreaElement | null;
+    const error = getFieldErrorElement(form, fieldName);
+    if (field) field.setAttribute('aria-invalid', 'true');
+    if (error) error.textContent = message;
+  }
+
+  function clearFieldError(form: HTMLFormElement, fieldName: string) {
+    const field = form.querySelector(`[name="${fieldName}"]`) as HTMLInputElement | HTMLTextAreaElement | null;
+    const error = getFieldErrorElement(form, fieldName);
+    if (field) field.removeAttribute('aria-invalid');
+    if (error) error.textContent = '';
+  }
+
+  function clearFieldErrors(form: HTMLFormElement) {
+    ['name', 'phone', 'email', 'message'].forEach((fieldName) => clearFieldError(form, fieldName));
+  }
+
   function validateContactForm(form: HTMLFormElement, status: HTMLParagraphElement, inquiryType: string) {
     const nameInput = form.querySelector('input[name="name"]') as HTMLInputElement | null;
     const phoneInput = form.querySelector('input[name="phone"]') as HTMLInputElement | null;
@@ -364,30 +390,34 @@ const contactSchema = {
     const messageInput = form.querySelector('textarea[name="message"]') as HTMLTextAreaElement | null;
 
     if (!nameInput || !phoneInput) return true;
+    clearFieldErrors(form);
 
     const name = nameInput.value.trim();
     phoneInput.value = formatPolishPhoneInput(phoneInput.value);
 
     if (name.length < 2) {
-      status.textContent = 'Podaj imię i nazwisko.';
+      setFieldError(form, 'name', 'Podaj imię i nazwisko.');
+      status.textContent = '';
       nameInput.focus();
       return false;
     }
 
     if (!isValidPolishPhone(phoneInput.value)) {
-      status.textContent = 'Podaj poprawny polski numer telefonu, np. 500 600 700 lub +48 500 600 700.';
+      setFieldError(form, 'phone', 'Podaj poprawny numer, np. 500 600 700.');
       phoneInput.focus();
       return false;
     }
 
     if (emailInput && !isValidEmail(emailInput.value)) {
-      status.textContent = 'Podaj poprawny adres e-mail.';
+      setFieldError(form, 'email', 'Podaj poprawny adres e-mail.');
+      status.textContent = '';
       emailInput.focus();
       return false;
     }
 
     if (inquiryType === 'message' && messageInput && messageInput.value.trim().length < 10) {
-      status.textContent = 'Wpisz krótką wiadomość, abyśmy wiedzieli, jak pomóc.';
+      setFieldError(form, 'message', 'Wpisz krótką wiadomość, abyśmy wiedzieli, jak pomóc.');
+      status.textContent = '';
       messageInput.focus();
       return false;
     }
@@ -434,10 +464,23 @@ const contactSchema = {
 
       phoneInput?.addEventListener('input', () => {
         phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+        clearFieldError(form, 'phone');
       });
 
       phoneInput?.addEventListener('blur', () => {
         phoneInput.value = formatPolishPhoneInput(phoneInput.value);
+      });
+
+      form.querySelector('input[name="name"]')?.addEventListener('input', () => {
+        clearFieldError(form, 'name');
+      });
+
+      form.querySelector('input[name="email"]')?.addEventListener('input', () => {
+        clearFieldError(form, 'email');
+      });
+
+      form.querySelector('textarea[name="message"]')?.addEventListener('input', () => {
+        clearFieldError(form, 'message');
       });
 
       form.addEventListener('submit', async (event) => {
