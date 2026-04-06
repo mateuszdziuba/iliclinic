@@ -51,13 +51,17 @@ const cenniki = defineCollection({
   loader: glob({ pattern: '**/*.{yaml,yml,json}', base: './src/content/cenniki' }),
   schema: z.object({
     location: z.enum(['pruszkow', 'ostroleka']),
+    intro: z.string().optional(),
+    emptyState: z.string().optional(),
+    consultationText: z.string().optional(),
+    primaryCtaLabel: z.string().optional(),
     categories: z.array(z.object({
       name: z.string(),
       services: z.array(z.object({
         name: z.string(),
-        duration: z.number().int().positive().optional(),
-        price: z.number().nonnegative().nullable().optional(),
-      })),
+        duration: z.union([z.number(), z.string()]).nullable().optional(),
+        price: z.union([z.number(), z.string()]).nullable().optional(),
+      })).default([]),
     })).default([]),
   }),
 });

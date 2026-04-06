@@ -41,8 +41,26 @@ interface PricingCategory {
   services: PricingRow[];
 }
 
-function normalizeCategories(input: PricingCategory[]) {
-  return input.filter((category) => category.services.length > 0);
+function normalizeValue(value?: string | number | null) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value !== 'string') return undefined;
+  const normalized = Number(value.replace(',', '.').trim());
+  return Number.isFinite(normalized) ? normalized : undefined;
+}
+
+function normalizeCategories(input: Array<{ name: string; services: Array<{ name: string; duration?: string | number | null; price?: string | number | null }> }>) {
+  return input
+    .map((category) => ({
+      name: category.name,
+      services: (category.services ?? [])
+        .filter((service) => service?.name?.trim())
+        .map((service) => ({
+          name: service.name.trim(),
+          duration: normalizeValue(service.duration),
+          price: service.price == null ? null : normalizeValue(service.price) ?? null,
+        })),
+    }))
+    .filter((category) => category.services.length > 0);
 }
 
 function normalizeBooksyCategories(input: BooksyCategory[]) {
@@ -96,11 +114,20 @@ const manualPricingEntries = await getCollection('cenniki', ({ data }) => data.l
 const manualPricing = manualPricingEntries[0]?.data;
 
 let categories: PricingCategory[] = [];
-let pricingIntro = 'Cennik aktualizowany ręcznie przez zespół gabinetu.';
+const pricingIntroDefault = location === 'pruszkow'
+  ? 'Cennik pobieramy bezpośrednio z Booksy, żeby ceny i warianty zabiegów były zawsze aktualne.'
+  : 'Zobacz orientacyjne ceny zabiegów dostępnych w gabinecie w Ostrołęce.';
+const emptyStateDefault = location === 'pruszkow'
+  ? 'Nie udało się teraz pobrać cennika online. Możesz sprawdzić dostępne pozycje bezpośrednio w Booksy.'
+  : 'Cennik dla Ostrołęki uzupełnimy wkrótce. Jeśli chcesz poznać cenę konkretnego zabiegu, skontaktuj się z gabinetem.';
+const consultationTextDefault = location === 'pruszkow'
+  ? 'Umów wizytę przez Booksy albo zadzwoń do gabinetu, jeśli chcesz dobrać zabieg z pomocą konsultacji.'
+  : 'Zadzwoń albo napisz do gabinetu, jeśli chcesz dobrać zabieg i potwierdzić aktualną cenę.';
+const pricingIntro = manualPricing?.intro ?? pricingIntroDefault;
+const emptyStateText = manualPricing?.emptyState ?? emptyStateDefault;
+const consultationText = manualPricing?.consultationText ?? consultationTextDefault;
 
 if (location === 'pruszkow') {
-  pricingIntro = 'Ceny pobrane z systemu rezerwacji Booksy. Odświeżane na bieżąco przy wejściu na stronę.';
-
   try {
     const res = await fetch('https://pl.booksy.com/api/pl/2/customer_api/businesses/113463', {
       headers: { 'X-Api-Key': 'widget-efab2853-7166-492f-b78f-925d33698cd4' },
@@ -120,7 +147,8 @@ if (location === 'pruszkow') {
 }
 
 const primaryCtaHref = location === 'pruszkow' && booksyUrl ? booksyUrl : `/${location}/kontakt`;
-const primaryCtaLabel = location === 'pruszkow' && booksyUrl ? 'Zarezerwuj przez Booksy' : 'Skontaktuj się z gabinetem';
+const primaryCtaLabel = manualPricing?.primaryCtaLabel
+  ?? (location === 'pruszkow' && booksyUrl ? 'Zarezerwuj przez Booksy' : 'Skontaktuj się z gabinetem');
 ---
 
 <BaseLayout
@@ -225,7 +253,7 @@ const primaryCtaLabel = location === 'pruszkow' && booksyUrl ? 'Zarezerwuj przez
     <!-- ─── FALLBACK (request-time fetch failed) ───────────────── -->
     <section class="py-32 bg-surface">
       <div class="max-w-3xl mx-auto px-6 text-center">
-        <p class="font-body text-text-muted text-sm mb-6">Cennik jest dostępny bezpośrednio na Booksy.</p>
+        <p class="font-body text-text-muted text-sm mb-6">{emptyStateText}</p>
         <a
           href={primaryCtaHref}
           target={location === 'pruszkow' && booksyUrl ? '_blank' : undefined}
@@ -246,11 +274,7 @@ const primaryCtaLabel = location === 'pruszkow' && booksyUrl ? 'Zarezerwuj przez
       <h2 class="font-heading text-3xl sm:text-5xl text-text-main font-light mb-6 leading-tight">
         Gotowa na zabieg?
       </h2>
-      <p class="font-body text-text-muted text-base mb-10 font-light">
-        {location === 'pruszkow'
-          ? 'Umów się przez Booksy lub zadzwoń — bezpłatna konsultacja w cenie.'
-          : 'Skontaktuj się z gabinetem lub zadzwoń, aby ustalić termin i dobrać zabieg.'}
-      </p>
+      <p class="font-body text-text-muted text-base mb-10 font-light">{consultationText}</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
           href={primaryCtaHref}

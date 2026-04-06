@@ -1,0 +1,6 @@
+location: pruszkow
+intro: Cennik pobieramy bezpośrednio z Booksy, żeby ceny i warianty zabiegów były zawsze aktualne.
+emptyState: Nie udało się teraz pobrać cennika online. Możesz sprawdzić dostępne pozycje bezpośrednio w Booksy.
+consultationText: Umów wizytę przez Booksy albo zadzwoń do gabinetu, jeśli chcesz dobrać zabieg z pomocą konsultacji.
+primaryCtaLabel: Zarezerwuj przez Booksy
+categories: []

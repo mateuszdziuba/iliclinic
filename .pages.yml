@@ -168,6 +168,18 @@ content:
             - value: ostroleka
               label: Ostrołęka
         required: true
+      - name: intro
+        label: Tekst pod nagłówkiem
+        type: text
+      - name: emptyState
+        label: Tekst gdy brak pozycji w cenniku
+        type: text
+      - name: consultationText
+        label: Tekst sekcji kontaktowej
+        type: text
+      - name: primaryCtaLabel
+        label: Etykieta głównego przycisku
+        type: string
       - name: categories
         label: Kategorie
         type: object

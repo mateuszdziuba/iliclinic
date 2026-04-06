@@ -1,2 +1,6 @@
 location: ostroleka
+intro: Zobacz orientacyjne ceny zabiegów dostępnych w gabinecie w Ostrołęce.
+emptyState: Cennik dla Ostrołęki uzupełnimy wkrótce. Jeśli chcesz poznać cenę konkretnego zabiegu, skontaktuj się z gabinetem.
+consultationText: Zadzwoń albo napisz do gabinetu, jeśli chcesz dobrać zabieg i potwierdzić aktualną cenę.
+primaryCtaLabel: Skontaktuj się z gabinetem
 categories: []
