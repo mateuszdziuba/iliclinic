@@ -26,10 +26,10 @@ przygotowanie_do_zabiegu:
   - Unikaj intensywnego słońca przez 2 tygodnie przed zabiegiem
   - Nie wykonuj ablacyjnych zabiegów laserowych w ostatnich 2 tygodniach
 seo:
-  metaTitle: "Stymulatory tkankowe | ili Clinic"
-  metaDescription: "Stymulatory tkankowe w ili Clinic wspierają odbudowę skóry, poprawę jędrności, napięcia i jakości tkanek bez przerysowanego efektu."
+  metaTitle: Stymulatory tkankowe | ili Clinic
+  metaDescription: Stymulatory tkankowe w ili Clinic wspierają odbudowę skóry,
+    poprawę jędrności, napięcia i jakości tkanek bez przerysowanego efektu.
 ---
-
 ## Zabiegi stymulujące Tri-ExoGF™ MedEstelle
 
 Tri-ExoGF™ to zaawansowany zabieg biostymulacyjny łączący mikro- i nanonakłuwanie z innowacyjnymi ampułkami egzosomalnymi. Trójstymulujące działanie opiera się na trzech aktywnych komponentach, które synergicznie pobudzają skórę do głębokiej regeneracji.
@@ -44,18 +44,18 @@ Tri-ExoGF™ to zaawansowany zabieg biostymulacyjny łączący mikro- i nanonak�
 
 ## Efekty
 
-*   Przebudowa skóry i odnowa komórkowa
-*   Redukcja zmarszczek i poprawa elastyczności
-*   Większa gęstość skóry i nawilżenie
-*   Poprawa owalu i konturów twarzy
-*   Rozświetlenie i jednolity koloryt
+- Przebudowa skóry i odnowa komórkowa
+- Redukcja zmarszczek i poprawa elastyczności
+- Większa gęstość skóry i nawilżenie
+- Poprawa owalu i konturów twarzy
+- Rozświetlenie i jednolity koloryt
 
 ## Warianty zabiegu
 
-*   **Face Therapy** — twarz, szyja, dekolt (700 zł)
-*   **Eye Focus Therapy** — okolice oczu z mini facial (550 zł)
-*   **Face Nano Glow** — jednorazowy zabieg z natychmiastowym efektem (700 zł)
-*   **Vascu-LiftGF** — dla skóry naczyniowej (690 zł)
+- **Face Therapy** — twarz, szyja, dekolt (700 zł)
+- **Eye Focus Therapy** — okolice oczu z mini facial (550 zł)
+- **Face Nano Glow** — jednorazowy zabieg z natychmiastowym efektem (700 zł)
+- **Vascu-LiftGF** — dla skóry naczyniowej (690 zł)
 
 ## Protokół leczenia
 
