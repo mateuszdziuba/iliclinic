@@ -35,6 +35,19 @@
 <script>
   const CONSENT_KEY = 'ili_cookie_consent';
 
+  function updateGoogleConsent(state: 'granted' | 'denied') {
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    function gtag() { w.dataLayer.push(arguments); }
+
+    gtag('consent', 'update', {
+      analytics_storage: state,
+      ad_storage: state,
+      ad_user_data: state,
+      ad_personalization: state
+    });
+  }
+
   function trackCookieAccept() {
     const w = window as any;
     w.dataLayer = w.dataLayer || [];
@@ -78,9 +91,13 @@
 
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'accepted') {
+      updateGoogleConsent('granted');
+      hideBanner();
       return;
     }
     if (consent === 'rejected') {
+      updateGoogleConsent('denied');
+      hideBanner();
       return;
     }
 
@@ -88,12 +105,14 @@
 
     document.getElementById('cookie-accept')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'accepted');
+      updateGoogleConsent('granted');
       trackCookieAccept();
       hideBanner();
     }, { once: true });
 
     document.getElementById('cookie-reject')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'rejected');
+      updateGoogleConsent('denied');
       hideBanner();
     }, { once: true });
   }
