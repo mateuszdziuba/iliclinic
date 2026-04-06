@@ -5,16 +5,10 @@ description: Konsultacje i zabiegi na skórę głowy. Diagnostyka, stymulacja
 locations:
   - pruszkow
   - ostroleka
-category: wlosy.yaml
+category: Włosy
 duration: 45-60 minut
 featured: false
 image: /images/trichology-treatment.png
-przygotowanie_do_zabiegu: |-
-  Nie myć włosów przez 24 godziny przed wizytą
-  Unikać produktów do stylizacji
-  Odczekać minimum 7 dni po farbowaniu
-  Przynieść listę suplementów i leków
-  Dostarczyć aktualne wyniki badań krwi
 seo:
   metaTitle: Trychologia i skóra głowy | ili Clinic
   metaDescription: Konsultacje trychologiczne i terapie skóry głowy w ili Clinic.
