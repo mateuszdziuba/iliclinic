@@ -3,4 +3,12 @@ intro: Zobacz orientacyjne ceny zabiegów dostępnych w gabinecie w Ostrołęce.
 emptyState: Cennik dla Ostrołęki uzupełnimy wkrótce. Jeśli chcesz poznać cenę konkretnego zabiegu, skontaktuj się z gabinetem.
 consultationText: Zadzwoń albo napisz do gabinetu, jeśli chcesz dobrać zabieg i potwierdzić aktualną cenę.
 primaryCtaLabel: Skontaktuj się z gabinetem
-categories: []
+categories:
+  - name: Podologia
+    services:
+      - name: Pedicure kosmetyczny
+        duration: 60
+        price: 140
+      - name: Pedicure podologiczny
+        duration: 75
+        price: 170

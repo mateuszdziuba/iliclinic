@@ -154,6 +154,7 @@ content:
     type: collection
     path: src/content/cenniki
     format: yaml
+    filename: "{fields.location}.yaml"
     view:
       primary: location
       fields: [location]
