@@ -149,6 +149,45 @@ content:
         label: Treść
         type: rich-text
 
+  - name: cenniki
+    label: Cenniki
+    type: collection
+    path: src/content/cenniki
+    format: yaml
+    fields:
+      - name: location
+        label: Lokalizacja
+        type: select
+        options:
+          values:
+            - value: pruszkow
+              label: Pruszków
+            - value: ostroleka
+              label: Ostrołęka
+        required: true
+      - name: categories
+        label: Kategorie
+        type: list
+        fields:
+          - name: name
+            label: Nazwa kategorii
+            type: string
+            required: true
+          - name: services
+            label: Usługi
+            type: list
+            fields:
+              - name: name
+                label: Nazwa usługi
+                type: string
+                required: true
+              - name: duration
+                label: Czas trwania (min)
+                type: number
+              - name: price
+                label: Cena (zł)
+                type: number
+
   # Site settings
   - name: settings
     label: Ustawienia strony

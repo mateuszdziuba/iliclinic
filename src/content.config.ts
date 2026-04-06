@@ -47,8 +47,24 @@ const marki = defineCollection({
   }),
 });
 
+const cenniki = defineCollection({
+  loader: glob({ pattern: '**/*.{yaml,yml,json}', base: './src/content/cenniki' }),
+  schema: z.object({
+    location: z.enum(['pruszkow', 'ostroleka']),
+    categories: z.array(z.object({
+      name: z.string(),
+      services: z.array(z.object({
+        name: z.string(),
+        duration: z.number().int().positive().optional(),
+        price: z.number().nonnegative().nullable().optional(),
+      })),
+    })).default([]),
+  }),
+});
+
 export const collections = {
   zabiegi,
   strony,
   marki,
+  cenniki,
 };

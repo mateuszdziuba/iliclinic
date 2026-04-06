@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import locations from '../../data/locations.json';
 import BooksyIcon from '../../components/BooksyIcon.astro';
+import { getCollection } from 'astro:content';
 
 export const prerender = false;
 
@@ -9,12 +10,12 @@ const { location } = Astro.params;
 const locationData = locations[location as keyof typeof locations];
 const salonName = (locationData as any).salonName || `ili Clinic ${locationData.name}`;
 const locationSeo = (locationData as any).seo ?? {};
-if (!locationData || location !== 'pruszkow') {
+if (!locationData || (location !== 'pruszkow' && location !== 'ostroleka')) {
   return Astro.redirect('/');
 }
 
 Astro.response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=60, stale-while-revalidate=300');
-const booksyUrl = (locationData as any).booksy as string;
+const booksyUrl = (locationData as any).booksy as string | undefined;
 
 // ── Fetch Booksy pricing on request ─────────────────────────────
 interface ServiceVariant {
@@ -40,44 +41,36 @@ interface PricingCategory {
   services: PricingRow[];
 }
 
-let categories: PricingCategory[] = [];
-try {
-  const res = await fetch('https://pl.booksy.com/api/pl/2/customer_api/businesses/113463', {
-    headers: { 'X-Api-Key': 'widget-efab2853-7166-492f-b78f-925d33698cd4' },
-    cache: 'no-store',
-  });
-  if (res.ok) {
-    const data = await res.json();
-    categories = (data?.business?.service_categories ?? [])
-      .map((category: BooksyCategory) => ({
-        name: category.name,
-        services: (category.services ?? []).flatMap((service) => {
-          const variants = service.variants ?? [];
+function normalizeCategories(input: PricingCategory[]) {
+  return input.filter((category) => category.services.length > 0);
+}
 
-          if (variants.length <= 1) {
-            const variant = variants[0];
-            return [{
-              name: service.name,
-              duration: variant?.duration,
-              price: variant?.price ?? null,
-            }];
-          }
+function normalizeBooksyCategories(input: BooksyCategory[]) {
+  return normalizeCategories(
+    input.map((category) => ({
+      name: category.name,
+      services: (category.services ?? []).flatMap((service) => {
+        const variants = service.variants ?? [];
 
-          return variants.map((variant) => ({
-            name: variant.label?.trim()
-              ? `${service.name} — ${variant.label.trim()}`
-              : service.name,
-            duration: variant.duration,
-            price: variant.price ?? null,
-          }));
-        }),
-      }))
-      .filter((category: PricingCategory) => category.services.length > 0);
-  } else {
-    console.warn('[cennik] Booksy returned', res.status);
-  }
-} catch (e) {
-  console.warn('[cennik] Booksy fetch failed at build time:', e);
+        if (variants.length <= 1) {
+          const variant = variants[0];
+          return [{
+            name: service.name,
+            duration: variant?.duration,
+            price: variant?.price ?? null,
+          }];
+        }
+
+        return variants.map((variant) => ({
+          name: variant.label?.trim()
+            ? `${service.name} — ${variant.label.trim()}`
+            : service.name,
+          duration: variant.duration,
+          price: variant.price ?? null,
+        }));
+      }),
+    }))
+  );
 }
 
 // ── Helpers ──────────────────────────────────────────────────────
@@ -98,6 +91,36 @@ function pluralServices(n: number) {
   if (n < 5) return `${n} usługi`;
   return `${n} usług`;
 }
+
+const manualPricingEntries = await getCollection('cenniki', ({ data }) => data.location === location);
+const manualPricing = manualPricingEntries[0]?.data;
+
+let categories: PricingCategory[] = [];
+let pricingIntro = 'Cennik aktualizowany ręcznie przez zespół gabinetu.';
+
+if (location === 'pruszkow') {
+  pricingIntro = 'Ceny pobrane z systemu rezerwacji Booksy. Odświeżane na bieżąco przy wejściu na stronę.';
+
+  try {
+    const res = await fetch('https://pl.booksy.com/api/pl/2/customer_api/businesses/113463', {
+      headers: { 'X-Api-Key': 'widget-efab2853-7166-492f-b78f-925d33698cd4' },
+      cache: 'no-store',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      categories = normalizeBooksyCategories(data?.business?.service_categories ?? []);
+    } else {
+      console.warn('[cennik] Booksy returned', res.status);
+    }
+  } catch (e) {
+    console.warn('[cennik] Booksy fetch failed at build time:', e);
+  }
+} else {
+  categories = normalizeCategories(manualPricing?.categories ?? []);
+}
+
+const primaryCtaHref = location === 'pruszkow' && booksyUrl ? booksyUrl : `/${location}/kontakt`;
+const primaryCtaLabel = location === 'pruszkow' && booksyUrl ? 'Zarezerwuj przez Booksy' : 'Skontaktuj się z gabinetem';
 ---
 
 <BaseLayout
@@ -114,8 +137,7 @@ function pluralServices(n: number) {
         Przejrzyste<br /><em class="not-italic text-primary">ceny zabiegów</em>
       </h1>
       <p class="font-body text-text-muted text-lg leading-relaxed max-w-md font-light mt-8" data-hero-desc>
-        Ceny pobrane z systemu rezerwacji Booksy.
-        Odświeżane na bieżąco przy wejściu na stronę.
+        {pricingIntro}
       </p>
     </div>
   </section>
@@ -205,13 +227,13 @@ function pluralServices(n: number) {
       <div class="max-w-3xl mx-auto px-6 text-center">
         <p class="font-body text-text-muted text-sm mb-6">Cennik jest dostępny bezpośrednio na Booksy.</p>
         <a
-          href={booksyUrl}
-          target="_blank"
-          rel="noopener"
+          href={primaryCtaHref}
+          target={location === 'pruszkow' && booksyUrl ? '_blank' : undefined}
+          rel={location === 'pruszkow' && booksyUrl ? 'noopener' : undefined}
           class="inline-flex items-center gap-2 bg-primary text-surface px-8 py-3 rounded-full font-body text-[10px] tracking-widest uppercase hover:brightness-110 transition-all"
         >
-          <span>Otwórz Booksy</span>
-          <BooksyIcon class="w-4 h-4" />
+          <span>{primaryCtaLabel}</span>
+          {location === 'pruszkow' && booksyUrl && <BooksyIcon class="w-4 h-4" />}
         </a>
       </div>
     </section>
@@ -225,17 +247,19 @@ function pluralServices(n: number) {
         Gotowa na zabieg?
       </h2>
       <p class="font-body text-text-muted text-base mb-10 font-light">
-        Umów się przez Booksy lub zadzwoń — bezpłatna konsultacja w cenie.
+        {location === 'pruszkow'
+          ? 'Umów się przez Booksy lub zadzwoń — bezpłatna konsultacja w cenie.'
+          : 'Skontaktuj się z gabinetem lub zadzwoń, aby ustalić termin i dobrać zabieg.'}
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a
-          href={booksyUrl}
-          target="_blank"
-          rel="noopener"
+          href={primaryCtaHref}
+          target={location === 'pruszkow' && booksyUrl ? '_blank' : undefined}
+          rel={location === 'pruszkow' && booksyUrl ? 'noopener' : undefined}
           class="inline-flex items-center justify-center gap-2 bg-primary text-surface px-10 py-4 rounded-full font-body text-[10px] tracking-widest uppercase hover:brightness-110 transition-all active:scale-95 w-full sm:w-auto"
         >
-          <span>Zarezerwuj przez Booksy</span>
-          <BooksyIcon class="w-4 h-4" />
+          <span>{primaryCtaLabel}</span>
+          {location === 'pruszkow' && booksyUrl && <BooksyIcon class="w-4 h-4" />}
         </a>
         <a
           href={`tel:${locationData.phone.replace(/\s/g, '')}`}
