@@ -134,6 +134,14 @@ const pageSchemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   {enableClientRouter && <ClientRouter />}
 </head>
 <body class="min-h-screen flex flex-col font-body selection:bg-accent/20 selection:text-primary">
+  <noscript>
+    <iframe
+      src="https://www.googletagmanager.com/ns.html?id=GTM-P85B9F3"
+      height="0"
+      width="0"
+      style="display:none;visibility:hidden"
+    ></iframe>
+  </noscript>
   {!hideHeader && <Header location={location} currentPath={currentPath} />}
 
   <main class="flex-1">
