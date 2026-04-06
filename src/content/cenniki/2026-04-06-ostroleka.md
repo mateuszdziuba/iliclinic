@@ -1,2 +1,0 @@
-location: ostroleka
-categories: Podologia
