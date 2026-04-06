@@ -12,3 +12,51 @@ categories:
       - name: Pedicure podologiczny
         duration: 75
         price: 170
+      - name: Pedicure leczniczy
+        duration: 90
+        price: 190
+      - name: Pedicure z założeniem klamry
+        duration: 90
+        price: 250
+      - name: Pół pedicure
+        duration: 30
+        price: 90
+      - name: Usuwanie odcisków/modzeli/nagniotków
+        duration: 20
+        price: 80
+      - name: Tamponada wrastającego paznokcia
+        duration: 15
+        price: 50
+      - name: Rekonstrukcja paznokcia
+        duration: 30
+        price: 40
+      - name: Oczyszczenie paznokci zmienionych chorobowo
+        duration: 45
+        price: 80
+      - name: Usuwanie brodawek kwasem Verru Acid Shot
+        duration: 15
+        price: 150
+      - name: Usuwanie zmian skórnych azotanem srebra
+        duration: 15
+        price: 100
+      - name: Oczyszczanie pękających pięt
+        duration: 30
+        price: 100
+      - name: Regeneracja i masaż przesuszonych stóp
+        duration: 50
+        price: 110
+      - name: Taping podologiczny wrastających paznokci
+        duration: 15
+        price: 15
+      - name: Opatrunek klasyczny
+        duration: 15
+        price: 15
+      - name: Opatrunek specjalistyczny
+        duration: 20
+        price: 30
+      - name: Opatrunek specjalistyczny Ag
+        duration: 20
+        price: 50
+      - name: Malowanie paznokci lakierem klasycznym
+        duration: 15
+        price: 15
