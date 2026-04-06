@@ -14,8 +14,6 @@
       "pricingTitle": "Cennik zabiegów Pruszków | ili Clinic Studio",
       "pricingDescription": "Aktualny cennik zabiegów ili Clinic Studio w Pruszkowie. Ceny usług pobierane na bieżąco z Booksy podczas wejścia na stronę."
     },
-    "locative": "Pruszkowie",
-    "geo": { "lat": 52.1653, "lng": 20.7982 },
     "slug": "pruszkow",
     "address": {
       "street": "ul. Obrońców Pokoju 10/Lokal 4",
@@ -30,7 +28,6 @@
       "saturday": "Po wcześniejszym umówieniu",
       "sunday": "Zamknięte"
     },
-    "booksy": "https://booksy.com/pl-pl/113463_ili-clinic-studio-beauty_salon-kosmetyczny_4404_pruszkow",
     "social": {
       "facebook": "https://www.facebook.com/ili.clinic",
       "instagram": "https://www.instagram.com/patricia.kosmetolog/"
@@ -51,8 +48,6 @@
       "pricingTitle": "Cennik zabiegów | ili Clinic Ostrołęka",
       "pricingDescription": "Cennik zabiegów ili Clinic w Ostrołęce. Skontaktuj się z gabinetem, aby uzyskać aktualne informacje o usługach i dostępnych terminach."
     },
-    "locative": "Ostrołęce",
-    "geo": { "lat": 53.0857, "lng": 21.5743 },
     "slug": "ostroleka",
     "address": {
       "street": "ul. Fieldorfa Nila 13",
@@ -63,7 +58,7 @@
     "email": "kontakt@iliclinic.pl",
     "googleMapsUrl": "https://maps.google.com/?q=ili+Clinic+Ostrołęka",
     "openingHours": {
-      "weekdays": "10:00 - 20:00",
+      "weekdays": "Po wcześniejszym umówieniu",
       "saturday": "Po wcześniejszym umówieniu",
       "sunday": "Zamknięte"
     },
