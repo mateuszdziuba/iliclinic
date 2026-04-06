@@ -6,6 +6,29 @@ media:
   output: /images
 
 content:
+  - name: kategorie_zabiegow
+    label: Kategorie zabiegów
+    type: collection
+    path: src/content/kategorie-zabiegow
+    format: yaml
+    filename: "{fields.slug}.yaml"
+    view:
+      primary: name
+      fields: [name, order]
+    fields:
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: name
+        label: Nazwa kategorii
+        type: string
+        required: true
+      - name: order
+        label: Kolejność
+        type: number
+        default: 0
+
   # Partner brands/logos
   - name: marki
     label: Marki partnerskie
@@ -57,14 +80,11 @@ content:
         required: true
       - name: category
         label: Kategoria
-        type: select
+        type: reference
         options:
-          creatable: true
-          values:
-            - Medycyna Estetyczna
-            - Hi-Tech / Laser
-            - Pielęgnacja Twarzy
-            - Inne
+          collection: kategorie_zabiegow
+          value: "{name}"
+          label: "{name}"
       - name: price_pruszkow
         label: Cena w Pruszkowie (zł)
         type: number

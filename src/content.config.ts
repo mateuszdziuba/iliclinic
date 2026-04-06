@@ -47,6 +47,15 @@ const marki = defineCollection({
   }),
 });
 
+const kategorieZabiegow = defineCollection({
+  loader: glob({ pattern: '**/*.{yaml,yml,json}', base: './src/content/kategorie-zabiegow' }),
+  schema: z.object({
+    slug: z.string(),
+    name: z.string(),
+    order: z.number().default(0),
+  }),
+});
+
 const cenniki = defineCollection({
   loader: glob({ pattern: '**/*.{yaml,yml,json}', base: './src/content/cenniki' }),
   schema: z.object({
@@ -70,5 +79,6 @@ export const collections = {
   zabiegi,
   strony,
   marki,
+  kategorieZabiegow,
   cenniki,
 };
