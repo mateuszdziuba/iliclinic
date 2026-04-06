@@ -154,6 +154,9 @@ content:
     type: collection
     path: src/content/cenniki
     format: yaml
+    view:
+      primary: location
+      fields: [location]
     fields:
       - name: location
         label: Lokalizacja
@@ -167,7 +170,11 @@ content:
         required: true
       - name: categories
         label: Kategorie
-        type: list
+        type: object
+        list:
+          collapsible:
+            collapsed: false
+            summary: "{fields.name}"
         fields:
           - name: name
             label: Nazwa kategorii
@@ -175,7 +182,11 @@ content:
             required: true
           - name: services
             label: Usługi
-            type: list
+            type: object
+            list:
+              collapsible:
+                collapsed: false
+                summary: "{fields.name}"
             fields:
               - name: name
                 label: Nazwa usługi
