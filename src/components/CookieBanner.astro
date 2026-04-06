@@ -35,34 +35,20 @@
 <script>
   const CONSENT_KEY = 'ili_cookie_consent';
 
-  function loadGA4() {
-    if (document.getElementById('ga4-script')) return;
+  function updateGoogleConsent(accepted: boolean) {
+    const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
+    const gtag = ((window as any).gtag =
+      (window as any).gtag ||
+      function gtag() {
+        dataLayer.push(arguments);
+      });
 
-    const script = document.createElement('script');
-    script.id = 'ga4-script';
-    script.type = 'text/partytown';
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9E1JE1J13X';
-    document.head.appendChild(script);
-
-    const config = document.createElement('script');
-    config.id = 'ga4-config';
-    config.type = 'text/partytown';
-    config.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9E1JE1J13X');
-    `;
-    document.head.appendChild(config);
-  }
-
-  function loadGTM() {
-    if (document.getElementById('gtm-script')) return;
-    const s = document.createElement('script');
-    s.id = 'gtm-script';
-    s.type = 'text/partytown';
-    s.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-P85B9F3');`;
-    document.head.appendChild(s);
+    gtag('consent', 'update', {
+      analytics_storage: accepted ? 'granted' : 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+    });
   }
 
   function hideBanner() {
@@ -100,23 +86,25 @@
 
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'accepted') {
-      loadGA4();
-      loadGTM();
+      updateGoogleConsent(true);
       return;
     }
-    if (consent === 'rejected') return;
+    if (consent === 'rejected') {
+      updateGoogleConsent(false);
+      return;
+    }
 
     setTimeout(showBanner, 1500);
 
     document.getElementById('cookie-accept')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'accepted');
-      loadGA4();
-      loadGTM();
+      updateGoogleConsent(true);
       hideBanner();
     }, { once: true });
 
     document.getElementById('cookie-reject')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'rejected');
+      updateGoogleConsent(false);
       hideBanner();
     }, { once: true });
   }
