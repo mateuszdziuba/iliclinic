@@ -5,7 +5,7 @@ description: Konsultacje i zabiegi na skórę głowy. Diagnostyka, stymulacja
 locations:
   - pruszkow
   - ostroleka
-category: Inne
+category: wlosy.yaml
 duration: 45-60 minut
 featured: false
 image: /images/trichology-treatment.png
