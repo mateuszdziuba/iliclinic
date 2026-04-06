@@ -5,13 +5,20 @@ description: Konsultacje i zabiegi na skórę głowy. Diagnostyka, stymulacja
 locations:
   - pruszkow
   - ostroleka
-category: Włosy
+category: Inne
 duration: 45-60 minut
 featured: false
 image: /images/trichology-treatment.png
+przygotowanie_do_zabiegu: |-
+  Nie myć włosów przez 24 godziny przed wizytą
+  Unikać produktów do stylizacji
+  Odczekać minimum 7 dni po farbowaniu
+  Przynieść listę suplementów i leków
+  Dostarczyć aktualne wyniki badań krwi
 seo:
-  metaTitle: "Trychologia i skóra głowy | ili Clinic"
-  metaDescription: "Konsultacje trychologiczne i terapie skóry głowy w ili Clinic. Diagnostyka wypadania włosów, łysienia i problemów trychologicznych."
+  metaTitle: Trychologia i skóra głowy | ili Clinic
+  metaDescription: Konsultacje trychologiczne i terapie skóry głowy w ili Clinic.
+    Diagnostyka wypadania włosów, łysienia i problemów trychologicznych.
 ---
 ## Trychologia w ili Clinic
 
@@ -21,24 +28,17 @@ Trychologia to specjalistyczna dziedzina medycyny estetycznej zajmująca się pr
 
 Protokoły trychologiczne realizowane w ili Clinic obejmują:
 
-*   **Mezoterapię igłową skóry głowy** — koktajle stymulujące wzrost włosów
-*   **Karboksyterapię** — dotlenienie i poprawa mikrokrążenia skóry głowy
-*   **Infuzje tlenowe** — intensywna regeneracja
-*   **Stymulację czynnikami wzrostu** — preparat Dr. Cyj (600 zł)
-*   **Terapię przeciw wypadaniu włosów i łysieniu** (500 zł za sesję)
+- **Mezoterapię igłową skóry głowy** — koktajle stymulujące wzrost włosów
+- **Karboksyterapię** — dotlenienie i poprawa mikrokrążenia skóry głowy
+- **Infuzje tlenowe** — intensywna regeneracja
+- **Stymulację czynnikami wzrostu** — preparat Dr. Cyj (600 zł)
+- **Terapię przeciw wypadaniu włosów i łysieniu** (500 zł za sesję)
 
 ## Przebieg konsultacji trychologicznej
 
-1.  Wywiad zdrowotny i ocena problemu
-2.  Badanie skóry głowy trichoskopem
-3.  Analiza wyników badań krwi
-4.  Ustalenie indywidualnego planu terapii
-5.  Zalecenia pielęgnacyjne
+1. Wywiad zdrowotny i ocena problemu
+2. Badanie skóry głowy trichoskopem
+3. Analiza wyników badań krwi
+4. Ustalenie indywidualnego planu terapii
+5. Zalecenia pielęgnacyjne
 
-## Przygotowanie do wizyty
-
-*   Nie myć włosów przez 24 godziny przed wizytą
-*   Unikać produktów do stylizacji
-*   Odczekać minimum 7 dni po farbowaniu
-*   Przynieść listę suplementów i leków
-*   Dostarczyć aktualne wyniki badań krwi
