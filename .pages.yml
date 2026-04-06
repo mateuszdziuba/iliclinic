@@ -83,8 +83,9 @@ content:
         type: reference
         options:
           collection: kategorie_zabiegow
-          value: "{name}"
-          label: "{name}"
+          search: "fields.name"
+          value: "{fields.name}"
+          label: "{fields.name}"
       - name: price_pruszkow
         label: Cena w Pruszkowie (zł)
         type: number
@@ -103,19 +104,16 @@ content:
         type: image
       - name: wskazania
         label: Wskazania
-        type: list
-        item:
-          type: string
+        type: string
+        list: true
       - name: przeciwwskazania
         label: Przeciwwskazania
-        type: list
-        item:
-          type: string
+        type: string
+        list: true
       - name: przygotowanie_do_zabiegu
         label: Przygotowanie do zabiegu
-        type: list
-        item:
-          type: string
+        type: string
+        list: true
       - name: seo
         label: SEO
         type: object
