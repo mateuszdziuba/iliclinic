@@ -34,21 +34,20 @@
 
 <script>
   const CONSENT_KEY = 'ili_cookie_consent';
+  const GTM_ID = 'GTM-P85B9F3';
 
-  function updateGoogleConsent(accepted: boolean) {
-    const dataLayer = ((window as any).dataLayer = (window as any).dataLayer || []);
-    const gtag = ((window as any).gtag =
-      (window as any).gtag ||
-      function gtag() {
-        dataLayer.push(arguments);
-      });
+  function loadGTM() {
+    if (document.getElementById('gtm-script')) return;
 
-    gtag('consent', 'update', {
-      analytics_storage: accepted ? 'granted' : 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-    });
+    const w = window as any;
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+    const script = document.createElement('script');
+    script.id = 'gtm-script';
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+    document.head.appendChild(script);
   }
 
   function hideBanner() {
@@ -86,11 +85,10 @@
 
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'accepted') {
-      updateGoogleConsent(true);
+      loadGTM();
       return;
     }
     if (consent === 'rejected') {
-      updateGoogleConsent(false);
       return;
     }
 
@@ -98,13 +96,12 @@
 
     document.getElementById('cookie-accept')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'accepted');
-      updateGoogleConsent(true);
+      loadGTM();
       hideBanner();
     }, { once: true });
 
     document.getElementById('cookie-reject')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'rejected');
-      updateGoogleConsent(false);
       hideBanner();
     }, { once: true });
   }

@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
-import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
@@ -10,14 +9,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://iliclinic.pl',
   adapter: vercel(),
-  integrations: [
-    sitemap(),
-    partytown({
-      config: {
-        forward: [['dataLayer.push', { preserveBehavior: true }]],
-      },
-    }),
-  ],
+  integrations: [sitemap()],
   prefetch: {
     prefetchAll: false,
   },
