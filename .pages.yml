@@ -59,12 +59,12 @@ content:
         label: Kategoria
         type: select
         options:
-          creatable: true,
+          creatable: true
           values:
-            [ Medycyna Estetyczna,
-            Hi-Tech / Laser,
-            Pielęgnacja Twarzy,
-            Inne]
+            - Medycyna Estetyczna
+            - Hi-Tech / Laser
+            - Pielęgnacja Twarzy
+            - Inne
       - name: price_pruszkow
         label: Cena w Pruszkowie (zł)
         type: number
