@@ -35,6 +35,21 @@
 <script>
   const CONSENT_KEY = 'ili_cookie_consent';
 
+  function loadGA4() {
+    if (document.getElementById('ga4-script')) return;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);};
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-9E1JE1J13X');
+
+    const script = document.createElement('script');
+    script.id = 'ga4-script';
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-9E1JE1J13X';
+    document.head.appendChild(script);
+  }
+
   function loadGTM() {
     if (document.getElementById('gtm-script')) return;
     const s = document.createElement('script');
@@ -78,6 +93,7 @@
 
     const consent = localStorage.getItem(CONSENT_KEY);
     if (consent === 'accepted') {
+      loadGA4();
       loadGTM();
       return;
     }
@@ -87,6 +103,7 @@
 
     document.getElementById('cookie-accept')?.addEventListener('click', () => {
       localStorage.setItem(CONSENT_KEY, 'accepted');
+      loadGA4();
       loadGTM();
       hideBanner();
     }, { once: true });
